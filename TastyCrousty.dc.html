@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-Regular.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-Medium.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-Medium.woff') format('woff');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-SemiBold.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-SemiBold.woff') format('woff');font-weight:600;font-style:normal;font-display:swap}
+*{box-sizing:border-box}
+button,input,select,textarea{text-transform:inherit}
+:root{--bg-canvas:#FFFFFF;--bg-subtle:#FAFAFA;--bg-hover:#F4F4F5;--bg-active:#EDEDEE;--bg-inverse:#0A0A0A;--inverse-hover:#1F1F1F;--border-subtle:#EFEFEF;--border-default:#E4E4E4;--border-strong:#D4D4D4;--text-primary:#1A1A1A;--text-default:#333333;--text-secondary:#555555;--text-subtle:#777777;--text-disabled:#AFAFAF;--positive-text:#15B042;--negative-text:#D93025;--negative-bg:#FDDDDA;--negative-border:#F8BDB7;--info-text:#0077E6}
+:root[data-theme="dark"]{--bg-canvas:#171717;--bg-subtle:#101010;--bg-hover:#1F1F1F;--bg-active:#262626;--bg-inverse:#FAFAFA;--inverse-hover:#E4E4E4;--border-subtle:#262626;--border-default:#2E2E2E;--border-strong:#3A3A3A;--text-primary:#F5F5F5;--text-default:#D4D4D4;--text-secondary:#AFAFAF;--text-subtle:#8A8A8A;--text-disabled:#6B6B6B;--positive-text:#3FD068;--negative-text:#F26A5E;--negative-bg:#2A1614;--negative-border:#5A2621;--info-text:#4DA3FF}
+body{transition:background 200ms ease,color 200ms ease}
+img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-theme="dark"] img[data-logo="black"]{display:none}:root[data-theme="dark"] img[data-logo="white"]{display:block}
+  body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:var(--text-default);background:var(--bg-canvas);-webkit-font-smoothing:antialiased}
+  a{color:var(--text-primary);text-decoration:none}
+  ::selection{background:var(--bg-active)}
+  svg{display:block}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</helmet>
+
+<div style="height:100vh;display:flex;overflow:hidden;font-family:Inter,-apple-system,'Segoe UI',sans-serif;color:var(--text-default);background:var(--bg-canvas)">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside id="lyr-sidebar" data-collapsed="0" style="width:240px;flex-shrink:0;height:100vh;background:var(--bg-subtle);border-right:1px solid var(--border-default);padding:8px;display:flex;flex-direction:column;overflow:hidden;transition:width 200ms cubic-bezier(0.32,0.72,0,1)">
+    <a href="Home.dc.html" style="height:40px;display:flex;align-items:center;gap:8px;padding:0 12px;border-bottom:1px solid var(--border-subtle);margin:0 -8px;padding-left:20px;padding-right:20px" style-hover="background:var(--bg-hover)">
+      <img data-logo="black" src="logos/layers-black.png" alt="Layers" style="height:18px;width:auto;flex-shrink:0">
+      <img data-logo="white" src="logos/layers-white.png" alt="Layers" style="height:18px;width:auto;flex-shrink:0">
+      <span data-nav-label style="margin-left:auto;color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><polyline points="6.5,4 10,8 6.5,12"/></svg></span>
+    </a>
+
+    <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding-top:8px;display:flex;flex-direction:column;gap:2px">
+      <a href="Home.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,7 8,2.5 13.5,7"/><polyline points="4,7 4,13 12,13 12,7"/></svg>
+        <span data-nav-label>Home</span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg>
+        <span data-nav-label>Inbox</span>
+      </a>
+      <a href="Reports.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;background:var(--bg-canvas);box-shadow:inset 2px 0 0 var(--bg-inverse);color:var(--text-primary);font-size:13px;font-weight:500">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg>
+        <span data-nav-label>Reports</span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,11 13.5,13"/></svg>
+        <span data-nav-label>Clients</span>
+      </a>
+      <div data-nav-label style="display:flex;flex-direction:column;gap:2px;margin-top:2px">
+        <a href="TastyCrousty.dc.html" style="height:32px;display:flex;align-items:center;padding:0 12px 0 40px;background:var(--bg-canvas);box-shadow:inset 2px 0 0 var(--bg-inverse);color:var(--text-primary);font-size:13px;font-weight:500">Tasty Crousty</a>
+        <a href="#" style="height:32px;display:flex;align-items:center;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="background:var(--bg-hover);color:var(--text-primary)">Clement</a>
+        <a href="Reports.dc.html" style="height:32px;display:flex;align-items:center;gap:6px;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="color:var(--text-primary)">View all
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg>
+        </a>
+      </div>
+      <div style="height:1px;background:var(--border-subtle);margin:8px -8px"></div>
+      <div data-nav-label style="height:24px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">AI intelligence</div>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,10.5 6,7 8.5,9.5 13.5,4.5"/><polyline points="10.5,4.5 13.5,4.5 13.5,7.5"/></svg>
+        <span data-nav-label>Optimization</span>
+        <span data-nav-label style="margin-left:auto;color:var(--text-disabled);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><polygon points="8,2.5 9.5,6.5 13.5,8 9.5,9.5 8,13.5 6.5,9.5 2.5,8 6.5,6.5"/></svg></span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="8"/><line x1="6" y1="13.5" x2="10" y2="13.5"/></svg>
+        <span data-nav-label>Website Intelligence</span>
+        <span data-nav-label style="margin-left:auto;color:var(--text-disabled);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><polygon points="8,2.5 9.5,6.5 13.5,8 9.5,9.5 8,13.5 6.5,9.5 2.5,8 6.5,6.5"/></svg></span>
+      </a>
+    </div>
+
+    <div style="border-top:1px solid var(--border-subtle);margin:0 -8px;padding:8px 8px 0;display:flex;flex-direction:column;gap:2px">
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="5.5" y="3" width="5" height="5"/><polyline points="3,13 3,11.5 13,11.5 13,13"/></svg>
+        <span data-nav-label>Account</span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg>
+        <span data-nav-label>English</span>
+        <span data-nav-label style="margin-left:auto;font-size:12px;color:var(--text-disabled)">EN</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ══ MAIN ══ -->
+  <div style="flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;min-width:0">
+    <header style="height:56px;flex-shrink:0;border-bottom:1px solid var(--border-default);display:flex;align-items:center;padding:0 24px;gap:12px">
+      <button onClick="{{ toggleSidebar }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="10"/><line x1="6.5" y1="3" x2="6.5" y2="13"/></svg>
+      </button>
+      <a href="Reports.dc.html" style="font-size:16px;font-weight:500;color:var(--text-primary);letter-spacing:-0.01em">Reports</a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+        <div style="height:20px;padding:0 8px;background:var(--negative-bg);border:1px solid var(--negative-border);color:var(--negative-text);font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:4px;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;cursor:pointer"><span style="width:8px;height:8px;background:var(--negative-text);display:block"></span>34</div>
+        <button onClick="{{ toggleTheme }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary)" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="6" y="6" width="4" height="4"/><line x1="8" y1="1.5" x2="8" y2="3.5"/><line x1="8" y1="12.5" x2="8" y2="14.5"/><line x1="1.5" y1="8" x2="3.5" y2="8"/><line x1="12.5" y1="8" x2="14.5" y2="8"/><line x1="3.5" y1="3.5" x2="4.9" y2="4.9"/><line x1="11.1" y1="11.1" x2="12.5" y2="12.5"/><line x1="12.5" y1="3.5" x2="11.1" y2="4.9"/><line x1="4.9" y1="11.1" x2="3.5" y2="12.5"/></svg></button>
+        <button style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);position:relative" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg><span style="position:absolute;top:6px;right:6px;width:6px;height:6px;background:var(--info-text)"></span></button>
+        <div style="width:1px;height:24px;background:var(--border-default);margin:0 4px"></div>
+        <button style="display:flex;align-items:center;gap:8px;height:32px;padding:0 4px 0 8px;border:none;background:transparent;cursor:pointer;font-family:inherit" style-hover="background:var(--bg-hover)"><span style="font-size:14px;font-weight:500;color:var(--text-primary)">Clément</span><span style="width:24px;height:24px;background:var(--bg-active);color:var(--text-secondary);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center">C</span></button>
+      </div>
+    </header>
+
+    <!-- sub toolbar -->
+    <div style="height:48px;flex-shrink:0;border-bottom:1px solid var(--border-default);display:flex;align-items:center;padding:0 24px;gap:12px">
+      <a href="Reports.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="7,4 3,8 7,12"/></svg></a>
+      <button style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="10"/><line x1="9.5" y1="3" x2="9.5" y2="13"/></svg></button>
+      <span style="width:8px;height:8px;background:var(--text-subtle);display:block;flex-shrink:0"></span>
+      <span style="font-size:14px;font-weight:500;color:var(--text-primary);white-space:nowrap">Tasty Crousty</span>
+      <span style="color:var(--border-strong)">·</span>
+      <span style="font-size:13px;color:var(--text-subtle);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto">Tasty Crousty — Nice, FR</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px;flex-shrink:0">
+        <span style="font-size:13px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;white-space:nowrap">16 widgets</span>
+        <div style="width:1px;height:24px;background:var(--border-default)"></div>
+        <div style="display:flex;border:1px solid var(--border-default)">
+          <button style="height:32px;padding:0 12px;border:none;background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:8px;cursor:pointer" style-hover="background:var(--bg-hover)">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="3,8.5 6.5,12 13,4"/></svg>Mark Ready
+          </button>
+          <div style="width:1px;background:var(--border-default)"></div>
+          <button style="height:32px;padding:0 12px;border:none;background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:8px;cursor:pointer" style-hover="background:var(--bg-hover)">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/></svg>
+            <span style="color:var(--text-subtle)">Templates ·</span> Full Deep-Dive
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><polyline points="4,6.5 8,10 12,6.5"/></svg>
+          </button>
+        </div>
+        <button style="height:32px;padding:0 12px;background:var(--bg-canvas);border:1px solid var(--border-default);color:var(--text-primary);font-family:inherit;font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:8px;cursor:pointer" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="1.5,8 8,4 14.5,8 8,12"/><rect x="6.5" y="6.5" width="3" height="3"/></svg>Preview
+        </button>
+      </div>
+    </div>
+
+    <!-- content -->
+    <div style="flex:1;overflow-y:auto;position:relative;background:var(--bg-canvas)">
+      <div style="max-width:1200px;margin:0 auto;padding:40px 24px 80px">
+
+        <!-- report canvas -->
+        <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="height:4px;background:var(--bg-inverse)"></div>
+          <div style="height:56px;border-bottom:1px solid var(--border-subtle)"></div>
+          <div style="padding:40px">
+            <div style="font-size:32px;line-height:38px;font-style:italic;color:var(--text-disabled);letter-spacing:-0.01em">Tasty Crousty</div>
+            <div style="margin-top:10px;font-size:16px;font-style:italic;color:var(--text-disabled)">AI Perception Report — Tasty Crousty</div>
+
+            <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:40px">
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Entity</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">Tasty Crousty</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Market</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">Nice, FR</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Analysis date</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">August 3, 2026</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Prepared by</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">clement.pro.lucas@gmail.com</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Persona</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">Etudiant</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Keywords</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">Repas étudiant pas cher</div></div>
+            </div>
+
+            <div style="height:1px;background:var(--border-subtle);margin:32px 0 20px"></div>
+
+            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px">
+              <span style="font-size:13px;font-weight:500;color:var(--text-subtle);margin-right:4px;text-transform:uppercase;letter-spacing:0.03em;">Show</span>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Entity</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Market</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Analysis date</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Prepared by</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Persona</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Keywords</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- executive summary -->
+        <div style="margin-top:40px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="width:8px;height:8px;background:var(--bg-inverse);display:block"></span>
+            <h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">Executive Summary</h2>
+          </div>
+          <p style="margin:16px 0 0;font-size:14px;font-style:italic;color:var(--text-disabled)">Write a brief executive summary for the client…</p>
+        </div>
+
+        <!-- AI perception snapshot -->
+        <div style="margin-top:40px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="1.5,8 8,4 14.5,8 8,12"/><rect x="6.5" y="6.5" width="3" height="3"/></svg></span>
+              <h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">AI Perception Snapshot</h2>
+            </div>
+            <span style="font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">August 3, 2026</span>
+          </div>
+
+          <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px">
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--text-primary)">
+                <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="6" y="6" width="4" height="4"/><rect x="3" y="3" width="10" height="10"/></svg></span>
+                <span style="font-size:14px;font-weight:500">AI Presence</span>
+              </div>
+              <div style="margin-top:10px;font-size:12px;line-height:16px;color:var(--text-subtle);min-height:32px">How often AI systems mention this entity</div>
+              <div style="margin-top:20px;position:relative;width:132px;height:132px;margin-left:auto;margin-right:auto">
+                <svg width="132" height="132" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg-active)" stroke-width="12"></circle>
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="#0fbee8" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.159" stroke-dashoffset="119.38"></circle>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                  <span style="font-size:30px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">6,2</span>
+                  <span style="font-size:12px;color:var(--text-subtle);margin-top:2px">/10</span>
+                </div>
+              </div>
+            </div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--text-primary)">
+                <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,11 13.5,13"/></svg></span>
+                <span style="font-size:14px;font-weight:500">Competitive Position</span>
+              </div>
+              <div style="margin-top:10px;font-size:12px;line-height:16px;color:var(--text-subtle);min-height:32px">How clearly AI positions this vs alternatives</div>
+              <div style="margin-top:20px;position:relative;width:132px;height:132px;margin-left:auto;margin-right:auto">
+                <svg width="132" height="132" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg-active)" stroke-width="12"></circle>
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="#0fbee8" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.159" stroke-dashoffset="91.11"></circle>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                  <span style="font-size:30px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">7,1</span>
+                  <span style="font-size:12px;color:var(--text-subtle);margin-top:2px">/10</span>
+                </div>
+              </div>
+            </div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--text-primary)">
+                <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M2.5 3 H13.5 V11 H8 L5 13.5 V11 H2.5 Z"/></svg></span>
+                <span style="font-size:14px;font-weight:500">Narrative Coherence</span>
+              </div>
+              <div style="margin-top:10px;font-size:12px;line-height:16px;color:var(--text-subtle);min-height:32px">Consistency of AI understanding across contexts</div>
+              <div style="margin-top:20px;position:relative;width:132px;height:132px;margin-left:auto;margin-right:auto">
+                <svg width="132" height="132" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg-active)" stroke-width="12"></circle>
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="#0fdd62" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.159" stroke-dashoffset="62.83"></circle>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                  <span style="font-size:30px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">8,0</span>
+                  <span style="font-size:12px;color:var(--text-subtle);margin-top:2px">/10</span>
+                </div>
+              </div>
+            </div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--text-primary)">
+                <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg></span>
+                <span style="font-size:14px;font-weight:500">Source Concentration</span>
+              </div>
+              <div style="margin-top:10px;font-size:12px;line-height:16px;color:var(--text-subtle);min-height:32px">Distribution of sources influencing AI perception</div>
+              <div style="margin-top:20px;position:relative;width:132px;height:132px;margin-left:auto;margin-right:auto">
+                <svg width="132" height="132" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg-active)" stroke-width="12"></circle>
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="#ed4a36" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.159" stroke-dashoffset="182.21"></circle>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                  <span style="font-size:30px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">4,2</span>
+                  <span style="font-size:12px;color:var(--text-subtle);margin-top:2px">/10</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);display:grid;grid-template-columns:1fr 1.4fr 1fr">
+          <div style="padding:24px">
+            <div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Average Position</div>
+            <div style="margin-top:2px;font-size:12px;color:var(--text-subtle)">Across all AI systems</div>
+            <div style="margin-top:20px;display:flex;align-items:baseline;gap:8px"><span style="font-size:44px;line-height:46px;font-weight:500;color:#0fdd62;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">2,3</span><span style="font-size:14px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">/ 100</span></div>
+            <div style="margin-top:12px;font-size:14px;font-weight:500;color:var(--text-primary)">Strong Presence</div>
+          </div>
+          <div style="padding:24px;border-left:1px solid var(--border-subtle)">
+            <div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Ranking Frequency</div>
+            <div style="margin-top:2px;font-size:12px;color:var(--text-subtle)">Distribution across responses</div>
+            <div style="margin-top:18px;display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center;gap:12px"><span style="width:110px;font-size:13px;color:var(--text-secondary)">Top 1</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:26%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:44px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">26%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="width:110px;font-size:13px;color:var(--text-secondary)">Top 3</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:75%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:44px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">75%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="width:110px;font-size:13px;color:var(--text-secondary)">Top 10</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:92%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:44px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">92%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="width:110px;font-size:13px;color:var(--text-secondary)">Not mentioned</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:8%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:44px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">8%</span></div></div>
+          </div>
+          <div style="padding:24px;border-left:1px solid var(--border-subtle)">
+            <div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Consistency</div>
+            <div style="margin-top:2px;font-size:12px;color:var(--text-subtle)">Uniformity across models</div>
+            <div style="margin-top:20px;display:flex;align-items:baseline;gap:8px"><span style="font-size:44px;line-height:46px;font-weight:500;color:#0fbee8;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">74</span><span style="font-size:14px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">/ 100</span></div>
+            <div style="margin-top:12px;font-size:14px;font-weight:500;color:var(--text-primary)">Moderate consistency</div>
+            <div style="margin-top:12px;height:4px;background:var(--border-subtle)"><div style="width:74%;height:100%;background:#0fbee8"></div></div>
+            <div style="margin-top:8px;font-size:12px;color:var(--text-subtle)">Some variation in positioning</div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,11 13.5,13"/></svg></span><h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">Competitive Metrics</h2></div>
+          <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);padding:20px"><div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Share of Voice</div><div style="margin-top:16px;display:flex;align-items:baseline;gap:6px"><span style="font-size:28px;line-height:32px;font-weight:500;color:#0fbee8;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">16</span><span style="font-size:14px;color:var(--text-subtle)"> %</span></div><div style="margin-top:12px;font-size:13px;color:var(--text-secondary);line-height:18px">Visibilité forte, derrière Five Pizza Original dans l'ensemble concurrentiel.</div></div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);padding:20px"><div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Win Rate</div><div style="margin-top:16px;display:flex;align-items:baseline;gap:6px"><span style="font-size:28px;line-height:32px;font-weight:500;color:#ed4a36;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">25</span><span style="font-size:14px;color:var(--text-subtle)"> %</span></div><div style="margin-top:12px;font-size:13px;color:var(--text-secondary);line-height:18px">Five Pizza l'emporte sur le critère prix étudiant.</div></div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);padding:20px"><div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Substitution Risk</div><div style="margin-top:16px;display:flex;align-items:baseline;gap:6px"><span style="font-size:28px;line-height:32px;font-weight:500;color:#ed4a36;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">75</span><span style="font-size:14px;color:var(--text-subtle)"> %</span></div><div style="margin-top:12px;font-size:13px;color:var(--text-secondary);line-height:18px">Five Pizza préféré pour preuves d'offres étudiantes économiques.</div></div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:16px 20px;display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,10.5 6,7 8.5,9.5 13.5,4.5"/><polyline points="10.5,4.5 13.5,4.5 13.5,7.5"/></svg></span><h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">Competitive Landscape</h2></div>
+            <span style="font-size:12px;color:var(--text-subtle)">Ranked <span style="font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;color:#0fdd62">#2</span> of <span style="font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--text-primary)">10</span></span>
+          </div>
+          <div style="display:flex;align-items:center;gap:16px;height:44px;padding:0 20px;border-top:1px solid var(--border-subtle)"><span style="width:16px;font-size:13px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">1</span><span style="font-size:14px;color:var(--text-default)">Five Pizza Original</span></div><div style="display:flex;align-items:center;gap:16px;height:44px;padding:0 20px;border-top:1px solid var(--border-subtle);background:var(--bg-active);box-shadow:inset 2px 0 0 var(--bg-inverse)"><span style="width:16px;font-size:13px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">2</span><span style="font-size:14px;font-weight:500;color:var(--text-primary)">Tasty Crousty</span><span style="font-size:11px;color:var(--text-subtle)">← you</span></div><div style="display:flex;align-items:center;gap:16px;height:44px;padding:0 20px;border-top:1px solid var(--border-subtle)"><span style="width:16px;font-size:13px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">3</span><span style="font-size:14px;color:var(--text-default)">O'Tacos</span></div><div style="display:flex;align-items:center;gap:16px;height:44px;padding:0 20px;border-top:1px solid var(--border-subtle)"><span style="width:16px;font-size:13px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">4</span><span style="font-size:14px;color:var(--text-default)">Chicken Street</span></div><div style="display:flex;align-items:center;gap:16px;height:44px;padding:0 20px;border-top:1px solid var(--border-subtle)"><span style="width:16px;font-size:13px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">5</span><span style="font-size:14px;color:var(--text-default)">KFC</span></div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:20px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;border-bottom:1px solid var(--border-subtle)">
+            <div>
+              <div style="font-size:16px;font-weight:500;color:var(--text-primary)">Brand Perception Signals</div>
+              <div style="margin-top:4px;font-size:12px;color:var(--text-subtle)">Key narratives detected across AI responses</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:24px">
+              <div style="text-align:right"><div style="font-size:20px;font-weight:500;color:var(--positive-text);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">5</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Strengths</div></div>
+              <div style="width:1px;height:32px;background:var(--border-subtle)"></div>
+              <div style="text-align:right"><div style="font-size:20px;font-weight:500;color:var(--negative-text);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">5</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Risks</div></div>
+              <div style="width:1px;height:32px;background:var(--border-subtle)"></div>
+              <div style="text-align:right"><div style="font-size:20px;font-weight:500;color:#0fbee8;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">50%</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Positive</div></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr">
+            <div style="padding:20px">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--positive-text)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,10.5 6,7 8.5,9.5 13.5,4.5"/><polyline points="10.5,4.5 13.5,4.5 13.5,7.5"/></svg><span style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.03em;">Strengths</span></div>
+              <div style="margin-top:16px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty est bien positionnée pour les étudiants qui veulent manger vite, copieusement et à prix présenté comme accessible.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty bénéficie d'une forte visibilité nationale sur les réseaux sociaux, surtout auprès des jeunes consommateurs.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty propose un concept simple et standardisé, ce qui facilite un service rapide et une expérience facile à comprendre.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty a une identité de marque forte et virale, ce qui augmente la mémorisation et l'envie d'essai.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty met en avant des portions généreuses, ce qui renforce l'attrait pour les clients cherchant un repas rassasiant.</span></div></div>
+            </div>
+            <div style="padding:20px;border-left:1px solid var(--border-subtle)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--negative-text)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,5.5 6,9 8.5,6.5 13.5,11.5"/><polyline points="10.5,11.5 13.5,11.5 13.5,8.5"/></svg><span style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.03em;">Risks</span></div>
+              <div style="margin-top:16px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty s'appuie davantage sur le discours marketing que sur une longue base d'avis indépendants, ce qui peut limiter la confiance dans la promesse qualité-prix.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty a une notoriété locale à Nice encore peu étayée, ce qui peut réduire la préférence face à des alternatives mieux établies localement.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty dispose de moins de preuves publiques que Five Pizza Original sur les offres étudiantes, ce qui affaiblit la préférence sur le critère du repas étudiant pas cher.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty fait l'objet de questions sur un possible écart entre l'engouement en ligne et la qualité réelle, ce qui peut freiner la recommandation.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty ne communique pas clairement sur des menus ou réductions étudiantes, ce qui limite la preuve d'une offre spécifiquement adaptée aux étudiants.</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+              <div style="display:flex;gap:10px"><span style="color:var(--text-subtle);display:flex;margin-top:2px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg></span><div><div style="font-size:15px;font-weight:500;color:var(--text-primary)">Source Attribution</div><div style="margin-top:4px;font-size:12px;color:var(--text-subtle);max-width:220px">Where AI systems source information about Tasty Crousty</div></div></div>
+              <div style="display:flex;gap:20px;text-align:right"><div><div style="font-size:20px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">4</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Domains</div></div><div><div style="font-size:20px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">360,000</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Citations</div></div></div>
+            </div>
+            <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;gap:12px"><span style="width:14px;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">1</span><span style="color:var(--text-subtle);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg></span><span style="flex:0 0 150px;font-size:13px;color:var(--text-default);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">deliveroo.fr</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:25%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:48px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">25.0%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="width:14px;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">2</span><span style="color:var(--text-subtle);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg></span><span style="flex:0 0 150px;font-size:13px;color:var(--text-default);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">fivepizzaoriginal.com</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:25%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:48px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">25.0%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="width:14px;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">3</span><span style="color:var(--text-subtle);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg></span><span style="flex:0 0 150px;font-size:13px;color:var(--text-default);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">reddit.com</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:25%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:48px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">25.0%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="width:14px;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">4</span><span style="color:var(--text-subtle);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg></span><span style="flex:0 0 150px;font-size:13px;color:var(--text-default);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">tastycrousty.io</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:25%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:48px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">25.0%</span></div></div>
+          </div>
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg></span><span style="font-size:15px;font-weight:500;color:var(--text-primary)">Top Cited Pages</span></div>
+              <span style="height:20px;padding:0 8px;display:inline-flex;align-items:center;font-size:12px;color:var(--info-text);border:1px solid var(--info-text);text-transform:none">Your site</span>
+            </div>
+            <div style="padding:6px 20px 8px">
+              <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle)"><div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:14px;font-weight:500;color:var(--text-primary)">Deliveroo</span><span style="font-size:13px;color:var(--text-secondary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">25.0%</span></div><div style="margin-top:4px;font-size:11px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">https://deliveroo.fr/fr/menu/strasbourg/esplanade-universite/five-pizza-stras…</div><div style="margin-top:6px;font-size:13px;color:var(--text-secondary);line-height:18px">Les avis indépendants mentionnent régulièrement le rapport qualité/prix et les menus étudiants comme point fort. [Deliveroo+2autour-de-moi.com+2]…</div></div>
+              <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle)"><div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:14px;font-weight:500;color:var(--text-primary)">Five Pizza Original</span><span style="font-size:13px;color:var(--text-secondary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">25.0%</span></div><div style="margin-top:4px;font-size:11px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">https://fivepizzaoriginal.com/fr_fr/?utm_source=chatgpt</div><div style="margin-top:6px;font-size:13px;color:var(--text-secondary);line-height:18px">1. [Five Pizza Original](https://fivepizzaoriginal.com/fr_fr/?utm_source=chatgpt)</div></div>
+              <div style="padding:14px 0;"><div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-size:14px;font-weight:500;color:var(--text-primary)">Reddit</span><span style="font-size:13px;color:var(--text-secondary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">25.0%</span></div><div style="margin-top:4px;font-size:11px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">https://www.reddit.com/r/AskFrance/comments/1r52qyg/quelquun_mexplique_ce_que…</div><div style="margin-top:6px;font-size:13px;color:var(--text-secondary);line-height:18px">Plusieurs discussions Reddit parlent du « phénomène » Tasty Crousty, souvent davantage sous l'angle du marketing viral que de la restauration elle-même. [Reddit+1]…</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:16px 20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="8,2.5 12.5,8 3.5,8"/><rect x="6" y="8" width="4" height="3.5"/><line x1="6.5" y1="13.5" x2="9.5" y2="13.5"/></svg></span><span style="font-size:15px;font-weight:500;color:var(--text-primary)">Implications</span></div>
+          <div style="padding:4px 20px"><div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><span style="flex-shrink:0;width:24px;height:24px;border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">1</span><span style="font-size:14px;line-height:21px;color:var(--text-default)">Tasty Crousty est bien compris par l'IA comme un concept simple et différencié — riz, poulet frit croustillant, sauce maison — avec des attributs clairs : portions généreuses, rapidité, prix accessible et forte viralité sociale. Cette clarté de positionnement est un atout GEO, car elle donne à l'IA une formule facile à résumer et à réutiliser dans les recommandations liées à la street food rapide et copieuse.</span></div><div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><span style="flex-shrink:0;width:24px;height:24px;border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">2</span><span style="font-size:14px;line-height:21px;color:var(--text-default)">L'IA classe Five Pizza Original devant Tasty Crousty sur la requête stratégique « repas étudiant pas cher », principalement parce que Five Pizza dispose de preuves publiques plus tangibles : menus économiques, offres étudiantes et avis mentionnant le rapport qualité/prix. Tasty Crousty est donc visible et pertinent, mais perd la recommandation finale faute de preuves vérifiables sur les prix exacts et les avantages étudiants.</span></div><div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><span style="flex-shrink:0;width:24px;height:24px;border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">3</span><span style="font-size:14px;line-height:21px;color:var(--text-default)">La réputation de Tasty Crousty est présentée comme fortement dépendante du marketing viral plutôt que d'un socle robuste d'avis clients ou de sources indépendantes. La mention de Reddit et des interrogations sur le décalage possible entre engouement social et qualité réelle crée une vulnérabilité : l'IA relaie l'idée d'un phénomène marketing dont la valeur produit reste partiellement à prouver.</span></div><div style="display:flex;gap:16px;padding:16px 0;"><span style="flex-shrink:0;width:24px;height:24px;border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">4</span><span style="font-size:14px;line-height:21px;color:var(--text-default)">La présence locale à Nice apparaît faible ou insuffisamment documentée : l'IA indique avoir trouvé peu de preuves indépendantes d'une implantation ou d'une offre locale claire…</span></div></div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:16px 20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><polyline points="5,8 7,10 11,5.5"/></svg></span><span style="font-size:15px;font-weight:500;color:var(--text-primary)">Next Steps</span></div>
+          <div style="padding:4px 20px"><div style="display:flex;gap:12px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><span style="color:var(--positive-text);display:flex;margin-top:1px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><polyline points="5,8 7,10 11,5.5"/></svg></span><span style="font-size:14px;line-height:21px;color:var(--text-default)">Clarifier l'écart de preuves tarifaires face à Five Pizza Original en publiant sur le site officiel les prix exacts des barquettes, menus et formules Tasty Crousty par restaurant ou par ville, avec une page dédiée au critère « repas étudiant pas cher ».</span></div><div style="display:flex;gap:12px;padding:16px 0;"><span style="color:var(--positive-text);display:flex;margin-top:1px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><polyline points="5,8 7,10 11,5.5"/></svg></span><span style="font-size:14px;line-height:21px;color:var(--text-default)">Combler l'absence d'offres étudiantes vérifiables par rapport à Five Pizza Original en indiquant clairement en ligne s'il existe des menus étudiants, réductions sur présentation de carte étudiante ou formules petit budget, avec conditions, prix et établissements participants.</span></div></div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:16px 20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="4.5" x2="13" y2="4.5"/><rect x="9" y="3" width="3" height="3"/><line x1="3" y1="11.5" x2="13" y2="11.5"/><rect x="4" y="10" width="3" height="3"/></svg></span><span style="font-size:15px;font-weight:500;color:var(--text-primary)">Methodology</span></div>
+          <div style="padding:20px">
+            <p style="margin:0;font-size:14px;line-height:21px;color:var(--text-secondary)">This report analyzes how AI systems perceive and represent your brand based on responses from leading language models.</p>
+            <p style="margin:16px 0 0;font-size:14px;line-height:21px;color:var(--text-secondary)">Data was collected by querying multiple AI models with standardized prompts across different customer personas and use cases. Responses were analyzed for presence, sentiment, attribute associations, and competitive positioning.</p>
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-subtle);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;font-size:12px;color:var(--text-subtle);line-height:20px">Models analyzed: ChatGPT and Google Gemini<br>Analysis date: August 3, 2026<br>Sample size: 958,226 responses across 4 sources</div>
+          </div>
+        </div>
+
+      </div>
+
+      <sc-if value="{{ showGetHelp }}" hint-placeholder-val="{{ true }}">
+      <button style="position:absolute;right:24px;bottom:24px;height:32px;padding:0 12px;background:var(--bg-canvas);border:1px solid var(--border-default);color:var(--text-primary);font-family:inherit;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.08)" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><path d="M6 6 a2 2 0 0 1 3.5 1.3 c0 1.2 -1.5 1.2 -1.5 2.2"/><line x1="8" y1="11" x2="8" y2="11.4"/></svg>
+        Get help
+      </button>
+      </sc-if>
+    </div>
+  </div>
+</div>
+
+<div style="position:fixed;inset:0;pointer-events:none;z-index:2147483647;opacity:0.05;background-image:url('textures/grain.png');background-repeat:repeat"></div></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:800},&quot;showGetHelp&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    try { if (localStorage.getItem("lyr-theme") === "dark") document.documentElement.setAttribute("data-theme","dark"); } catch(e){}
+  }
+  renderVals() {
+    return {
+      toggleTheme: () => {
+        const r = document.documentElement;
+        const dark = r.getAttribute("data-theme") === "dark";
+        if (dark) { r.removeAttribute("data-theme"); try{localStorage.setItem("lyr-theme","light")}catch(e){} }
+        else { r.setAttribute("data-theme","dark"); try{localStorage.setItem("lyr-theme","dark")}catch(e){} }
+      },
+      showGetHelp: this.props.showGetHelp ?? true,
+      toggleSidebar: () => {
+        const sb = document.getElementById("lyr-sidebar");
+        if (!sb) return;
+        const collapsed = sb.getAttribute("data-collapsed") === "1";
+        sb.style.width = collapsed ? "240px" : "56px";
+        sb.setAttribute("data-collapsed", collapsed ? "0" : "1");
+        document.querySelectorAll("[data-nav-label]").forEach((el) => {
+          el.style.display = collapsed ? "" : "none";
+        });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
