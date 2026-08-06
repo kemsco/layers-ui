@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-Regular.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-Medium.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-Medium.woff') format('woff');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-SemiBold.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-SemiBold.woff') format('woff');font-weight:600;font-style:normal;font-display:swap}
+*{box-sizing:border-box}
+button,input,select,textarea{text-transform:inherit}
+:root{--bg-canvas:#FFFFFF;--bg-subtle:#FAFAFA;--bg-hover:#F4F4F5;--bg-active:#EDEDEE;--bg-inverse:#0A0A0A;--inverse-hover:#1F1F1F;--border-subtle:#EFEFEF;--border-default:#E4E4E4;--border-strong:#D4D4D4;--text-primary:#1A1A1A;--text-default:#333333;--text-secondary:#555555;--text-subtle:#777777;--text-disabled:#AFAFAF;--positive-text:#15B042;--negative-text:#D93025;--negative-bg:#FDDDDA;--negative-border:#F8BDB7;--info-text:#0077E6}
+:root[data-theme="dark"]{--bg-canvas:#171717;--bg-subtle:#101010;--bg-hover:#1F1F1F;--bg-active:#262626;--bg-inverse:#FAFAFA;--inverse-hover:#E4E4E4;--border-subtle:#262626;--border-default:#2E2E2E;--border-strong:#3A3A3A;--text-primary:#F5F5F5;--text-default:#D4D4D4;--text-secondary:#AFAFAF;--text-subtle:#8A8A8A;--text-disabled:#6B6B6B;--positive-text:#3FD068;--negative-text:#F26A5E;--negative-bg:#2A1614;--negative-border:#5A2621;--info-text:#4DA3FF}
+body{transition:background 200ms ease,color 200ms ease}
+img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-theme="dark"] img[data-logo="black"]{display:none}:root[data-theme="dark"] img[data-logo="white"]{display:block}
+  body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:var(--text-default);background:var(--bg-canvas);-webkit-font-smoothing:antialiased}
+  a{color:var(--text-primary);text-decoration:none}
+  ::selection{background:var(--bg-active)}
+  svg{display:block}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</helmet>
+
+<div style="height:100vh;display:flex;overflow:hidden;font-family:Inter,-apple-system,'Segoe UI',sans-serif;color:var(--text-default);background:var(--bg-canvas)">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside id="lyr-sidebar" data-collapsed="0" style="width:240px;flex-shrink:0;height:100vh;background:var(--bg-subtle);border-right:1px solid var(--border-default);padding:8px;display:flex;flex-direction:column;overflow:hidden;transition:width 200ms cubic-bezier(0.32,0.72,0,1)">
+    <a href="Home.dc.html" style="height:40px;display:flex;align-items:center;gap:8px;padding:0 12px;border-bottom:1px solid var(--border-subtle);margin:0 -8px;padding-left:20px;padding-right:20px" style-hover="background:var(--bg-hover)">
+      <img data-logo="black" src="logos/layers-black.png" alt="Layers" style="height:18px;width:auto;flex-shrink:0">
+      <img data-logo="white" src="logos/layers-white.png" alt="Layers" style="height:18px;width:auto;flex-shrink:0">
+      <span data-nav-label style="margin-left:auto;color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><polyline points="6.5,4 10,8 6.5,12"/></svg></span>
+    </a>
+
+    <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding-top:8px;display:flex;flex-direction:column;gap:2px">
+      <a href="Home.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,7 8,2.5 13.5,7"/><polyline points="4,7 4,13 12,13 12,7"/></svg>
+        <span data-nav-label>Home</span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg>
+        <span data-nav-label>Inbox</span>
+      </a>
+      <a href="Reports.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;background:var(--bg-canvas);box-shadow:inset 2px 0 0 var(--bg-inverse);color:var(--text-primary);font-size:13px;font-weight:500">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg>
+        <span data-nav-label>Reports</span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,11 13.5,13"/></svg>
+        <span data-nav-label>Clients</span>
+      </a>
+      <div data-nav-label style="display:flex;flex-direction:column;gap:2px;margin-top:2px">
+        <a href="TastyCrousty.dc.html" style="height:32px;display:flex;align-items:center;padding:0 12px 0 40px;background:var(--bg-canvas);box-shadow:inset 2px 0 0 var(--bg-inverse);color:var(--text-primary);font-size:13px;font-weight:500">Tasty Crousty</a>
+        <a href="#" style="height:32px;display:flex;align-items:center;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="background:var(--bg-hover);color:var(--text-primary)">Clement</a>
+        <a href="Reports.dc.html" style="height:32px;display:flex;align-items:center;gap:6px;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="color:var(--text-primary)">View all
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg>
+        </a>
+      </div>
+      <div style="height:1px;background:var(--border-subtle);margin:8px -8px"></div>
+      <div data-nav-label style="height:24px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">AI intelligence</div>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,10.5 6,7 8.5,9.5 13.5,4.5"/><polyline points="10.5,4.5 13.5,4.5 13.5,7.5"/></svg>
+        <span data-nav-label>Optimization</span>
+        <span data-nav-label style="margin-left:auto;color:var(--text-disabled);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><polygon points="8,2.5 9.5,6.5 13.5,8 9.5,9.5 8,13.5 6.5,9.5 2.5,8 6.5,6.5"/></svg></span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="8"/><line x1="6" y1="13.5" x2="10" y2="13.5"/></svg>
+        <span data-nav-label>Website Intelligence</span>
+        <span data-nav-label style="margin-left:auto;color:var(--text-disabled);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><polygon points="8,2.5 9.5,6.5 13.5,8 9.5,9.5 8,13.5 6.5,9.5 2.5,8 6.5,6.5"/></svg></span>
+      </a>
+    </div>
+
+    <div style="border-top:1px solid var(--border-subtle);margin:0 -8px;padding:8px 8px 0;display:flex;flex-direction:column;gap:2px">
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="5.5" y="3" width="5" height="5"/><polyline points="3,13 3,11.5 13,11.5 13,13"/></svg>
+        <span data-nav-label>Account</span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg>
+        <span data-nav-label>English</span>
+        <span data-nav-label style="margin-left:auto;font-size:12px;color:var(--text-disabled)">EN</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ══ MAIN ══ -->
+  <div style="flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;min-width:0">
+    <header style="height:56px;flex-shrink:0;border-bottom:1px solid var(--border-default);display:flex;align-items:center;padding:0 24px;gap:12px">
+      <button onClick="{{ toggleSidebar }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="10"/><line x1="6.5" y1="3" x2="6.5" y2="13"/></svg>
+      </button>
+      <a href="Reports.dc.html" style="font-size:16px;font-weight:500;color:var(--text-primary);letter-spacing:-0.01em">Reports</a>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+        <div style="height:20px;padding:0 8px;background:var(--negative-bg);border:1px solid var(--negative-border);color:var(--negative-text);font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:4px;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;cursor:pointer"><span style="width:8px;height:8px;background:var(--negative-text);display:block"></span>34</div>
+        <button onClick="{{ toggleTheme }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary)" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="6" y="6" width="4" height="4"/><line x1="8" y1="1.5" x2="8" y2="3.5"/><line x1="8" y1="12.5" x2="8" y2="14.5"/><line x1="1.5" y1="8" x2="3.5" y2="8"/><line x1="12.5" y1="8" x2="14.5" y2="8"/><line x1="3.5" y1="3.5" x2="4.9" y2="4.9"/><line x1="11.1" y1="11.1" x2="12.5" y2="12.5"/><line x1="12.5" y1="3.5" x2="11.1" y2="4.9"/><line x1="4.9" y1="11.1" x2="3.5" y2="12.5"/></svg></button>
+        <button style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);position:relative" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg><span style="position:absolute;top:6px;right:6px;width:6px;height:6px;background:var(--info-text)"></span></button>
+        <div style="width:1px;height:24px;background:var(--border-default);margin:0 4px"></div>
+        <button style="display:flex;align-items:center;gap:8px;height:32px;padding:0 4px 0 8px;border:none;background:transparent;cursor:pointer;font-family:inherit" style-hover="background:var(--bg-hover)"><span style="font-size:14px;font-weight:500;color:var(--text-primary)">Clément</span><span style="width:24px;height:24px;background:var(--bg-active);color:var(--text-secondary);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center">C</span></button>
+      </div>
+    </header>
+
+    <!-- sub toolbar -->
+    <div style="height:48px;flex-shrink:0;border-bottom:1px solid var(--border-default);display:flex;align-items:center;padding:0 24px;gap:12px">
+      <a href="Reports.dc.html" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="13" y2="8"/><polyline points="7,4 3,8 7,12"/></svg></a>
+      <button style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="10"/><line x1="9.5" y1="3" x2="9.5" y2="13"/></svg></button>
+      <span style="width:8px;height:8px;background:var(--text-subtle);display:block;flex-shrink:0"></span>
+      <span style="font-size:14px;font-weight:500;color:var(--text-primary);white-space:nowrap">Tasty Crousty</span>
+      <span style="color:var(--border-strong)">·</span>
+      <span style="font-size:13px;color:var(--text-subtle);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto">Tasty Crousty — Nice, FR</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px;flex-shrink:0">
+        <span style="font-size:13px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;white-space:nowrap">16 widgets</span>
+        <div style="width:1px;height:24px;background:var(--border-default)"></div>
+        <div style="display:flex;border:1px solid var(--border-default)">
+          <button style="height:32px;padding:0 12px;border:none;background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:8px;cursor:pointer" style-hover="background:var(--bg-hover)">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="3,8.5 6.5,12 13,4"/></svg>Mark Ready
+          </button>
+          <div style="width:1px;background:var(--border-default)"></div>
+          <button style="height:32px;padding:0 12px;border:none;background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:8px;cursor:pointer" style-hover="background:var(--bg-hover)">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/></svg>
+            <span style="color:var(--text-subtle)">Templates ·</span> Full Deep-Dive
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><polyline points="4,6.5 8,10 12,6.5"/></svg>
+          </button>
+        </div>
+        <button style="height:32px;padding:0 12px;background:var(--bg-canvas);border:1px solid var(--border-default);color:var(--text-primary);font-family:inherit;font-size:14px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:8px;cursor:pointer" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="1.5,8 8,4 14.5,8 8,12"/><rect x="6.5" y="6.5" width="3" height="3"/></svg>Preview
+        </button>
+      </div>
+    </div>
+
+    <!-- content -->
+    <div style="flex:1;overflow-y:auto;position:relative;background:var(--bg-canvas)">
+      <div style="max-width:1200px;margin:0 auto;padding:40px 24px 80px">
+
+        <!-- report canvas -->
+        <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="height:4px;background:var(--bg-inverse)"></div>
+          <div style="height:56px;border-bottom:1px solid var(--border-subtle)"></div>
+          <div style="padding:40px">
+            <div style="font-size:32px;line-height:38px;font-style:italic;color:var(--text-disabled);letter-spacing:-0.01em">Tasty Crousty</div>
+            <div style="margin-top:10px;font-size:16px;font-style:italic;color:var(--text-disabled)">AI Perception Report — Tasty Crousty</div>
+
+            <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:40px">
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Entity</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">Tasty Crousty</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Market</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">Nice, FR</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Analysis date</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">August 3, 2026</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Prepared by</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">clement.pro.lucas@gmail.com</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Persona</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">Etudiant</div></div>
+              <div><div style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Keywords</div><div style="margin-top:6px;font-size:14px;color:var(--text-primary)">Repas étudiant pas cher</div></div>
+            </div>
+
+            <div style="height:1px;background:var(--border-subtle);margin:32px 0 20px"></div>
+
+            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px">
+              <span style="font-size:13px;font-weight:500;color:var(--text-subtle);margin-right:4px;text-transform:uppercase;letter-spacing:0.03em;">Show</span>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Entity</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Market</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Analysis date</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Prepared by</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Persona</button>
+              <button style="height:28px;padding:0 10px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;text-transform:uppercase;letter-spacing:0.03em;" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Keywords</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- executive summary -->
+        <div style="margin-top:40px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="width:8px;height:8px;background:var(--bg-inverse);display:block"></span>
+            <h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">Executive Summary<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></h2>
+          </div>
+          <p style="margin:16px 0 0;font-size:14px;font-style:italic;color:var(--text-disabled)">Write a brief executive summary for the client…</p>
+        </div>
+
+        <!-- AI perception snapshot -->
+        <div style="margin-top:40px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <div style="display:flex;align-items:center;gap:12px">
+              <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="1.5,8 8,4 14.5,8 8,12"/><rect x="6.5" y="6.5" width="3" height="3"/></svg></span>
+              <h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">AI Perception Snapshot<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></h2>
+            </div>
+            <span style="font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">August 3, 2026</span>
+          </div>
+
+          <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px">
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--text-primary)">
+                <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="6" y="6" width="4" height="4"/><rect x="3" y="3" width="10" height="10"/></svg></span>
+                <span style="font-size:14px;font-weight:500">AI Presence<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fréquence de mention par les systèmes IA." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></span>
+              </div>
+              <div style="margin-top:10px;font-size:12px;line-height:16px;color:var(--text-subtle);min-height:32px">How often AI systems mention this entity</div>
+              <div style="margin-top:20px;position:relative;width:132px;height:132px;margin-left:auto;margin-right:auto">
+                <svg width="132" height="132" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg-active)" stroke-width="12"></circle>
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="#0fbee8" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.159" stroke-dashoffset="119.38"></circle>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                  <span style="font-size:30px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">6,2</span>
+                  <span style="font-size:12px;color:var(--text-subtle);margin-top:2px">/10</span>
+                </div>
+              </div>
+            </div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--text-primary)">
+                <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,11 13.5,13"/></svg></span>
+                <span style="font-size:14px;font-weight:500">Competitive Position<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Clarté du positionnement face aux alternatives." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></span>
+              </div>
+              <div style="margin-top:10px;font-size:12px;line-height:16px;color:var(--text-subtle);min-height:32px">How clearly AI positions this vs alternatives</div>
+              <div style="margin-top:20px;position:relative;width:132px;height:132px;margin-left:auto;margin-right:auto">
+                <svg width="132" height="132" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg-active)" stroke-width="12"></circle>
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="#0fbee8" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.159" stroke-dashoffset="91.11"></circle>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                  <span style="font-size:30px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">7,1</span>
+                  <span style="font-size:12px;color:var(--text-subtle);margin-top:2px">/10</span>
+                </div>
+              </div>
+            </div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--text-primary)">
+                <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M2.5 3 H13.5 V11 H8 L5 13.5 V11 H2.5 Z"/></svg></span>
+                <span style="font-size:14px;font-weight:500">Narrative Coherence<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cohérence de la compréhension IA selon les contextes." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></span>
+              </div>
+              <div style="margin-top:10px;font-size:12px;line-height:16px;color:var(--text-subtle);min-height:32px">Consistency of AI understanding across contexts</div>
+              <div style="margin-top:20px;position:relative;width:132px;height:132px;margin-left:auto;margin-right:auto">
+                <svg width="132" height="132" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg-active)" stroke-width="12"></circle>
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="#0fdd62" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.159" stroke-dashoffset="62.83"></circle>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                  <span style="font-size:30px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">8,0</span>
+                  <span style="font-size:12px;color:var(--text-subtle);margin-top:2px">/10</span>
+                </div>
+              </div>
+            </div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--text-primary)">
+                <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg></span>
+                <span style="font-size:14px;font-weight:500">Source Concentration<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Répartition des sources influençant la perception." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></span>
+              </div>
+              <div style="margin-top:10px;font-size:12px;line-height:16px;color:var(--text-subtle);min-height:32px">Distribution of sources influencing AI perception</div>
+              <div style="margin-top:20px;position:relative;width:132px;height:132px;margin-left:auto;margin-right:auto">
+                <svg width="132" height="132" viewBox="0 0 120 120" style="transform:rotate(-90deg)">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="var(--bg-active)" stroke-width="12"></circle>
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="#ed4a36" stroke-width="12" stroke-linecap="round" stroke-dasharray="314.159" stroke-dashoffset="182.21"></circle>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                  <span style="font-size:30px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">4,2</span>
+                  <span style="font-size:12px;color:var(--text-subtle);margin-top:2px">/10</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ PERFORMANCE OVERVIEW ══ -->
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:20px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <div>
+              <div style="display:flex;align-items:center"><span style="font-size:15px;font-weight:500;color:var(--text-primary)">Performance Overview</span><span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suivi global de la perception IA au fil des rapports." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></div>
+              <div style="margin-top:4px;font-size:12px;color:var(--text-subtle)">Key perception metrics across every report generated</div>
+            </div>
+            <div style="display:flex;padding:3px;background:var(--bg-subtle);border:1px solid var(--border-default);gap:2px;flex-shrink:0">
+              <sc-for list="{{ granBtns }}" as="g" hint-placeholder-count="3">
+              <button onClick="{{ g.onClick }}" style="height:28px;padding:0 14px;border:none;background:{{ g.bg }};color:{{ g.color }};box-shadow:{{ g.shadow }};font-size:13px;font-weight:500;font-family:Inter,sans-serif;cursor:pointer">{{ g.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:0 10px 6px">{{ overviewChart }}</div>
+          <div style="padding:2px 20px 18px;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center">
+            <sc-for list="{{ ovMetrics }}" as="m" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:7px">
+              <span style="width:10px;height:10px;border-radius:50%;background:{{ m.color }};flex-shrink:0"></span>
+              <span style="font-size:13px;color:var(--text-secondary)">{{ m.label }}</span>
+              <span data-info="{{ m.info }}" role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;line-height:1;cursor:help;flex-shrink:0">i</span>
+            </div>
+            </sc-for>
+            <span style="margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-subtle)"><span style="display:inline-flex;align-items:center;gap:5px"><svg width="11" height="11" viewBox="0 0 12 12" fill="var(--text-subtle)"><path d="M6 2 L10 8 L2 8 Z"/></svg>Report generated</span><span style="color:var(--border-strong)">·</span>{{ ovTrend }}<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tendance calculée sur la période sélectionnée." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></span>
+          </div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);display:grid;grid-template-columns:1fr 1.4fr 1fr">
+          <div style="padding:24px">
+            <div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Average Position<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></div>
+            <div style="margin-top:2px;font-size:12px;color:var(--text-subtle)">Across all AI systems</div>
+            <div style="margin-top:20px;display:flex;align-items:baseline;gap:8px"><span style="font-size:44px;line-height:46px;font-weight:500;color:#0fdd62;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">2,3</span><span style="font-size:14px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">/ 100</span></div>
+            <div style="margin-top:12px;font-size:14px;font-weight:500;color:var(--text-primary)">Strong Presence</div>
+          </div>
+          <div style="padding:24px;border-left:1px solid var(--border-subtle)">
+            <div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Ranking Frequency<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></div>
+            <div style="margin-top:2px;font-size:12px;color:var(--text-subtle)">Distribution across responses</div>
+            <div style="margin-top:18px;display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center;gap:12px"><span style="width:110px;font-size:13px;color:var(--text-secondary)">Top 1</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:26%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:44px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">26%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="width:110px;font-size:13px;color:var(--text-secondary)">Top 3</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:75%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:44px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">75%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="width:110px;font-size:13px;color:var(--text-secondary)">Top 10</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:92%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:44px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">92%</span></div><div style="display:flex;align-items:center;gap:12px"><span style="width:110px;font-size:13px;color:var(--text-secondary)">Not mentioned</span><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:8%;height:100%;background:var(--bg-inverse)"></div></div><span style="width:44px;text-align:right;font-size:13px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">8%</span></div></div>
+          </div>
+          <div style="padding:24px;border-left:1px solid var(--border-subtle)">
+            <div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Consistency<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></div>
+            <div style="margin-top:2px;font-size:12px;color:var(--text-subtle)">Uniformity across models</div>
+            <div style="margin-top:20px;display:flex;align-items:baseline;gap:8px"><span style="font-size:44px;line-height:46px;font-weight:500;color:#0fbee8;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">74</span><span style="font-size:14px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">/ 100</span></div>
+            <div style="margin-top:12px;font-size:14px;font-weight:500;color:var(--text-primary)">Moderate consistency</div>
+            <div style="margin-top:12px;height:4px;background:var(--border-subtle)"><div style="width:74%;height:100%;background:#0fbee8"></div></div>
+            <div style="margin-top:8px;font-size:12px;color:var(--text-subtle)">Some variation in positioning</div>
+          </div>
+        </div>
+
+        <!-- ══ AI UNDERSTANDING ══ -->
+        <div style="margin-top:40px">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+            <div style="display:flex;align-items:flex-start;gap:12px">
+              <span style="color:var(--text-subtle);display:flex;margin-top:1px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2"/><path d="M8 1.5 V3 M8 13 V14.5 M1.5 8 H3 M13 8 H14.5 M3.4 3.4 L4.5 4.5 M11.5 11.5 L12.6 12.6 M12.6 3.4 L11.5 4.5 M4.5 11.5 L3.4 12.6"/></svg></span>
+              <div>
+                <div style="display:flex;align-items:center"><h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">AI Understanding</h2><span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ce que les systèmes d'IA ont compris de Tasty Crousty, par sujet." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;line-height:1;cursor:help;flex-shrink:0">i</span></div>
+                <div style="margin-top:4px;font-size:13px;color:var(--text-subtle)">{{ auSubtitle }}</div>
+              </div>
+            </div>
+            <div style="display:flex;padding:3px;background:var(--bg-subtle);border:1px solid var(--border-default);gap:2px;flex-shrink:0">
+              <sc-for list="{{ auTabBtns }}" as="t" hint-placeholder-count="2">
+              <button onClick="{{ t.onClick }}" style="height:30px;padding:0 16px;border:none;background:{{ t.bg }};color:{{ t.color }};box-shadow:{{ t.shadow }};font-size:13px;font-weight:500;font-family:Inter,sans-serif;cursor:pointer">{{ t.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:0 20px;height:36px;display:grid;grid-template-columns:40px minmax(0,1fr) 130px 34px 30px;gap:14px;align-items:center;border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle)">
+              <span></span>
+              <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Sujet</span>
+              <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;display:flex;align-items:center">Understanding · Gaps<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Anneau = score de compréhension /100 ; Gaps = éléments manquants signalés par l'IA." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;text-transform:none;letter-spacing:0;line-height:1;cursor:help;flex-shrink:0">i</span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <sc-for list="{{ auRows }}" as="r" hint-placeholder-count="6">
+            <div style="border-bottom:1px solid var(--border-subtle);background:{{ r.rowBg }}">
+              <div onClick="{{ r.toggle }}" style="padding:12px 20px;display:grid;grid-template-columns:40px minmax(0,1fr) 130px 34px 30px;gap:14px;align-items:center;cursor:pointer">
+                <span style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--bg-active);color:var(--text-secondary)">{{ r.icon }}</span>
+                <div style="min-width:0">
+                  <div style="font-size:14px;font-weight:500;color:var(--text-primary)">{{ r.name }}</div>
+                  <div style="margin-top:2px;font-size:12px;color:var(--text-subtle);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.teaser }}</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="position:relative;width:40px;height:40px;flex-shrink:0">
+                    <svg width="40" height="40" viewBox="0 0 40 40" style="transform:rotate(-90deg)">
+                      <circle cx="20" cy="20" r="15" fill="none" stroke="var(--bg-active)" stroke-width="4"></circle>
+                      <circle cx="20" cy="20" r="15" fill="none" stroke="{{ r.scColor }}" stroke-width="4" stroke-linecap="round" stroke-dasharray="94.25" stroke-dashoffset="{{ r.scDash }}"></circle>
+                    </svg>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ r.score }}</div>
+                  </div>
+                  <span style="height:22px;padding:0 8px;display:inline-flex;align-items:center;font-size:11px;font-weight:500;color:{{ r.gapColor }};background:{{ r.gapBg }};border-radius:4px;white-space:nowrap">{{ r.gap }}</span>
+                </div>
+                <button onClick="{{ r.toggleBolt }}" title="Constat & amélioration" style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid {{ r.boltBorder }};background:{{ r.boltBg }};color:{{ r.boltColor }};cursor:pointer;padding:0"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 1.5 L3.5 9 H8 L7 14.5 L12.5 6.5 H8 Z"/></svg></button>
+                <span style="color:var(--text-subtle);display:flex;justify-content:flex-end;transition:transform 150ms ease;transform:{{ r.chevron }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="6,4 10,8 6,12"/></svg></span>
+              </div>
+              <sc-if value="{{ r.isOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:0 20px 20px 74px">
+                <div style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">Ce que l'IA a compris</div>
+                <div style="font-size:14px;line-height:22px;color:var(--text-secondary);max-width:760px;text-wrap:pretty">{{ r.summary }}</div>
+                <sc-if value="{{ r.isBolt }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-default);border:1px solid var(--border-default);max-width:760px">
+                  <div style="padding:16px;background:var(--bg-canvas)">
+                    <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px"><span style="width:6px;height:6px;border-radius:50%;background:var(--text-subtle)"></span><span style="font-size:11px;font-weight:600;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Constat</span></div>
+                    <div style="font-size:13px;line-height:20px;color:var(--text-secondary)">{{ r.constat }}</div>
+                  </div>
+                  <div style="padding:16px;background:color-mix(in srgb, var(--positive-text) 6%, var(--bg-canvas))">
+                    <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px"><span style="color:var(--positive-text);display:flex"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 1.5 L3.5 9 H8 L7 14.5 L12.5 6.5 H8 Z"/></svg></span><span style="font-size:11px;font-weight:600;color:var(--positive-text);text-transform:uppercase;letter-spacing:0.04em">Amélioration</span></div>
+                    <div style="font-size:13px;line-height:20px;color:var(--text-primary)">{{ r.amelio }}</div>
+                  </div>
+                </div>
+                </sc-if>
+              </div>
+              </sc-if>
+            </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:40px">
+          <div style="display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,11 13.5,13"/></svg></span><h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">Competitive Metrics<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></h2></div>
+          <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);padding:20px"><div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Share of Voice<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></div><div style="margin-top:16px;display:flex;align-items:baseline;gap:6px"><span style="font-size:28px;line-height:32px;font-weight:500;color:#0fbee8;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">16</span><span style="font-size:14px;color:var(--text-subtle)"> %</span></div><div style="margin-top:12px;font-size:13px;color:var(--text-secondary);line-height:18px">Visibilité forte, derrière Five Pizza Original dans l'ensemble concurrentiel.</div></div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);padding:20px"><div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Win Rate<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></div><div style="margin-top:16px;display:flex;align-items:baseline;gap:6px"><span style="font-size:28px;line-height:32px;font-weight:500;color:#ed4a36;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">25</span><span style="font-size:14px;color:var(--text-subtle)"> %</span></div><div style="margin-top:12px;font-size:13px;color:var(--text-secondary);line-height:18px">Five Pizza l'emporte sur le critère prix étudiant.</div></div>
+            <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);padding:20px"><div style="font-size:13px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Substitution Risk<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></div><div style="margin-top:16px;display:flex;align-items:baseline;gap:6px"><span style="font-size:28px;line-height:32px;font-weight:500;color:#ed4a36;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">75</span><span style="font-size:14px;color:var(--text-subtle)"> %</span></div><div style="margin-top:12px;font-size:13px;color:var(--text-secondary);line-height:18px">Five Pizza préféré pour preuves d'offres étudiantes économiques.</div></div>
+          </div>
+        </div>
+
+        <!-- ══ COMPETITIVE LANDSCAPE — DETAILED COMPARISON ══ -->
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:16px 20px;display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><line x1="2.5" y1="13.5" x2="13.5" y2="13.5"/><rect x="3" y="8" width="2.5" height="5"/><rect x="6.75" y="5" width="2.5" height="8"/><rect x="10.5" y="2.5" width="2.5" height="10.5"/></svg></span><h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">Competitive Landscape<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;vertical-align:middle;flex-shrink:0">i</span></h2></div>
+            <span style="font-size:12px;color:var(--text-subtle)">Ranked <span style="font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--positive-text)">#{{ youRank }}</span> of <span style="font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--text-primary)">6</span></span>
+          </div>
+          <div style="padding:0 20px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+            <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;margin-right:4px">Overall standings</span>
+            <sc-for list="{{ standings }}" as="st" hint-placeholder-count="6">
+            <div style="display:flex;align-items:center;gap:8px;height:32px;padding:0 12px 0 5px;border:1px solid var(--border-default);box-shadow:{{ st.ring }}">
+              <span style="width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;background:{{ st.rankBg }};color:{{ st.rankColor }};font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ st.rank }}</span>
+              <span style="font-size:13px;font-weight:500;color:var(--text-primary);white-space:nowrap">{{ st.name }}</span>
+              <sc-if value="{{ st.isYou }}" hint-placeholder-val="{{ false }}"><span style="font-size:10px;color:var(--positive-text);text-transform:uppercase;letter-spacing:0.04em">You</span></sc-if>
+            </div>
+            </sc-for>
+          </div>
+          <div style="overflow-x:auto">
+          <div style="min-width:720px;display:grid;grid-template-columns:minmax(150px,1.4fr) repeat(6, minmax(0,1fr));border-top:1px solid var(--border-subtle)">
+            <div style="padding:14px 16px;display:flex;align-items:flex-end;border-bottom:1px solid var(--border-default)"><span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Metric</span></div>
+            <sc-for list="{{ compBrands }}" as="b" hint-placeholder-count="6">
+            <div style="padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;border-bottom:1px solid var(--border-default);background:{{ b.headBg }}">
+              <span style="width:34px;height:34px;border:2px solid {{ b.ringColor }};border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace">{{ b.initial }}</span>
+              <span style="font-size:12px;font-weight:500;color:var(--text-primary);text-align:center;line-height:14px">{{ b.name }}</span>
+              <sc-if value="{{ b.isYou }}" hint-placeholder-val="{{ false }}"><span style="font-size:10px;color:var(--positive-text);text-transform:uppercase;letter-spacing:0.04em">You</span></sc-if>
+            </div>
+            </sc-for>
+            <sc-for list="{{ compRows }}" as="m" hint-placeholder-count="7">
+            <div style="padding:0 16px;min-height:52px;display:flex;align-items:center;border-bottom:1px solid var(--border-subtle)"><span style="font-size:14px;font-weight:500;color:var(--text-default)">{{ m.label }}</span></div>
+            <sc-for list="{{ m.cells }}" as="c">
+            <div style="min-height:52px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border-subtle);background:{{ c.bg }}"><span style="font-size:15px;color:{{ c.color }};font-weight:{{ c.weight }};font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ c.text }}</span></div>
+            </sc-for>
+            </sc-for>
+          </div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:20px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;border-bottom:1px solid var(--border-subtle)">
+            <div>
+              <div style="font-size:16px;font-weight:500;color:var(--text-primary)">Brand Perception Signals</div>
+              <div style="margin-top:4px;font-size:12px;color:var(--text-subtle)">Key narratives detected across AI responses</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:24px">
+              <div style="text-align:right"><div style="font-size:20px;font-weight:500;color:var(--positive-text);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">5</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Strengths</div></div>
+              <div style="width:1px;height:32px;background:var(--border-subtle)"></div>
+              <div style="text-align:right"><div style="font-size:20px;font-weight:500;color:var(--negative-text);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">5</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Risks</div></div>
+              <div style="width:1px;height:32px;background:var(--border-subtle)"></div>
+              <div style="text-align:right"><div style="font-size:20px;font-weight:500;color:#0fbee8;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">50%</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Positive</div></div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr">
+            <div style="padding:20px">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--positive-text)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,10.5 6,7 8.5,9.5 13.5,4.5"/><polyline points="10.5,4.5 13.5,4.5 13.5,7.5"/></svg><span style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.03em;">Strengths</span></div>
+              <div style="margin-top:16px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty est bien positionnée pour les étudiants qui veulent manger vite, copieusement et à prix présenté comme accessible.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty bénéficie d'une forte visibilité nationale sur les réseaux sociaux, surtout auprès des jeunes consommateurs.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty propose un concept simple et standardisé, ce qui facilite un service rapide et une expérience facile à comprendre.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty a une identité de marque forte et virale, ce qui augmente la mémorisation et l'envie d'essai.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--positive-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty met en avant des portions généreuses, ce qui renforce l'attrait pour les clients cherchant un repas rassasiant.</span></div></div>
+            </div>
+            <div style="padding:20px;border-left:1px solid var(--border-subtle)">
+              <div style="display:flex;align-items:center;gap:8px;color:var(--negative-text)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,5.5 6,9 8.5,6.5 13.5,11.5"/><polyline points="10.5,11.5 13.5,11.5 13.5,8.5"/></svg><span style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.03em;">Risks</span></div>
+              <div style="margin-top:16px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty s'appuie davantage sur le discours marketing que sur une longue base d'avis indépendants, ce qui peut limiter la confiance dans la promesse qualité-prix.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty a une notoriété locale à Nice encore peu étayée, ce qui peut réduire la préférence face à des alternatives mieux établies localement.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty dispose de moins de preuves publiques que Five Pizza Original sur les offres étudiantes, ce qui affaiblit la préférence sur le critère du repas étudiant pas cher.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty fait l'objet de questions sur un possible écart entre l'engouement en ligne et la qualité réelle, ce qui peut freiner la recommandation.</span></div><div style="display:flex;gap:10px"><span style="width:6px;height:6px;background:var(--negative-text);flex-shrink:0;margin-top:7px"></span><span style="font-size:14px;line-height:20px;color:var(--text-default)">Tasty Crousty ne communique pas clairement sur des menus ou réductions étudiantes, ce qui limite la preuve d'une offre spécifiquement adaptée aux étudiants.</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ SOURCE ATTRIBUTION ══ -->
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+            <div style="display:flex;gap:10px"><span style="color:var(--text-subtle);display:flex;margin-top:2px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg></span><div><div style="font-size:15px;font-weight:500;color:var(--text-primary)">Source Attribution</div><div style="margin-top:4px;font-size:12px;color:var(--text-subtle)">Where AI systems source information about Tasty Crousty</div></div></div>
+            <div style="display:flex;gap:24px;text-align:right"><div><div style="font-size:20px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">6</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Domains</div></div><div><div style="font-size:20px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">360,000</div><div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">Citations</div></div></div>
+          </div>
+          <div style="padding:14px 20px;border-bottom:1px solid var(--border-subtle);display:flex;gap:12px;align-items:center">
+            <div style="flex:1;display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-subtle)"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><circle cx="7" cy="7" r="4"/><line x1="10" y1="10" x2="13.5" y2="13.5"/></svg><span style="font-size:14px;color:var(--text-subtle)">Search sources</span></div>
+            <div style="display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);cursor:pointer" style-hover="background:var(--bg-hover)"><span style="font-size:14px;font-weight:500">All Types</span><span style="color:var(--text-subtle);display:flex"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><polyline points="4,6 8,10 12,6"/></svg></span></div>
+          </div>
+          <div style="padding:0 20px;height:38px;border-bottom:1px solid var(--border-subtle);display:grid;grid-template-columns:22px minmax(180px,1fr) 132px 84px 128px 40px;gap:12px;align-items:center;background:var(--bg-subtle)">
+            <span></span>
+            <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;">Domain</span>
+            <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;">Type</span>
+            <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;">Used</span>
+            <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;">Avg. Citations</span>
+            <span></span>
+          </div>
+          <sc-for list="{{ sources }}" as="s" hint-placeholder-count="6">
+          <div style="border-bottom:1px solid var(--border-subtle)">
+            <div onClick="{{ s.toggle }}" style="padding:0 20px;min-height:56px;display:grid;grid-template-columns:22px minmax(180px,1fr) 132px 84px 128px 40px;gap:12px;align-items:center;cursor:pointer" style-hover="background:var(--bg-hover)">
+              <span style="color:var(--text-subtle);display:flex;transition:transform 150ms ease;transform:{{ s.chevron }}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="6,4 10,8 6,12"/></svg></span>
+              <div style="display:flex;align-items:center;gap:10px;min-width:0"><span style="flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:{{ s.typeBg }};color:{{ s.color }};font-size:13px;font-weight:600;font-family:'Proto Mono',ui-monospace,monospace">{{ s.initial }}</span><span style="font-size:14px;font-weight:500;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ s.domain }}</span></div>
+              <span><span style="height:22px;padding:0 8px;display:inline-flex;align-items:center;font-size:12px;font-weight:500;color:{{ s.color }};background:{{ s.typeBg }};border-radius:4px">{{ s.type }}</span></span>
+              <span style="font-size:14px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ s.usedLabel }}</span>
+              <span style="font-size:14px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ s.avg }}</span>
+              <a href="{{ s.url }}" target="_blank" rel="noopener" onClick="{{ stop }}" style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-default);color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-inverse);color:var(--bg-canvas);border-color:var(--bg-inverse)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M6 3.5 H3.5 V12.5 H12.5 V10"/><line x1="7.5" y1="8.5" x2="12.5" y2="3.5"/><polyline points="9,3.5 12.5,3.5 12.5,7"/></svg></a>
+            </div>
+            <sc-if value="{{ s.isOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="background:var(--bg-subtle);border-top:1px solid var(--border-subtle)">
+              <sc-for list="{{ s.pages }}" as="p">
+              <div style="padding:0 20px;min-height:52px;display:grid;grid-template-columns:22px minmax(180px,1fr) 132px 84px 128px 40px;gap:12px;align-items:center;border-bottom:1px solid var(--border-subtle)">
+                <span></span>
+                <div style="min-width:0;padding-left:6px;border-left:2px solid var(--border-strong)"><div style="font-size:13px;font-weight:500;color:var(--text-default);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.title }}</div><div style="margin-top:2px;font-size:11px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.url }}</div></div>
+                <span style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;">Page</span>
+                <span style="font-size:13px;color:var(--text-secondary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ p.usedLabel }}</span>
+                <span style="font-size:13px;color:var(--text-secondary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ p.avg }}</span>
+                <a href="{{ p.url }}" target="_blank" rel="noopener" style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-default);color:var(--text-secondary);flex-shrink:0;background:var(--bg-canvas)" style-hover="background:var(--bg-inverse);color:var(--bg-canvas);border-color:var(--bg-inverse)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M6 3.5 H3.5 V12.5 H12.5 V10"/><line x1="7.5" y1="8.5" x2="12.5" y2="3.5"/><polyline points="9,3.5 12.5,3.5 12.5,7"/></svg></a>
+              </div>
+              </sc-for>
+            </div>
+            </sc-if>
+          </div>
+          </sc-for>
+        </div>
+
+        <!-- ══ TOP CITED PAGES ══ -->
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg></span><span style="font-size:15px;font-weight:500;color:var(--text-primary)">Top Cited Pages</span></div>
+            <span style="height:22px;padding:0 8px;display:inline-flex;align-items:center;font-size:12px;font-weight:500;color:var(--positive-text);background:color-mix(in srgb, var(--positive-text) 13%, transparent);border-radius:4px">Your site</span>
+          </div>
+          <div style="padding:0 20px;height:38px;border-bottom:1px solid var(--border-subtle);display:grid;grid-template-columns:minmax(200px,1fr) 84px 128px 148px 40px;gap:12px;align-items:center;background:var(--bg-subtle)">
+            <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;">Page</span>
+            <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;">Used</span>
+            <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;">Avg. Citations</span>
+            <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;">Weight /100</span>
+            <span></span>
+          </div>
+          <sc-for list="{{ topPages }}" as="p" hint-placeholder-count="5">
+          <div style="padding:0 20px;min-height:56px;display:grid;grid-template-columns:minmax(200px,1fr) 84px 128px 148px 40px;gap:12px;align-items:center;border-bottom:1px solid var(--border-subtle)" style-hover="background:var(--bg-hover)">
+            <div style="min-width:0"><div style="font-size:14px;font-weight:500;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.title }}</div><div style="margin-top:2px;font-size:11px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.url }}</div></div>
+            <span style="font-size:14px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ p.usedLabel }}</span>
+            <span style="font-size:14px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ p.avg }}</span>
+            <div style="display:flex;align-items:center;gap:10px"><div style="flex:1;height:4px;background:var(--border-subtle)"><div style="width:{{ p.weightPct }};height:100%;background:var(--positive-text)"></div></div><span style="width:26px;text-align:right;font-size:14px;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ p.weight }}</span></div>
+            <a href="{{ p.url }}" target="_blank" rel="noopener" style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-default);color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-inverse);color:var(--bg-canvas);border-color:var(--bg-inverse)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M6 3.5 H3.5 V12.5 H12.5 V10"/><line x1="7.5" y1="8.5" x2="12.5" y2="3.5"/><polyline points="9,3.5 12.5,3.5 12.5,7"/></svg></a>
+          </div>
+          </sc-for>
+        </div>
+
+        <!-- ══ GEO MATRIX ══ -->
+        <div style="margin-top:40px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="4.5" height="4.5"/><rect x="9" y="2.5" width="4.5" height="4.5"/><rect x="2.5" y="9" width="4.5" height="4.5"/><rect x="9" y="9" width="4.5" height="4.5"/></svg></span>
+            <h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">GEO Matrix</h2>
+          </div>
+          <div style="margin-top:4px;font-size:13px;color:var(--text-subtle)">Filtrer la performance par keyword, intention ou prompt</div>
+
+          <div style="margin-top:16px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border-subtle);display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+              <div style="display:flex;padding:3px;background:var(--bg-subtle);border:1px solid var(--border-default);gap:2px">
+                <sc-for list="{{ geoTabBtns }}" as="t" hint-placeholder-count="3">
+                <button onClick="{{ t.onClick }}" style="height:30px;padding:0 16px;border:none;background:{{ t.bg }};color:{{ t.color }};box-shadow:{{ t.shadow }};font-size:13px;font-weight:500;font-family:Inter,sans-serif;cursor:pointer">{{ t.label }}</button>
+                </sc-for>
+              </div>
+              <div style="flex:1;min-width:180px;display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid var(--border-default);background:var(--bg-canvas)">
+                <span style="color:var(--text-subtle);display:flex;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><circle cx="7" cy="7" r="4"/><line x1="10" y1="10" x2="13.5" y2="13.5"/></svg></span>
+                <input value="{{ geoQuery }}" onInput="{{ onGeoSearch }}" placeholder="Rechercher…" style="flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:14px;color:var(--text-primary);font-family:Inter,sans-serif" />
+              </div>
+            </div>
+
+            <div style="overflow-x:auto">
+            <div style="min-width:820px">
+              <div style="padding:0 20px;height:52px;display:grid;grid-template-columns:minmax(220px,1.5fr) repeat(5, minmax(70px,1fr)) 104px 44px;gap:10px;align-items:center;border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle)">
+                <span style="font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Élément</span>
+                <sc-for list="{{ geoMetrics }}" as="m" hint-placeholder-count="5">
+                <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px">
+                  <span style="font-size:10px;font-weight:600;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.02em;line-height:12px">{{ m.label }}</span>
+                  <span data-info="{{ m.info }}" role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;line-height:1;cursor:help;flex-shrink:0">i</span>
+                </div>
+                </sc-for>
+                <span style="display:flex;align-items:center;justify-content:flex-end;font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Coverage<span data-info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Part des métriques au-dessus du seuil de présence." role="img" aria-label="info" style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;margin-left:6px;border-radius:50%;background:var(--bg-active);color:var(--text-subtle);font-size:9px;font-weight:700;font-family:Inter,sans-serif;font-style:normal;text-transform:none;letter-spacing:0;line-height:1;cursor:help;flex-shrink:0">i</span></span>
+                <span style="display:flex;justify-content:flex-end;font-size:11px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Action</span>
+              </div>
+
+              <sc-for list="{{ geoRows }}" as="r" hint-placeholder-count="7">
+              <div style="border-bottom:1px solid var(--border-subtle)">
+              <div style="padding:12px 20px;display:grid;grid-template-columns:minmax(220px,1.5fr) repeat(5, minmax(70px,1fr)) 104px 44px;gap:10px;align-items:center" style-hover="background:var(--bg-hover)">
+                <div style="min-width:0">
+                  <div style="font-size:14px;font-weight:500;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div>
+                  <div style="margin-top:2px;font-size:12px;color:var(--text-subtle)">{{ r.sub }}</div>
+                </div>
+                <sc-for list="{{ r.cells }}" as="c">
+                <div style="background:{{ c.bg }};padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:1px">
+                  <span style="font-size:18px;line-height:20px;font-weight:600;color:{{ c.color }};font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ c.v }}</span>
+                  <span style="font-size:11px;font-weight:500;color:{{ c.deltaColor }};font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ c.delta }}</span>
+                </div>
+                </sc-for>
+                <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px">
+                  <span style="height:24px;padding:0 9px;display:inline-flex;align-items:center;font-size:12px;font-weight:600;color:{{ r.covColor }};background:{{ r.covBg }};font-family:'Proto Mono',ui-monospace,monospace">{{ r.covPct }}</span>
+                  <span style="font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace">{{ r.covLabel }}</span>
+                </div>
+                <button onClick="{{ r.toggleBolt }}" title="Constat & actions" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid {{ r.boltBorder }};background:{{ r.boltBg }};color:{{ r.boltColor }};cursor:pointer;padding:0;justify-self:end"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 1.5 L3.5 9 H8 L7 14.5 L12.5 6.5 H8 Z"/></svg></button>
+              </div>
+              <sc-if value="{{ r.isBolt }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-default);border:1px solid var(--border-default);margin:0 20px 16px">
+                <div style="padding:16px;background:var(--bg-canvas)">
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px"><span style="width:8px;height:8px;background:#ed4a36"></span><span style="font-size:11px;font-weight:600;color:#ed4a36;text-transform:uppercase;letter-spacing:0.04em">Constat</span></div>
+                  <div style="font-size:13px;line-height:20px;color:var(--text-secondary)">{{ r.constat }}</div>
+                </div>
+                <div style="padding:16px;background:var(--bg-canvas)">
+                  <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px"><span style="color:#0fdd62;display:flex"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 1.5 L3.5 9 H8 L7 14.5 L12.5 6.5 H8 Z"/></svg></span><span style="font-size:11px;font-weight:600;color:#0fdd62;text-transform:uppercase;letter-spacing:0.04em">Actions</span></div>
+                  <div style="font-size:13px;line-height:20px;color:var(--text-primary)">{{ r.actions }}</div>
+                </div>
+              </div>
+              </sc-if>
+              </div>
+              </sc-for>
+              <sc-if value="{{ geoEmpty }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:40px 20px;text-align:center;font-size:14px;color:var(--text-subtle)">Aucun résultat</div>
+              </sc-if>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:16px 20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="8,2.5 12.5,8 3.5,8"/><rect x="6" y="8" width="4" height="3.5"/><line x1="6.5" y1="13.5" x2="9.5" y2="13.5"/></svg></span><span style="font-size:15px;font-weight:500;color:var(--text-primary)">Implications</span></div>
+          <div style="padding:4px 20px"><div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><span style="flex-shrink:0;width:24px;height:24px;border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">1</span><span style="font-size:14px;line-height:21px;color:var(--text-default)">Tasty Crousty est bien compris par l'IA comme un concept simple et différencié — riz, poulet frit croustillant, sauce maison — avec des attributs clairs : portions généreuses, rapidité, prix accessible et forte viralité sociale. Cette clarté de positionnement est un atout GEO, car elle donne à l'IA une formule facile à résumer et à réutiliser dans les recommandations liées à la street food rapide et copieuse.</span></div><div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><span style="flex-shrink:0;width:24px;height:24px;border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">2</span><span style="font-size:14px;line-height:21px;color:var(--text-default)">L'IA classe Five Pizza Original devant Tasty Crousty sur la requête stratégique « repas étudiant pas cher », principalement parce que Five Pizza dispose de preuves publiques plus tangibles : menus économiques, offres étudiantes et avis mentionnant le rapport qualité/prix. Tasty Crousty est donc visible et pertinent, mais perd la recommandation finale faute de preuves vérifiables sur les prix exacts et les avantages étudiants.</span></div><div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><span style="flex-shrink:0;width:24px;height:24px;border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">3</span><span style="font-size:14px;line-height:21px;color:var(--text-default)">La réputation de Tasty Crousty est présentée comme fortement dépendante du marketing viral plutôt que d'un socle robuste d'avis clients ou de sources indépendantes. La mention de Reddit et des interrogations sur le décalage possible entre engouement social et qualité réelle crée une vulnérabilité : l'IA relaie l'idée d'un phénomène marketing dont la valeur produit reste partiellement à prouver.</span></div><div style="display:flex;gap:16px;padding:16px 0;"><span style="flex-shrink:0;width:24px;height:24px;border:1px solid var(--border-default);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">4</span><span style="font-size:14px;line-height:21px;color:var(--text-default)">La présence locale à Nice apparaît faible ou insuffisamment documentée : l'IA indique avoir trouvé peu de preuves indépendantes d'une implantation ou d'une offre locale claire…</span></div></div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:16px 20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><polyline points="5,8 7,10 11,5.5"/></svg></span><span style="font-size:15px;font-weight:500;color:var(--text-primary)">Next Steps</span></div>
+          <div style="padding:4px 20px"><div style="display:flex;gap:12px;padding:16px 0;border-bottom:1px solid var(--border-subtle)"><span style="color:var(--positive-text);display:flex;margin-top:1px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><polyline points="5,8 7,10 11,5.5"/></svg></span><span style="font-size:14px;line-height:21px;color:var(--text-default)">Clarifier l'écart de preuves tarifaires face à Five Pizza Original en publiant sur le site officiel les prix exacts des barquettes, menus et formules Tasty Crousty par restaurant ou par ville, avec une page dédiée au critère « repas étudiant pas cher ».</span></div><div style="display:flex;gap:12px;padding:16px 0;"><span style="color:var(--positive-text);display:flex;margin-top:1px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><polyline points="5,8 7,10 11,5.5"/></svg></span><span style="font-size:14px;line-height:21px;color:var(--text-default)">Combler l'absence d'offres étudiantes vérifiables par rapport à Five Pizza Original en indiquant clairement en ligne s'il existe des menus étudiants, réductions sur présentation de carte étudiante ou formules petit budget, avec conditions, prix et établissements participants.</span></div></div>
+        </div>
+
+        <div style="margin-top:40px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:16px 20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px"><span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><line x1="3" y1="4.5" x2="13" y2="4.5"/><rect x="9" y="3" width="3" height="3"/><line x1="3" y1="11.5" x2="13" y2="11.5"/><rect x="4" y="10" width="3" height="3"/></svg></span><span style="font-size:15px;font-weight:500;color:var(--text-primary)">Methodology</span></div>
+          <div style="padding:20px">
+            <p style="margin:0;font-size:14px;line-height:21px;color:var(--text-secondary)">This report analyzes how AI systems perceive and represent your brand based on responses from leading language models.</p>
+            <p style="margin:16px 0 0;font-size:14px;line-height:21px;color:var(--text-secondary)">Data was collected by querying multiple AI models with standardized prompts across different customer personas and use cases. Responses were analyzed for presence, sentiment, attribute associations, and competitive positioning.</p>
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-subtle);font-family:'Proto Mono',ui-monospace,monospace;text-transform:none;font-size:12px;color:var(--text-subtle);line-height:20px">Models analyzed: ChatGPT and Google Gemini<br>Analysis date: August 3, 2026<br>Sample size: 958,226 responses across 4 sources</div>
+          </div>
+        </div>
+
+      </div>
+
+      <sc-if value="{{ showGetHelp }}" hint-placeholder-val="{{ true }}">
+      <button style="position:absolute;right:24px;bottom:24px;height:32px;padding:0 12px;background:var(--bg-canvas);border:1px solid var(--border-default);color:var(--text-primary);font-family:inherit;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.08)" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><path d="M6 6 a2 2 0 0 1 3.5 1.3 c0 1.2 -1.5 1.2 -1.5 2.2"/><line x1="8" y1="11" x2="8" y2="11.4"/></svg>
+        Get help
+      </button>
+      </sc-if>
+    </div>
+  </div>
+</div>
+
+<sc-if value="{{ tipShown }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;left:{{ tipLeft }};top:{{ tipTop }};transform:translate(-50%,calc(-100% - 10px));z-index:2147483646;max-width:260px;padding:10px 12px;background:var(--bg-inverse);color:var(--bg-canvas);font-size:12px;line-height:1.5;box-shadow:0 6px 24px rgba(0,0,0,0.22);pointer-events:none">{{ tipText }}</div>
+</sc-if>
+
+<div style="position:fixed;inset:0;pointer-events:none;z-index:2147483647;opacity:0.05;background-image:url('textures/grain.png');background-repeat:repeat"></div></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:800},&quot;showGetHelp&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { open: {}, gran: "Daily", hoverI: null, tip: null, auTab: "global", auOpen: {}, auBolt: {}, geoTab: "topics", geoQuery: "", geoBolt: {} };
+  componentDidMount() {
+    try { if (localStorage.getItem("lyr-theme") === "dark") document.documentElement.setAttribute("data-theme","dark"); } catch(e){}
+    this._infoOver = (e) => {
+      const el = e.target.closest && e.target.closest("[data-info]");
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      this.setState({ tip: { text: el.getAttribute("data-info"), x: r.left + r.width / 2, y: r.top } });
+    };
+    this._infoOut = (e) => {
+      const el = e.target.closest && e.target.closest("[data-info]");
+      if (!el) return;
+      const to = e.relatedTarget;
+      if (to && to.closest && to.closest("[data-info]") === el) return;
+      this.setState({ tip: null });
+    };
+    document.addEventListener("mouseover", this._infoOver);
+    document.addEventListener("mouseout", this._infoOut);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("mouseover", this._infoOver);
+    document.removeEventListener("mouseout", this._infoOut);
+  }
+  renderVals() {
+    const badge = { UGC:"var(--info-text)", Competitor:"var(--negative-text)", You:"var(--positive-text)", Reference:"#8b5cf6", Editorial:"#d08700" };
+    const raw = [
+      { domain:"tastycrousty.fr", type:"You", pages:[
+        { title:"Accueil", url:"https://tastycrousty.fr/", used:18, avg:5.4 },
+        { title:"Menu & Prix", url:"https://tastycrousty.fr/menu", used:14, avg:5.1 },
+        { title:"Nos restaurants", url:"https://tastycrousty.fr/restaurants", used:11, avg:4.9 } ] },
+      { domain:"reddit.com", type:"UGC", pages:[
+        { title:"r/AskFrance — le phénomène Tasty Crousty", url:"https://reddit.com/r/AskFrance/comments/1r52qyg", used:12, avg:1.9 },
+        { title:"r/nice — bon plan street food ?", url:"https://reddit.com/r/nice/comments/pk21a", used:10, avg:1.7 },
+        { title:"r/StreetFood — riz poulet croustillant", url:"https://reddit.com/r/StreetFood/comments/9df2", used:9, avg:1.8 } ] },
+      { domain:"deliveroo.fr", type:"Competitor", pages:[
+        { title:"Five Pizza — Strasbourg Esplanade", url:"https://deliveroo.fr/fr/menu/strasbourg/esplanade/five-pizza", used:14, avg:3.3 },
+        { title:"Tasty Crousty — Nice", url:"https://deliveroo.fr/fr/menu/nice/tasty-crousty", used:11, avg:2.9 } ] },
+      { domain:"fivepizzaoriginal.com", type:"Competitor", pages:[
+        { title:"Accueil FR", url:"https://fivepizzaoriginal.com/fr_fr/", used:12, avg:2.5 },
+        { title:"Offres étudiantes", url:"https://fivepizzaoriginal.com/fr_fr/etudiants", used:10, avg:2.3 } ] },
+      { domain:"tripadvisor.fr", type:"Reference", pages:[
+        { title:"Restaurants street food à Nice", url:"https://tripadvisor.fr/Restaurants-Nice-street-food", used:10, avg:1.5 },
+        { title:"Avis — Tasty Crousty", url:"https://tripadvisor.fr/Restaurant_Review-Tasty-Crousty", used:8, avg:1.3 } ] },
+      { domain:"thefork.fr", type:"Editorial", pages:[
+        { title:"Guide street food à Nice", url:"https://thefork.fr/guide/nice/street-food", used:12, avg:1.1 } ] },
+    ];
+    const sources = raw.map((d) => {
+      const used = d.pages.reduce((a,p)=>a+p.used,0);
+      const avg = d.pages.reduce((a,p)=>a+p.avg,0)/d.pages.length;
+      const open = !!this.state.open[d.domain];
+      return {
+        domain: d.domain, type: d.type, url: "https://"+d.domain,
+        usedLabel: used+"%", avg: avg.toFixed(1),
+        isOpen: open, chevron: open ? "rotate(90deg)" : "none",
+        color: badge[d.type], typeBg: "color-mix(in srgb, "+badge[d.type]+" 13%, transparent)",
+        initial: d.domain[0].toUpperCase(),
+        pages: d.pages.map((p)=>({ title:p.title, url:p.url, usedLabel:p.used+"%", avg:p.avg.toFixed(1) })),
+        toggle: () => this.setState((s)=>({ open: { ...s.open, [d.domain]: !s.open[d.domain] } })),
+      };
+    });
+    const topPages = [
+      { title:"Accueil", url:"https://tastycrousty.fr/", used:18, avg:5.4, weight:92 },
+      { title:"Menu & Prix", url:"https://tastycrousty.fr/menu", used:14, avg:5.1, weight:78 },
+      { title:"Nos restaurants", url:"https://tastycrousty.fr/restaurants", used:11, avg:4.9, weight:64 },
+      { title:"Le concept", url:"https://tastycrousty.fr/concept", used:7, avg:4.2, weight:46 },
+      { title:"Actualités", url:"https://tastycrousty.fr/actus", used:4, avg:3.6, weight:28 },
+    ].map((p)=>({ title:p.title, url:p.url, usedLabel:p.used+"%", avg:p.avg.toFixed(1), weight:p.weight, weightPct:p.weight+"%" }));
+    const cbrands = ["Tasty Crousty","Five Pizza Original","O'Tacos","Chicken Street","KFC","Burger King"];
+    const youI = 0;
+    const cmetrics = [
+      { name:"Mention Rate", vals:[72.4,80.0,61.2,48.5,66.8,58.3], fmt:"pct", dir:"high" },
+      { name:"Citation Rate", vals:[43.4,38.8,31.2,28.9,41.2,35.1], fmt:"pct", dir:"high" },
+      { name:"Share of Voice", vals:[16.8,17.7,12.4,7.1,14.8,9.8], fmt:"pct", dir:"high" },
+      { name:"Total Mentions", vals:[128,149,78,45,92,62], fmt:"int", dir:"high" },
+      { name:"Coverage", vals:[84.2,88.5,71.2,52.3,79.3,64.5], fmt:"pct", dir:"high" },
+      { name:"Avg. Position", vals:[2.4,2.2,3.2,4.5,3.7,3.9], fmt:"pos", dir:"low" },
+      { name:"Avg. Sentiment", vals:[81.1,79.5,72.3,69.4,78.3,80.2], fmt:"num", dir:"high" },
+    ];
+    const posTint = "color-mix(in srgb, var(--positive-text) 14%, transparent)";
+    const negTint = "color-mix(in srgb, var(--negative-text) 12%, transparent)";
+    const youTint = "color-mix(in srgb, var(--bg-inverse) 4%, transparent)";
+    const fmtV = (v,f)=> f==="pct" ? v.toFixed(1)+"%" : f==="pos" ? "#"+v.toFixed(1) : f==="int" ? String(v) : v.toFixed(1);
+    const pts = cbrands.map(()=>0);
+    const compRows = cmetrics.map((m)=>{
+      const best = m.dir==="high" ? Math.max(...m.vals) : Math.min(...m.vals);
+      const worst = m.dir==="high" ? Math.min(...m.vals) : Math.max(...m.vals);
+      m.vals.map((v,i)=>({i,v})).sort((a,b)=> m.dir==="high"? b.v-a.v : a.v-b.v).forEach((o,rank)=> pts[o.i]+=(cbrands.length-1-rank));
+      const cells = m.vals.map((v,i)=>{
+        const isBest = v===best, isWorst = v===worst && best!==worst;
+        return {
+          text: fmtV(v,m.fmt),
+          bg: isBest?posTint : isWorst?negTint : (i===youI?youTint:"transparent"),
+          color: isBest?"var(--positive-text)" : isWorst?"var(--negative-text)" : "var(--text-primary)",
+          weight: (isBest||isWorst)?"600":"400",
+        };
+      });
+      return { label:m.name, cells };
+    });
+    const compBrands = cbrands.map((b,i)=>({ name:b, initial:b.replace(/[^A-Za-z]/g,"").slice(0,1).toUpperCase(), isYou:i===youI, headBg:i===youI?youTint:"transparent", ringColor:i===youI?"var(--positive-text)":"var(--border-strong)" }));
+    const medalBg = ["#C99700","#8A9096","#B06A2C"];
+    const standings = cbrands.map((b,i)=>({ name:b, pts:pts[i], isYou:i===youI }))
+      .sort((a,b)=>b.pts-a.pts)
+      .map((s,idx)=>({ name:s.name, isYou:s.isYou, rank:idx+1, rankBg: idx<3?medalBg[idx]:"var(--bg-active)", rankColor: idx<3?"#fff":"var(--text-secondary)", ring: s.isYou?"inset 0 0 0 1.5px var(--bg-inverse)":"none" }));
+    const youRank = standings.find((s)=>s.isYou).rank;
+    const h = React.createElement;
+    // ── AI Understanding widget ──
+    const IPATH = {
+      valeurs:["M8 13.2 L3.2 8.2 A2.6 2.6 0 0 1 8 5.4 A2.6 2.6 0 0 1 12.8 8.2 Z"],
+      pricing:["M8 2.5 H13.5 V8 L8 13.5 L2.5 8 Z","M10.5 5.5 h0.01"],
+      offres:["M2.5 6 H13.5 V13.5 H2.5 Z","M2 4 H14 V6 H2 Z","M8 4 V13.5"],
+      services:["M3 3 h4 v4 h-4 Z","M9 3 h4 v4 h-4 Z","M3 9 h4 v4 h-4 Z","M9 9 h4 v4 h-4 Z"],
+      contact:["M8 2.2 C5.2 2.2 3.5 4.1 3.5 6.6 C3.5 10 8 14 8 14 C8 14 12.5 10 12.5 6.6 C12.5 4.1 10.8 2.2 8 2.2 Z","M8 5.4 a1.6 1.6 0 1 0 0.01 0"],
+      sav:["M2.5 3 H13.5 V11 H8 L5 13.5 V11 H2.5 Z"],
+    };
+    const auIcon = (t) => h("svg", { width:16, height:16, viewBox:"0 0 16 16", fill:"none", stroke:"currentColor", strokeWidth:1.5, strokeLinecap:"round", strokeLinejoin:"round" }, (IPATH[t]||[]).map((d,i)=>h("path",{key:i,d})));
+    const AU = [
+      { key:"valeurs", name:"Valeurs", icon:"valeurs",
+        global:{ score:82, gap:"Low", teaser:"Street food généreuse, rapide et accessible.", summary:"L'IA décrit Tasty Crousty comme une enseigne de street food généreuse et décontractée, au bon rapport qualité-prix, plébiscitée par les étudiants. Le positionnement « croustillant » et convivial ressort clairement des avis et des réseaux.", constat:"La proposition de valeur est comprise mais reste générique et peu différenciée des autres enseignes.", amelio:"Formuler une signature de marque explicite (origine des produits, engagement local) sur le site et les bios sociales." },
+        site:{ score:68, gap:"Medium", teaser:"Ton convivial, valeurs peu explicites.", summary:"En se basant uniquement sur le site, l'IA perçoit un ton chaleureux et un focus produit, mais peu d'éléments formalisent la mission ou les engagements de la marque.", constat:"Le site ne contient pas de page « À propos » détaillant les valeurs.", amelio:"Ajouter une page mission/valeurs avec origine des ingrédients et démarche." } },
+      { key:"pricing", name:"Pricing", icon:"pricing",
+        global:{ score:74, gap:"Medium", teaser:"Perçu abordable, montants incertains.", summary:"L'IA situe Tasty Crousty dans une gamme abordable orientée étudiants, mais les montants précis varient selon les sources et ne sont pas toujours à jour.", constat:"Les prix cités proviennent surtout de plateformes tierces, parfois obsolètes.", amelio:"Publier une grille tarifaire à jour et structurée sur le site." },
+        site:{ score:88, gap:"Low", teaser:"Carte et prix clairs sur le site.", summary:"Le site expose une carte avec des prix lisibles, permettant à l'IA d'extraire des tarifs cohérents par produit et par formule.", constat:"Prix bien structurés, mais aucune donnée sur les promotions temporaires.", amelio:"Baliser les prix en données structurées (schema.org) pour fiabiliser l'extraction." } },
+      { key:"offres", name:"Offres", icon:"offres",
+        global:{ score:71, gap:"Medium", teaser:"Formules étudiantes connues, détails flous.", summary:"Les offres et menus étudiants sont identifiés via les réseaux et les avis, mais leurs conditions exactes restent incomplètes.", constat:"Les promotions sont mentionnées sans période ni conditions claires.", amelio:"Centraliser les offres actives avec dates et conditions sur une page dédiée." },
+        site:{ score:79, gap:"Low", teaser:"Formules affichées, promos limitées.", summary:"Le site présente les formules principales ; l'IA les comprend bien mais trouve peu d'offres promotionnelles détaillées.", constat:"Peu de mise en avant des offres limitées dans le temps.", amelio:"Créer une section « Offres du moment » actualisée régulièrement." } },
+      { key:"services", name:"Services", icon:"services",
+        global:{ score:80, gap:"Low", teaser:"Sur place, à emporter, livraison.", summary:"L'IA comprend l'offre de service (sur place, à emporter, livraison via plateformes) grâce aux agrégateurs et aux réseaux.", constat:"Les canaux de commande sont compris mais dispersés entre plateformes.", amelio:"Regrouper les modes de commande et les liens de livraison sur le site." },
+        site:{ score:83, gap:"Low", teaser:"Modes de commande listés.", summary:"Le site indique clairement les modes de service et les zones ; l'IA en tire une vue fiable de l'expérience client.", constat:"Bonne clarté, mais horaires de service par canal peu détaillés.", amelio:"Préciser les horaires et la disponibilité par mode de service." } },
+      { key:"contact", name:"Contact informations", icon:"contact",
+        global:{ score:90, gap:"Low", teaser:"Adresses et contacts bien identifiés.", summary:"Adresses, téléphone et présence en ligne sont largement corroborés entre les sources ; l'IA les restitue avec confiance.", constat:"Informations cohérentes et complètes dans l'ensemble.", amelio:"Vérifier la cohérence NAP (nom-adresse-téléphone) sur tous les annuaires." },
+        site:{ score:94, gap:"Low", teaser:"Contact clair sur le site.", summary:"La page contact fournit adresse, téléphone et formulaire ; l'IA extrait ces informations sans ambiguïté.", constat:"Coordonnées complètes et bien structurées.", amelio:"Ajouter les données structurées LocalBusiness pour renforcer la fiabilité." } },
+      { key:"sav", name:"Service client", icon:"sav",
+        global:{ score:58, gap:"High", teaser:"Avis mitigés, canaux peu documentés.", summary:"L'IA capte des retours clients contrastés et peu d'informations sur les canaux de support ou la gestion des réclamations.", constat:"Le service client est peu documenté et les avis divergent.", amelio:"Afficher une politique de contact/SAV claire et répondre publiquement aux avis." },
+        site:{ score:46, gap:"High", teaser:"Support quasi absent du site.", summary:"En se limitant au site, l'IA trouve très peu d'éléments sur le support, les retours ou la satisfaction client.", constat:"Aucune page dédiée au service après-vente ou aux réclamations.", amelio:"Créer une page FAQ/Support et des engagements de réponse." } },
+    ];
+    const auTab = this.state.auTab;
+    const gapColorOf = (g) => g==="Low" ? "var(--positive-text)" : g==="Medium" ? "#d08700" : "var(--negative-text)";
+    const auRows = AU.map((t) => {
+      const d = t[auTab], ok = auTab+":"+t.key;
+      const open = !!this.state.auOpen[ok], bolt = !!this.state.auBolt[ok];
+      const sc = d.score, scColor = sc>=75 ? "#0fdd62" : sc>=50 ? "#0fbee8" : "#ed4a36";
+      const gc = gapColorOf(d.gap);
+      return {
+        name:t.name, icon:auIcon(t.icon), score:sc, scColor, scDash:(94.25*(1-sc/100)).toFixed(2),
+        gap:d.gap, gapColor:gc, gapBg:"color-mix(in srgb, "+gc+" 13%, transparent)",
+        teaser:d.teaser, summary:d.summary, constat:d.constat, amelio:d.amelio,
+        isOpen:open, chevron: open ? "rotate(90deg)" : "none", rowBg: open ? "var(--bg-subtle)" : "var(--bg-canvas)",
+        isBolt:bolt, boltBg: bolt ? "var(--bg-inverse)" : "var(--bg-canvas)", boltColor: bolt ? "var(--bg-canvas)" : "var(--text-secondary)", boltBorder: bolt ? "var(--bg-inverse)" : "var(--border-default)",
+        info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Score de compréhension et complétude estimés par l'IA.",
+        toggle:() => this.setState((s)=>({ auOpen:{ ...s.auOpen, [ok]:!s.auOpen[ok] } })),
+        toggleBolt:(e) => { if(e) e.stopPropagation(); this.setState((s)=>({ auBolt:{ ...s.auBolt, [ok]:!s.auBolt[ok] }, auOpen:{ ...s.auOpen, [ok]:true } })); },
+      };
+    });
+    const auTabBtns = [{k:"global",l:"Global Understanding"},{k:"site",l:"Site Understanding"}].map((t)=>({ label:t.l, bg: t.k===auTab?"var(--bg-canvas)":"transparent", color: t.k===auTab?"var(--text-primary)":"var(--text-subtle)", shadow: t.k===auTab?"0 1px 2px rgba(0,0,0,0.08)":"none", onClick:()=>this.setState({ auTab:t.k }) }));
+    const auSubtitle = auTab==="global" ? "Toutes sources confondues — site, réseaux sociaux et contenu externe" : "En utilisant uniquement le site internet de Tasty Crousty";
+    // ── GEO Matrix widget ──
+    const geoColor = (v) => v < 5 ? { c:"#ed4a36", b:"color-mix(in srgb, #ed4a36 12%, transparent)" } : v < 8 ? { c:"#0fbee8", b:"color-mix(in srgb, #0fbee8 12%, transparent)" } : { c:"#0fdd62", b:"color-mix(in srgb, #0fdd62 12%, transparent)" };
+    const geoMetrics = [
+      { label:"AI Presence", info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fréquence de mention par les systèmes IA." },
+      { label:"Comp. Position", info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Clarté du positionnement face aux alternatives." },
+      { label:"Source Conc.", info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Concentration des sources influençant la perception." },
+      { label:"Consistency", info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Uniformité de la réponse entre les modèles." },
+      { label:"Avg. Position", info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Position moyenne dans les réponses IA." },
+    ];
+    const GEO = {
+      topics: [
+        { name:"menu étudiant pas cher", sub:"10 prompts", vals:[[8.4,0.9],[7.1,0.4],[4.3,-0.6],[7.8,1.1],[8.0,0.7]] },
+        { name:"poulet croustillant", sub:"8 prompts", vals:[[7.2,0.5],[6.8,0.3],[5.1,0.8],[8.2,1.4],[6.5,0.2]] },
+        { name:"livraison Nice", sub:"6 prompts", vals:[[6.1,0.4],[5.5,0.6],[4.2,-0.3],[6.9,0.9],[5.8,0.5]] },
+        { name:"avis Tasty Crousty", sub:"7 prompts", vals:[[4.6,-0.5],[4.1,-0.2],[3.8,-0.7],[5.2,0.3],[4.9,-0.1]] },
+        { name:"street food Nice", sub:"9 prompts", vals:[[7.8,1.2],[8.1,0.9],[5.6,0.4],[8.4,1.1],[7.2,0.6]] },
+        { name:"burger & tacos étudiant", sub:"5 prompts", vals:[[5.4,0.3],[6.2,0.5],[4.8,-0.2],[6.0,0.4],[5.9,0.2]] },
+        { name:"horaires & adresse", sub:"4 prompts", vals:[[8.9,0.6],[7.4,0.5],[6.1,0.3],[9.1,0.8],[8.3,0.4]] },
+      ],
+      tags: [
+        { name:"Branded", sub:"15 prompts", vals:[[8.2,0.8],[7.5,1.2],[6.1,0.5],[8.4,0.9],[7.8,0.3]] },
+        { name:"Comparison", sub:"12 prompts", vals:[[4.8,-0.5],[5.2,0.2],[4.1,-0.3],[5.5,0.4],[4.9,-0.1]] },
+        { name:"Review", sub:"8 prompts", vals:[[5.1,0.6],[4.6,-0.2],[3.9,-0.4],[5.8,0.7],[4.4,0.3]] },
+        { name:"Purchase Intent", sub:"6 prompts", vals:[[6.5,0.4],[7.1,0.6],[5.4,-0.2],[6.8,0.5],[6.2,-0.3]] },
+        { name:"Recommendation", sub:"11 prompts", vals:[[8.3,1.8],[8.8,2.0],[7.2,1.1],[8.1,1.0],[7.9,0.8]] },
+        { name:"Informational", sub:"9 prompts", vals:[[6.2,-0.2],[5.8,0.4],[5.1,0.6],[6.4,-0.1],[5.6,0.2]] },
+        { name:"Alternatives", sub:"7 prompts", vals:[[3.4,-1.2],[4.1,-0.5],[3.1,-0.8],[4.2,-0.9],[2.8,-0.7]] },
+      ],
+      prompts: [
+        { name:"Où manger un repas étudiant pas cher à Nice ?", sub:"Topic : menu étudiant", vals:[[8.5,0.9],[7.2,0.5],[4.3,-0.4],[8.1,1.0],[7.8,0.6]] },
+        { name:"Quel est le meilleur poulet croustillant à Nice ?", sub:"Topic : poulet croustillant", vals:[[7.6,0.6],[6.9,0.3],[5.2,0.7],[7.9,1.2],[6.8,0.4]] },
+        { name:"Tasty Crousty ou Five Pizza pour étudiants ?", sub:"Topic : comparaison", vals:[[4.2,-0.6],[5.5,0.3],[4.0,-0.5],[5.1,0.2],[4.6,-0.2]] },
+        { name:"Tasty Crousty livre-t-il sur Nice ?", sub:"Topic : livraison", vals:[[6.8,0.4],[5.4,0.6],[4.9,-0.3],[6.2,0.5],[5.7,0.3]] },
+        { name:"Les avis sur Tasty Crousty sont-ils bons ?", sub:"Topic : avis", vals:[[4.5,-0.4],[4.1,-0.3],[3.6,-0.6],[5.0,0.2],[4.3,-0.1]] },
+        { name:"Menu et prix de Tasty Crousty ?", sub:"Topic : pricing", vals:[[8.8,0.7],[7.1,0.5],[6.4,0.4],[9.0,0.9],[8.2,0.6]] },
+        { name:"Alternatives à Tasty Crousty à Nice ?", sub:"Topic : alternatives", vals:[[3.8,-0.9],[4.4,-0.4],[3.2,-0.7],[4.6,-0.8],[3.9,-0.5]] },
+      ],
+    };
+    const geoTab = this.state.geoTab, geoQuery = this.state.geoQuery;
+    const geoTabBtns = [{k:"topics",l:"Sujet"},{k:"tags",l:"Intention"},{k:"prompts",l:"Prompt"}].map((t)=>({ label:t.l, bg: t.k===geoTab?"var(--bg-canvas)":"transparent", color: t.k===geoTab?"var(--text-primary)":"var(--text-subtle)", shadow: t.k===geoTab?"0 1px 2px rgba(0,0,0,0.08)":"none", onClick:()=>this.setState({ geoTab:t.k }) }));
+    const q = geoQuery.trim().toLowerCase();
+    const geoRows = GEO[geoTab].filter((r) => !q || r.name.toLowerCase().includes(q) || r.sub.toLowerCase().includes(q)).map((r) => {
+      const cells = r.vals.map(([v,d]) => { const col = geoColor(v); return { v:v.toFixed(1), color:col.c, bg:col.b, delta:(d>=0?"▲":"▼")+Math.abs(d).toFixed(1), deltaColor: d>=0?"var(--positive-text)":"var(--negative-text)" }; });
+      const n = r.vals.filter(([v])=>v>=5).length, pct = Math.round(n/5*100);
+      const cc = pct>=80 ? "#0fdd62" : pct>=60 ? "#0fbee8" : "#ed4a36";
+      const mi = r.vals.map(([v])=>v), lowIdx = mi.indexOf(Math.min(...mi)), highIdx = mi.indexOf(Math.max(...mi));
+      const constat = "Signal le plus faible sur « "+geoMetrics[lowIdx].label+" » ("+mi[lowIdx].toFixed(1)+"/10). Le point fort reste « "+geoMetrics[highIdx].label+" » ("+mi[highIdx].toFixed(1)+"/10).";
+      const actions = "Renforcer le contenu lié à « "+r.name+" » pour faire progresser « "+geoMetrics[lowIdx].label+" » : citations, données structurées et cohérence entre les sources.";
+      const bk = geoTab+":"+r.name, bolt = !!this.state.geoBolt[bk];
+      return { name:r.name, sub:r.sub, cells, covPct:pct+"%", covLabel:n+"/5", covColor:cc, covBg:"color-mix(in srgb, "+cc+" 14%, transparent)",
+        constat, actions, isBolt:bolt, boltBg: bolt?"#0fbee8":"var(--bg-canvas)", boltColor: bolt?"#ffffff":"var(--text-secondary)", boltBorder: bolt?"#0fbee8":"var(--border-default)",
+        toggleBolt:(e)=>{ if(e) e.stopPropagation(); this.setState((s)=>({ geoBolt:{ ...s.geoBolt, [bk]:!s.geoBolt[bk] } })); } };
+    });
+    const geoEmpty = geoRows.length === 0;
+    const onGeoSearch = (e) => this.setState({ geoQuery: e.target.value });
+    // ── Performance Overview area chart ──
+    const OV = [
+      { key:"presence", label:"AI Presence", color:"#0fbee8", start:4.0, end:6.2, seed:1.2, info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore." },
+      { key:"position", label:"Competitive Position", color:"#2f6bff", start:5.4, end:7.1, seed:2.7, info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam quis nostrud." },
+      { key:"narrative", label:"Narrative Coherence", color:"#0fdd62", start:6.8, end:8.0, seed:0.6, info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit." },
+      { key:"source", label:"Source Concentration", color:"#ed4a36", start:5.6, end:4.2, seed:3.4, info:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non." },
+    ];
+    const gran = this.state.gran;
+    const N = gran === "Weekly" ? 12 : gran === "Monthly" ? 6 : 30;
+    const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const endDate = new Date(2026, 7, 3);
+    const labels = [];
+    for (let i = 0; i < N; i++) {
+      if (gran === "Monthly") { const d = new Date(2026, 7 - (N - 1 - i), 1); labels.push(MON[d.getMonth()]); }
+      else { const step = gran === "Weekly" ? 7 : 1; const d = new Date(endDate); d.setDate(endDate.getDate() - (N - 1 - i) * step); labels.push(MON[d.getMonth()] + " " + d.getDate()); }
+    }
+    const valOf = (m, i) => { const t = N === 1 ? 1 : i / (N - 1); const base = m.start + (m.end - m.start) * t; const noise = Math.sin(i * 1.3 + m.seed) * 0.22 + Math.sin(i * 0.55 + m.seed * 2) * 0.12; return Math.max(0.3, Math.min(9.9, base + noise)); };
+    const reportIdx = []; { const k = Math.max(1, Math.round(N / 8)); for (let i = 1; i < N; i += k) reportIdx.push(i); if (reportIdx[reportIdx.length - 1] !== N - 1) reportIdx.push(N - 1); }
+    const totalReports = reportIdx.length;
+    const reportsToDate = (i) => reportIdx.filter((r) => r <= i).length;
+    const W = 940, H = 300, x0 = 46, x1 = 922, yT = 24, yB = 244;
+    const xF = (i) => N === 1 ? (x0 + x1) / 2 : x0 + (x1 - x0) * i / (N - 1);
+    const yF = (v) => yB - (yB - yT) * (v / 10);
+    const linePath = (pts) => {
+      if (pts.length < 2) return "";
+      let d = "M" + pts[0].x + "," + pts[0].y;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+        const c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
+        const c2x = p2.x - (p3.x - p1.x) / 6, c2y = p2.y - (p3.y - p1.y) / 6;
+        d += " C" + c1x + "," + c1y + " " + c2x + "," + c2y + " " + p2.x + "," + p2.y;
+      }
+      return d;
+    };
+    const series = OV.map((m) => { const pts = []; for (let i = 0; i < N; i++) pts.push({ x: xF(i), y: yF(valOf(m, i)), v: valOf(m, i) }); return { ...m, pts }; });
+    const kids = [];
+    kids.push(h("defs", { key:"defs" }, series.map((s) => h("linearGradient", { key:s.key, id:"ovg_"+s.key, x1:"0", y1:"0", x2:"0", y2:"1" }, [
+      h("stop", { key:"a", offset:"0%", stopColor:s.color, stopOpacity:0.18 }),
+      h("stop", { key:"b", offset:"85%", stopColor:s.color, stopOpacity:0 }),
+    ]))));
+    [0,2,4,6,8,10].forEach((gv) => {
+      const gy = yF(gv);
+      kids.push(h("line", { key:"g"+gv, x1:x0, y1:gy, x2:x1, y2:gy, stroke:"var(--border-subtle)", strokeWidth:1, strokeDasharray:gv===0?"0":"3 4" }));
+      kids.push(h("text", { key:"gl"+gv, x:x0-10, y:gy+4, textAnchor:"end", fill:"var(--text-subtle)", fontSize:12, fontFamily:"ui-monospace,monospace" }, String(gv)));
+    });
+    const tickEvery = Math.ceil(N / 6);
+    for (let i = 0; i < N; i++) {
+      if (i % tickEvery === 0 || i === N - 1) kids.push(h("text", { key:"xl"+i, x:xF(i), y:266, textAnchor:"middle", fill:"var(--text-subtle)", fontSize:12, fontFamily:"Inter,sans-serif" }, labels[i]));
+    }
+    series.forEach((s) => {
+      const lp = linePath(s.pts);
+      kids.push(h("path", { key:"a"+s.key, d: lp + " L"+s.pts[s.pts.length-1].x+","+yB+" L"+s.pts[0].x+","+yB+" Z", fill:"url(#ovg_"+s.key+")" }));
+      kids.push(h("path", { key:"l"+s.key, d: lp, fill:"none", stroke:s.color, strokeWidth:2, strokeLinecap:"round", strokeLinejoin:"round" }));
+    });
+    reportIdx.forEach((ri, k) => { const rx = xF(ri); kids.push(h("path", { key:"rp"+k, d:"M"+(rx-4)+","+(yB+9)+" L"+(rx+4)+","+(yB+9)+" L"+rx+","+(yB+3)+" Z", fill:"var(--text-subtle)" })); });
+    const hi = this.state.hoverI;
+    if (hi != null && hi >= 0 && hi < N) {
+      const hx = xF(hi);
+      kids.push(h("line", { key:"cross", x1:hx, y1:yT, x2:hx, y2:yB, stroke:"var(--border-strong)", strokeWidth:1, strokeDasharray:"3 3" }));
+      series.forEach((s, si) => kids.push(h("circle", { key:"hd"+si, cx:hx, cy:s.pts[hi].y, r:4, fill:"var(--bg-canvas)", stroke:s.color, strokeWidth:2 })));
+      const bw = 200, lh = 22, bh = 34 + series.length * lh + 22, right = hx > (x0 + x1) / 2;
+      const bx = right ? hx - 14 - bw : hx + 14, by = yT + 4;
+      const tt = [ h("rect", { key:"bg", x:bx, y:by, width:bw, height:bh, rx:8, fill:"var(--bg-inverse)" }),
+        h("text", { key:"ti", x:bx+16, y:by+26, fill:"var(--bg-canvas)", fontSize:15, fontWeight:600, fontFamily:"Inter,sans-serif" }, labels[hi]) ];
+      series.forEach((s, li) => {
+        const ly = by + 34 + 14 + li * lh;
+        tt.push(h("circle", { key:"c"+li, cx:bx+18, cy:ly-4, r:4, fill:s.color }));
+        tt.push(h("text", { key:"n"+li, x:bx+30, y:ly, fill:"rgba(255,255,255,0.82)", fontSize:13, fontFamily:"Inter,sans-serif" }, s.label));
+        tt.push(h("text", { key:"v"+li, x:bx+bw-16, y:ly, fill:"var(--bg-canvas)", fontSize:13, fontWeight:600, textAnchor:"end", fontFamily:"ui-monospace,monospace" }, s.pts[hi].v.toFixed(1)));
+      });
+      const ry = by + 34 + 14 + series.length * lh;
+      tt.push(h("line", { key:"sep", x1:bx+16, y1:ry-16, x2:bx+bw-16, y2:ry-16, stroke:"rgba(255,255,255,0.14)", strokeWidth:1 }));
+      tt.push(h("text", { key:"rl", x:bx+16, y:ry, fill:"rgba(255,255,255,0.6)", fontSize:12, fontFamily:"Inter,sans-serif" }, "Reports to date"));
+      tt.push(h("text", { key:"rv", x:bx+bw-16, y:ry, fill:"var(--bg-canvas)", fontSize:12, fontWeight:600, textAnchor:"end", fontFamily:"ui-monospace,monospace" }, String(reportsToDate(hi))));
+      kids.push(h("g", { key:"tt", style:{ pointerEvents:"none" } }, tt));
+    }
+    kids.push(h("rect", { key:"ov", x:x0, y:yT, width:x1-x0, height:yB-yT, fill:"transparent",
+      onMouseMove:(e) => { const svg = e.currentTarget.ownerSVGElement; const p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; const loc = p.matrixTransform(svg.getScreenCTM().inverse()); let i = Math.round((loc.x - x0) / ((x1 - x0) / (N - 1))); i = Math.max(0, Math.min(N - 1, i)); if (i !== this.state.hoverI) this.setState({ hoverI: i }); },
+      onMouseLeave:() => this.setState({ hoverI: null }) }));
+    const overviewChart = h("svg", { viewBox:"0 0 "+W+" "+H, width:"100%", preserveAspectRatio:"xMidYMid meet", style:{ display:"block", height:"auto" } }, kids);
+    const granBtns = ["Daily","Weekly","Monthly"].map((g) => ({ label:g, bg: g===gran?"var(--bg-canvas)":"transparent", color: g===gran?"var(--text-primary)":"var(--text-subtle)", shadow: g===gran?"0 1px 2px rgba(0,0,0,0.08)":"none", onClick:() => this.setState({ gran:g, hoverI:null }) }));
+    const ovMetrics = OV.map((m) => ({ label:m.label, color:m.color, info:m.info }));
+    const ovTrend = "Narrative Coherence leads at 8.0 · across " + totalReports + " reports";
+    const tip = this.state.tip;
+    return {
+      sources, topPages, compBrands, compRows, standings, youRank,
+      overviewChart, granBtns, ovMetrics, ovTrend,
+      auRows, auTabBtns, auSubtitle,
+      geoTabBtns, geoMetrics, geoRows, geoQuery, onGeoSearch, geoEmpty,
+      tipShown: !!tip, tipText: tip ? tip.text : "", tipLeft: tip ? (tip.x + "px") : "0px", tipTop: tip ? (tip.y + "px") : "0px",
+      stop: (e) => e.stopPropagation(),
+      toggleTheme: () => {
+        const r = document.documentElement;
+        const dark = r.getAttribute("data-theme") === "dark";
+        if (dark) { r.removeAttribute("data-theme"); try{localStorage.setItem("lyr-theme","light")}catch(e){} }
+        else { r.setAttribute("data-theme","dark"); try{localStorage.setItem("lyr-theme","dark")}catch(e){} }
+      },
+      showGetHelp: this.props.showGetHelp ?? true,
+      toggleSidebar: () => {
+        const sb = document.getElementById("lyr-sidebar");
+        if (!sb) return;
+        const collapsed = sb.getAttribute("data-collapsed") === "1";
+        sb.style.width = collapsed ? "240px" : "56px";
+        sb.setAttribute("data-collapsed", collapsed ? "0" : "1");
+        document.querySelectorAll("[data-nav-label]").forEach((el) => {
+          el.style.display = collapsed ? "" : "none";
+        });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
