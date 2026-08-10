@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html> 
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,8 +15,8 @@
 @font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-SemiBold.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-SemiBold.woff') format('woff');font-weight:600;font-style:normal;font-display:swap}
 *{box-sizing:border-box}
 button,input,select,textarea{text-transform:inherit}
-:root{--bg-canvas:#FFFFFF;--bg-subtle:#FAFAFA;--bg-hover:#F4F4F5;--bg-active:#EDEDEE;--bg-inverse:#0A0A0A;--inverse-hover:#1F1F1F;--border-subtle:#EFEFEF;--border-default:#E4E4E4;--border-strong:#D4D4D4;--text-primary:#1A1A1A;--text-default:#333333;--text-secondary:#555555;--text-subtle:#777777;--text-disabled:#AFAFAF;--positive-text:#15B042;--negative-text:#D93025;--negative-bg:#FDDDDA;--negative-border:#F8BDB7;--info-text:#0077E6}
-:root[data-theme="dark"]{--bg-canvas:#171717;--bg-subtle:#101010;--bg-hover:#1F1F1F;--bg-active:#262626;--bg-inverse:#FAFAFA;--inverse-hover:#E4E4E4;--border-subtle:#262626;--border-default:#2E2E2E;--border-strong:#3A3A3A;--text-primary:#F5F5F5;--text-default:#D4D4D4;--text-secondary:#AFAFAF;--text-subtle:#8A8A8A;--text-disabled:#6B6B6B;--positive-text:#3FD068;--negative-text:#F26A5E;--negative-bg:#2A1614;--negative-border:#5A2621;--info-text:#4DA3FF}
+:root{--bg-canvas:#FFFFFF;--bg-card:#F7F8FA;--bg-subtle:#F7F8FA;--bg-hover:#F4F4F5;--bg-active:#EDEDEE;--bg-inverse:#0A0A0A;--inverse-hover:#1F1F1F;--border-subtle:#EFEFEF;--border-default:#E4E4E4;--border-strong:#D4D4D4;--text-primary:#1A1A1A;--text-default:#333333;--text-secondary:#555555;--text-subtle:#777777;--text-disabled:#AFAFAF;--positive-text:#15B042;--negative-text:#D93025;--negative-bg:#FDDDDA;--negative-border:#F8BDB7;--info-text:#0077E6}
+:root[data-theme="dark"]{--bg-canvas:#171717;--bg-card:#171717;--bg-subtle:#101010;--bg-hover:#1F1F1F;--bg-active:#262626;--bg-inverse:#FAFAFA;--inverse-hover:#E4E4E4;--border-subtle:#262626;--border-default:#2E2E2E;--border-strong:#3A3A3A;--text-primary:#F5F5F5;--text-default:#D4D4D4;--text-secondary:#AFAFAF;--text-subtle:#8A8A8A;--text-disabled:#6B6B6B;--positive-text:#3FD068;--negative-text:#F26A5E;--negative-bg:#2A1614;--negative-border:#5A2621;--info-text:#4DA3FF}
 body{transition:background 200ms ease,color 200ms ease}
 img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-theme="dark"] img[data-logo="black"]{display:none}:root[data-theme="dark"] img[data-logo="white"]{display:block}
   body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:var(--text-default);background:var(--bg-canvas);-webkit-font-smoothing:antialiased}
@@ -48,10 +48,11 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
         <span data-nav-label>Home</span>
       </a>
 
-      <button style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;border:none;background:transparent;cursor:pointer;color:var(--text-subtle);font-size:13px;font-weight:500;font-family:inherit;width:100%;text-align:left" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+      <a href="Inbox.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg>
         <span data-nav-label>Inbox</span>
-      </button>
+        <span data-nav-label style="margin-left:auto;height:18px;min-width:18px;padding:0 5px;background:var(--negative-text);color:#FFFFFF;font-size:11px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;font-family:'Proto Mono',ui-monospace,monospace">28</span>
+      </a>
 
       <!-- Reports active -->
       <button style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;border:none;background:var(--bg-canvas);box-shadow:inset 2px 0 0 var(--bg-inverse);cursor:pointer;color:var(--text-primary);font-size:13px;font-weight:500;font-family:inherit;width:100%;text-align:left">
@@ -73,8 +74,18 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
         </button>
       </div>
 
+      <a href="To-do.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><polyline points="5,8 7,10 11,5.5"/></svg>
+        <span data-nav-label>To-do</span>
+      </a>
+
+      <button style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;border:none;background:transparent;cursor:pointer;color:var(--text-subtle);font-size:13px;font-weight:500;font-family:inherit;width:100%;text-align:left" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="5.5" width="11" height="7.5"/><path d="M6 5.5 V4 H10 V5.5"/><line x1="2.5" y1="8.5" x2="13.5" y2="8.5"/><rect x="7" y="7.5" width="2" height="2"/></svg>
+        <span data-nav-label>Tool Box</span>
+      </button>
+
       <!-- separator -->
-      <div style="height:1px;background:var(--border-subtle);margin:8px -8px"></div>
+      <div style="height:1px;background:var(--border-subtle);margin:22px -8px 8px"></div>
 
       <div data-nav-label style="height:24px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">AI intelligence</div>
 
@@ -109,7 +120,7 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
   <div style="flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;min-width:0">
 
     <!-- topbar -->
-    <header style="height:56px;flex-shrink:0;border-bottom:1px solid var(--border-default);display:flex;align-items:center;padding:0 24px;gap:12px">
+    <header style="height:56px;flex-shrink:0;border-bottom:1px solid var(--border-default);display:flex;align-items:center;padding:0 24px;gap:12px;background:var(--bg-subtle)">
       <button onClick="{{ toggleSidebar }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-hover);color:var(--text-primary)">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="10"/><line x1="6.5" y1="3" x2="6.5" y2="13"/></svg>
       </button>
@@ -122,15 +133,9 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
         <button onClick="{{ toggleTheme }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary)" style-hover="background:var(--bg-hover);color:var(--text-primary)">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="6" y="6" width="4" height="4"/><line x1="8" y1="1.5" x2="8" y2="3.5"/><line x1="8" y1="12.5" x2="8" y2="14.5"/><line x1="1.5" y1="8" x2="3.5" y2="8"/><line x1="12.5" y1="8" x2="14.5" y2="8"/><line x1="3.5" y1="3.5" x2="4.9" y2="4.9"/><line x1="11.1" y1="11.1" x2="12.5" y2="12.5"/><line x1="12.5" y1="3.5" x2="11.1" y2="4.9"/><line x1="4.9" y1="11.1" x2="3.5" y2="12.5"/></svg>
         </button>
-        <button style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);position:relative" style-hover="background:var(--bg-hover);color:var(--text-primary)">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg>
-          <span style="position:absolute;top:6px;right:6px;width:6px;height:6px;background:var(--info-text)"></span>
-        </button>
         <div style="width:1px;height:24px;background:var(--border-default);margin:0 4px"></div>
-        <button style="display:flex;align-items:center;gap:8px;height:32px;padding:0 4px 0 8px;border:none;background:transparent;cursor:pointer;font-family:inherit" style-hover="background:var(--bg-hover)">
-          <span style="font-size:14px;font-weight:500;color:var(--text-primary)">Clément</span>
-          <span style="width:24px;height:24px;background:var(--bg-active);color:var(--text-secondary);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center">C</span>
-        </button>
+        <button style="height:32px;padding:0 14px;border:none;background:var(--bg-inverse);color:var(--bg-canvas);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:var(--inverse-hover)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg>Créer un rapport</button>
+        <button onClick="{{ openClientModal }}" style="height:32px;padding:0 14px;border:1px solid var(--bg-inverse);background:transparent;color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:var(--bg-hover)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><circle cx="6.5" cy="5.5" r="2.5"/><path d="M2.5 13 C2.5 10.2 4.3 9 6.5 9 C7.4 9 8.2 9.2 8.9 9.6"/><line x1="11.5" y1="7.5" x2="11.5" y2="12.5"/><line x1="9" y1="10" x2="14" y2="10"/></svg>Ajouter un client</button>
       </div>
     </header>
 
@@ -144,10 +149,6 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
             <h1 style="margin:0;font-size:20px;line-height:26px;font-weight:500;color:var(--text-primary);letter-spacing:-0.01em">Reports</h1>
             <p style="margin:4px 0 0;font-size:14px;line-height:20px;color:var(--text-secondary)">Build and deliver client-ready AI visibility reports.</p>
           </div>
-          <button style="height:32px;padding:0 14px;background:var(--bg-inverse);color:var(--bg-canvas);border:none;font-size:14px;font-weight:500;font-family:inherit;display:flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0" style-hover="background:var(--inverse-hover)">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="8" y1="3.5" x2="8" y2="12.5"/><line x1="3.5" y1="8" x2="12.5" y2="8"/></svg>
-            New Report
-          </button>
         </div>
 
         <!-- KPI bar -->
@@ -220,24 +221,25 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
           <div onClick="{{ goReport }}" style="border:1px solid var(--border-default);background:var(--bg-canvas);transition:border-color 120ms ease-out;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)" style-hover="border-color:var(--border-strong)">
             <!-- client band -->
             <div style="height:40px;padding:0 16px;background:var(--bg-subtle);border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px">
-              <span style="color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg></span>
-              <span style="font-size:13px;font-weight:500;color:var(--text-secondary)">Tasty Crousty</span>
+              <img src="logos/tasty-crousty.png" alt="Tasty Crousty" style="height:26px;width:auto;max-width:110px;object-fit:contain;display:block">
             </div>
             <!-- body -->
             <div style="padding:16px">
               <div style="display:flex;align-items:center;gap:8px">
                 <span style="width:8px;height:8px;background:var(--text-subtle);display:block;flex-shrink:0"></span>
-                <span style="font-size:13px;font-weight:500;color:var(--text-subtle)">Tasty Crousty <span style="color:var(--text-disabled)">·</span> Draft</span>
+                <span style="font-size:13px;font-weight:600;color:var(--text-primary)">Tasty Crousty</span>
+                <span style="color:var(--text-disabled)">·</span>
+                <span style="font-size:13px;font-weight:500;color:var(--text-subtle)">Draft</span>
               </div>
-              <div style="margin-top:8px;font-size:16px;font-weight:500;color:var(--text-primary);letter-spacing:-0.01em">Tasty Crousty</div>
               <div style="height:1px;background:var(--border-subtle);margin:12px 0"></div>
               <div style="display:flex;flex-wrap:wrap;gap:8px">
                 <span style="height:20px;padding:0 8px;background:#F2F2F2;color:var(--text-secondary);font-size:13px;display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg>Nice, FR</span>
                 <span style="height:20px;padding:0 8px;background:#F2F2F2;color:var(--text-secondary);font-size:13px;display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><polygon points="9,2.5 4.5,9 7.5,9 7,13.5 11.5,7 8.5,7"/></svg>Quick</span>
                 <span style="height:20px;padding:0 8px;background:#F2F2F2;color:var(--text-secondary);font-size:13px;display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><rect x="3" y="4" width="10" height="9"/><line x1="3" y1="7" x2="13" y2="7"/><line x1="6" y1="2.5" x2="6" y2="5"/><line x1="10" y1="2.5" x2="10" y2="5"/></svg>Monthly</span>
+                <span style="height:20px;padding:0 8px;background:#F2F2F2;color:var(--text-secondary);font-size:13px;display:inline-flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="5" width="6" height="8"/><rect x="8.5" y="2.5" width="5" height="10.5"/><line x1="4.5" y1="7.5" x2="6.5" y2="7.5"/><line x1="4.5" y1="10" x2="6.5" y2="10"/><line x1="10.5" y1="5" x2="11.5" y2="5"/><line x1="10.5" y1="7.5" x2="11.5" y2="7.5"/><line x1="10.5" y1="10" x2="11.5" y2="10"/></svg>Brand</span>
               </div>
               <div style="margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
-                <span style="font-size:12px;color:var(--text-subtle);display:inline-flex;align-items:center;gap:6px;min-width:0"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" style="flex-shrink:0"><rect x="5.5" y="3" width="5" height="5"/><polyline points="3,13 3,11.5 13,11.5 13,13"/></svg><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">clement.pro.lucas@gmail.com</span></span>
+                <span style="font-size:12px;color:var(--text-subtle);display:inline-flex;align-items:center;gap:6px;min-width:0"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter" style="flex-shrink:0"><rect x="5.5" y="3" width="5" height="5"/><polyline points="3,13 3,11.5 13,11.5 13,13"/></svg><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Clément</span></span>
                 <span style="font-size:12px;color:var(--text-subtle);display:inline-flex;align-items:center;gap:6px;flex-shrink:0"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="3.5" width="9" height="9"/><polyline points="8,6 8,8 10,9.5"/></svg>Yesterday</span>
               </div>
             </div>
@@ -258,6 +260,37 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
   </div>
 </div>
 
+
+<div id="lyr-client-modal" style="display:none;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;padding:24px;background:rgba(10,10,10,0.34);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">
+  <div style="width:100%;max-width:520px;border:1px solid var(--border-strong);background:var(--bg-canvas);box-shadow:0 24px 64px rgba(0,0,0,0.28)">
+    <div style="padding:18px 22px;border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle);display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+      <div>
+        <div style="font-size:16px;font-weight:500;color:var(--text-primary)">Ajouter un client</div>
+        <div style="margin-top:3px;font-size:13px;color:var(--text-subtle)">Créez un compte client pour lancer des analyses et livrer des rapports.</div>
+      </div>
+      <button onClick="{{ closeClientModal }}" aria-label="Close" style="width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-subtle)" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></button>
+    </div>
+    <div style="padding:22px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label style="font-size:13px;font-weight:500;color:var(--text-primary)">Nom du client</label>
+        <input placeholder="Tasty Crousty" style="height:42px;padding:0 14px;border:1px solid var(--border-default);background:var(--bg-canvas);font-family:inherit;font-size:14px;color:var(--text-primary);outline:none" style-focus="border-color:var(--bg-inverse)">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label style="font-size:13px;font-weight:500;color:var(--text-primary)">URL du site</label>
+        <input placeholder="https://tastycrousty.com" style="height:42px;padding:0 14px;border:1px solid var(--border-default);background:var(--bg-canvas);font-family:inherit;font-size:14px;color:var(--text-primary);outline:none" style-focus="border-color:var(--bg-inverse)">
+        <span style="font-size:12px;line-height:17px;color:var(--text-subtle)">Servira à lancer les analyses et à récupérer automatiquement leur logo.</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label style="font-size:13px;font-weight:500;color:var(--text-primary)">Notes</label>
+        <textarea rows="4" placeholder="Contexte, contacts, particularités du compte…" style="padding:11px 14px;border:1px solid var(--border-default);background:var(--bg-canvas);font-family:inherit;font-size:14px;line-height:20px;color:var(--text-primary);outline:none;resize:vertical"></textarea>
+      </div>
+    </div>
+    <div style="padding:16px 22px;border-top:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:flex-end;gap:10px">
+      <button onClick="{{ closeClientModal }}" style="height:38px;padding:0 16px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer" style-hover="background:var(--bg-hover)">Annuler</button>
+      <button onClick="{{ closeClientModal }}" style="height:38px;padding:0 18px;border:none;background:var(--bg-inverse);color:var(--bg-canvas);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer" style-hover="background:var(--inverse-hover)">Créer le client</button>
+    </div>
+  </div>
+</div>
 <div style="position:fixed;inset:0;pointer-events:none;z-index:2147483647;opacity:0.05;background-image:url('textures/grain.png');background-repeat:repeat"></div></x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:800},&quot;showKpiBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showGetHelp&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
 class Component extends DCLogic {
@@ -266,6 +299,8 @@ class Component extends DCLogic {
   }
   renderVals() {
     return {
+      openClientModal: () => { const m = document.getElementById("lyr-client-modal"); if (m) m.style.display = "flex"; },
+      closeClientModal: () => { const m = document.getElementById("lyr-client-modal"); if (m) m.style.display = "none"; },
       toggleTheme: () => {
         const r = document.documentElement;
         const dark = r.getAttribute("data-theme") === "dark";

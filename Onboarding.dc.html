@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;background:#FFFFFF}
+  a{text-decoration:none}
+  input::placeholder{color:#A1A1A6}
+  select{-webkit-appearance:none;-moz-appearance:none;appearance:none}
+</style>
+</helmet>
+
+<!-- ══════════ STEPS 1–3 : split screen ══════════ -->
+<sc-if value="{{ notWelcome }}" hint-placeholder-val="{{ true }}">
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#FFFFFF">
+
+  <!-- progress bar — full width, 2px -->
+  <div style="height:2px;width:100%;background:#EAEAEC;flex-shrink:0">
+    <div style="height:100%;width:{{ progressPct }};background:#101828;transition:width .35s ease"></div>
+  </div>
+
+  <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0">
+
+    <!-- LEFT — form -->
+    <div style="display:flex;flex-direction:column;padding:40px 32px;overflow-y:auto">
+
+      <!-- step header -->
+      <div style="width:100%;max-width:420px;margin:0 auto">
+        <div style="font-size:12px;font-weight:500;color:#6E6E73;letter-spacing:0.01em">{{ stepOf }}</div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <sc-for list="{{ stepLabels }}" as="s" hint-placeholder-count="4">
+            <span style="font-size:13px;font-weight:{{ s.weight }};color:{{ s.color }}">{{ s.label }}</span>
+            <sc-if value="{{ s.showDot }}" hint-placeholder-val="{{ true }}"><span style="color:#D4D4D8;font-size:13px">·</span></sc-if>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- step body -->
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:40px 0">
+        <div style="width:100%;max-width:420px;margin:0 auto">
+
+          <!-- STEP 1 — Create your account -->
+          <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <h1 style="margin:0;font-size:26px;font-weight:600;color:#1D1D1F;letter-spacing:-0.01em">Create your account</h1>
+            <p style="margin:8px 0 0;font-size:14px;color:#6E6E73">Get started with Layers in under 2 minutes.</p>
+
+            <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <label style="font-size:13px;font-weight:500;color:#1D1D1F">Prénom</label>
+                <input value="{{ firstName }}" onInput="{{ onFirst }}" placeholder="Clément" style="height:44px;padding:0 14px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none" style-focus="border-color:#0A0A0A">
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <label style="font-size:13px;font-weight:500;color:#1D1D1F">Nom</label>
+                <input value="{{ lastName }}" onInput="{{ onLast }}" placeholder="Lucas" style="height:44px;padding:0 14px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none" style-focus="border-color:#0A0A0A">
+              </div>
+            </div>
+
+            <div style="margin-top:16px;display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:500;color:#1D1D1F">Email professionnel</label>
+              <input type="email" value="{{ email }}" onInput="{{ onEmail }}" placeholder="vous@youragency.com" style="height:44px;padding:0 14px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none" style-focus="border-color:#0A0A0A">
+            </div>
+
+            <div style="margin-top:16px;display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:500;color:#1D1D1F">Password</label>
+              <div style="position:relative;display:flex;align-items:center">
+                <input type="{{ pwType }}" value="{{ pwd }}" onInput="{{ onPwd }}" placeholder="••••••••••" style="width:100%;height:44px;padding:0 44px 0 14px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none" style-focus="border-color:#0A0A0A">
+                <button onClick="{{ togglePw }}" type="button" aria-label="Afficher le mot de passe" style="position:absolute;right:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:#6E6E73" style-hover="color:#1D1D1F">
+                  <sc-if value="{{ pwVisible }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6Z"/><circle cx="10" cy="10" r="2.5"/><line x1="3" y1="3" x2="17" y2="17"/></svg></sc-if>
+                  <sc-if value="{{ pwHidden }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10s3-6 8-6 8 6 8 6-3 6-8 6-8-6-8-6Z"/><circle cx="10" cy="10" r="2.5"/></svg></sc-if>
+                </button>
+              </div>
+            </div>
+
+            <button onClick="{{ goNext }}" type="button" style="margin-top:24px;width:100%;height:46px;border:none;background:#101828;color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#1D2739">Create account</button>
+
+            <div style="margin-top:24px;display:flex;align-items:center;gap:14px">
+              <span style="flex:1;height:1px;background:#EAEAEC"></span>
+              <span style="font-size:11px;font-weight:500;letter-spacing:0.06em;color:#A1A1A6">OR</span>
+              <span style="flex:1;height:1px;background:#EAEAEC"></span>
+            </div>
+
+            <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px">
+              <button onClick="{{ goNext }}" type="button" style="height:46px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;font-weight:500;color:#1D1D1F;cursor:pointer" style-hover="background:#FAFAFA;border-color:#D4D4D8">
+                <svg width="17" height="17" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62Z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.8.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18Z"/><path fill="#FBBC05" d="M3.97 10.72a5.4 5.4 0 0 1 0-3.44V4.95H.96a9 9 0 0 0 0 8.1l3-2.33Z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58A9 9 0 0 0 .96 4.95l3 2.33C4.68 5.16 6.66 3.58 9 3.58Z"/></svg>
+                Continue with Google
+              </button>
+              <button onClick="{{ goNext }}" type="button" style="height:46px;display:flex;align-items:center;justify-content:center;gap:10px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;font-weight:500;color:#1D1D1F;cursor:pointer" style-hover="background:#FAFAFA;border-color:#D4D4D8">
+                <svg width="16" height="16" viewBox="0 0 16 16"><rect x="0" y="0" width="7.2" height="7.2" fill="#F25022"/><rect x="8.8" y="0" width="7.2" height="7.2" fill="#7FBA00"/><rect x="0" y="8.8" width="7.2" height="7.2" fill="#00A4EF"/><rect x="8.8" y="8.8" width="7.2" height="7.2" fill="#FFB900"/></svg>
+                Continue with Microsoft
+              </button>
+            </div>
+
+            <div style="margin-top:28px;padding-top:20px;border-top:1px solid #EFEFEF">
+              <a href="#" style="display:flex;align-items:center;justify-content:space-between;gap:12px" style-hover="opacity:0.75">
+                <span style="font-size:13px;color:#6E6E73">Want a demo first? <span style="color:#1D1D1F;font-weight:500">Book a call with the founders</span></span>
+                <span style="color:#1D1D1F">→</span>
+              </a>
+            </div>
+          </div>
+          </sc-if>
+
+          <!-- STEP 2 — Tell us about you -->
+          <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <h1 style="margin:0;font-size:26px;font-weight:600;color:#1D1D1F;letter-spacing:-0.01em">{{ greeting }}</h1>
+            <p style="margin:8px 0 0;font-size:14px;color:#6E6E73">Let's set up your workspace.</p>
+
+            <div style="margin-top:36px">
+              <div style="font-size:15px;font-weight:500;color:#1D1D1F">How large is your team?</div>
+              <div style="margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+                <sc-for list="{{ teamOptions }}" as="t" hint-placeholder-count="6">
+                <button onClick="{{ t.onClick }}" type="button" style="min-height:88px;padding:14px;border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;text-align:left;transition:background .15s,border-color .15s">
+                  <span style="font-size:15px;font-weight:600">{{ t.main }}</span>
+                  <sc-if value="{{ t.hasSub }}" hint-placeholder-val="{{ false }}"><span style="margin-top:2px;font-size:12px;opacity:0.7">{{ t.sub }}</span></sc-if>
+                </button>
+                </sc-for>
+              </div>
+            </div>
+
+            <button onClick="{{ goNext }}" type="button" style="margin-top:32px;width:100%;height:46px;border:none;background:#101828;color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#1D2739">Continue</button>
+          </div>
+          </sc-if>
+
+          <!-- STEP 3 — Your agency identity -->
+          <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+          <div>
+            <h1 style="margin:0;font-size:26px;font-weight:600;color:#1D1D1F;letter-spacing:-0.01em">Your agency identity</h1>
+            <p style="margin:8px 0 0;font-size:14px;color:#6E6E73">This will appear on your dashboard and client reports.</p>
+
+            <div style="margin-top:28px;display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:500;color:#1D1D1F">Agency website URL</label>
+              <input value="{{ agencyUrl }}" onInput="{{ onUrl }}" placeholder="https://youragency.com" style="height:44px;padding:0 14px;border:1px solid {{ urlBorder }};background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none" style-focus="border-color:#0A0A0A">
+              <sc-if value="{{ urlError }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:#D6402C">Agency website is required.</span></sc-if>
+            </div>
+
+            <div style="margin-top:18px;display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:500;color:#1D1D1F">Agency logo</label>
+              <div style="display:flex;gap:14px;align-items:stretch">
+                <div style="width:64px;height:64px;flex-shrink:0;border:1px solid #E4E4E7;background:#FAFAFA;display:flex;align-items:center;justify-content:center;overflow:hidden">
+                  <sc-if value="{{ hasLogo }}" hint-placeholder-val="{{ false }}">{{ logoImg }}</sc-if>
+                  <sc-if value="{{ noLogo }}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C7C7CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg></sc-if>
+                </div>
+                <label style="flex:1;border:1px dashed #D4D4D8;background:#FFFFFF;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;padding:8px" style-hover="border-color:#0A0A0A;background:#FAFAFA" onDragOver="{{ onDragOver }}" onDrop="{{ onDrop }}">
+                  <span style="font-size:13px;color:#1D1D1F;font-weight:500">Glissez un fichier ou cliquez</span>
+                  <span style="font-size:11px;color:#A1A1A6">PNG, JPG, SVG</span>
+                  <input type="file" accept="image/*" onChange="{{ onPickFile }}" style="display:none">
+                </label>
+              </div>
+              <input value="{{ logoUrl }}" onInput="{{ onLogoUrl }}" placeholder="… ou collez une URL de logo" style="margin-top:8px;height:40px;padding:0 14px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:13px;color:#1D1D1F;outline:none" style-focus="border-color:#0A0A0A">
+            </div>
+
+            <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <label style="font-size:13px;font-weight:500;color:#1D1D1F">Region</label>
+                <div style="position:relative">
+                  <select value="{{ region }}" onChange="{{ onRegion }}" style="width:100%;height:44px;padding:0 36px 0 14px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none;cursor:pointer">
+                    <option>France</option><option>Europe</option><option>North America</option><option>Asia-Pacific</option><option>Other</option>
+                  </select>
+                  <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:#6E6E73"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,6 8,10 12,6"/></svg></span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <label style="font-size:13px;font-weight:500;color:#1D1D1F">Language</label>
+                <div style="position:relative">
+                  <select value="{{ language }}" onChange="{{ onLanguage }}" style="width:100%;height:44px;padding:0 36px 0 14px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none;cursor:pointer">
+                    <option>English</option><option>Français</option><option>Español</option><option>Deutsch</option>
+                  </select>
+                  <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:#6E6E73"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,6 8,10 12,6"/></svg></span>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:28px;display:flex;align-items:center;gap:16px">
+              <button onClick="{{ goNext }}" type="button" style="flex:1;height:46px;border:none;background:#101828;color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#1D2739">Continue</button>
+              <button onClick="{{ goNext }}" type="button" style="border:none;background:transparent;color:#6E6E73;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;padding:0 4px" style-hover="color:#1D1D1F">Skip this step</button>
+            </div>
+          </div>
+          </sc-if>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — brand visual -->
+    <div style="position:relative;overflow:hidden;background:#0A0A0A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px">
+      <img src="textures/signin-bg.png" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+      <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:96px;width:100%;max-width:640px">
+        <img src="logos/layers-white.png" alt="Layers" style="width:400px;max-width:70%;height:auto;display:block">
+        <h1 style="margin:0;text-align:center;color:#FFFFFF;font-weight:500;font-size:40px;line-height:1.18;letter-spacing:-0.01em">Grow your GEO services<br>with real insights</h1>
+      </div>
+    </div>
+
+  </div>
+</div>
+</sc-if>
+
+<!-- ══════════ STEP 4 : You're in ══════════ -->
+<sc-if value="{{ isWelcome }}" hint-placeholder-val="{{ false }}">
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;background:#FFFFFF;text-align:center">
+  <img src="logos/layers-black.png" alt="Layers" style="width:110px;height:auto;opacity:0.85">
+
+  <div style="margin-top:56px;display:flex;flex-direction:column;align-items:center">
+    <div style="width:80px;height:80px;border:1px solid #E4E4E7;background:#FAFAFA;display:flex;align-items:center;justify-content:center;overflow:hidden">
+      <sc-if value="{{ hasLogo }}" hint-placeholder-val="{{ false }}">{{ logoImg }}</sc-if>
+      <sc-if value="{{ noLogo }}" hint-placeholder-val="{{ true }}"><span style="font-size:30px;font-weight:600;color:#1D1D1F">{{ agencyInitial }}</span></sc-if>
+    </div>
+    <div style="margin-top:12px;font-size:14px;font-weight:500;color:#1D1D1F">{{ agencyName }}</div>
+  </div>
+
+  <h1 style="margin:40px 0 0;font-size:34px;font-weight:600;color:#1D1D1F;letter-spacing:-0.015em">{{ welcomeTitle }}</h1>
+  <p style="margin:12px 0 0;font-size:15px;color:#6E6E73;max-width:440px">Your workspace is ready. Let's set up your first client analysis.</p>
+
+  <a href="Reports.dc.html" style="margin-top:36px;height:48px;padding:0 28px;display:inline-flex;align-items:center;gap:10px;background:#101828;color:#FFFFFF;font-size:15px;font-weight:600" style-hover="background:#1D2739">Set up my first client →</a>
+  <a href="Home.dc.html" style="margin-top:18px;font-size:14px;color:#6E6E73;font-weight:500" style-hover="color:#1D1D1F;text-decoration:underline">Explore the dashboard</a>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    step: 0,
+    firstName: "", lastName: "", email: "", pwd: "", pwVisible: false,
+    teamSize: null,
+    agencyUrl: "", logoUrl: "", logoSrc: "",
+    region: "France", language: "Français",
+    urlError: false,
+  };
+
+  readFile(file) {
+    if (!file) return;
+    const r = new FileReader();
+    r.onload = () => this.setState({ logoSrc: r.result });
+    r.readAsDataURL(file);
+  }
+
+  renderVals() {
+    const st = this.state, step = st.step;
+    const fn = st.firstName.trim();
+    const host = st.agencyUrl.replace(/^https?:\/\//i, "").replace(/^www\./i, "").split("/")[0].trim();
+    const agencyName = host ? host.charAt(0).toUpperCase() + host.slice(1) : "Your agency";
+
+    const stepNames = ["Account", "Team", "Agency", "Ready"];
+    const stepLabels = stepNames.map((label, i) => ({
+      label,
+      color: i <= step ? "#101828" : "#A1A1A6",
+      weight: i === step ? 600 : 500,
+      showDot: i < stepNames.length - 1,
+    }));
+
+    const teams = [
+      { k: "solo", main: "Just me", sub: "Freelance", hasSub: true },
+      { k: "2-10", main: "2 à 10", hasSub: false },
+      { k: "11-29", main: "11 à 29", hasSub: false },
+      { k: "30-49", main: "30 à 49", hasSub: false },
+      { k: "50-100", main: "50 à 100", hasSub: false },
+      { k: "100+", main: "100+", hasSub: false },
+    ];
+    const teamOptions = teams.map((t) => {
+      const sel = st.teamSize === t.k;
+      return {
+        main: t.main, sub: t.sub || "", hasSub: t.hasSub,
+        bg: sel ? "#101828" : "#FFFFFF",
+        color: sel ? "#FFFFFF" : "#1D1D1F",
+        border: sel ? "#101828" : "#E4E4E7",
+        onClick: () => this.setState({ teamSize: t.k }),
+      };
+    });
+
+    const goNext = () => {
+      if (this.state.step === 2 && !this.state.agencyUrl.trim()) {
+        this.setState({ urlError: true });
+        return;
+      }
+      this.setState((s) => ({ step: Math.min(3, s.step + 1), urlError: false }));
+    };
+
+    const v = st.pwVisible;
+    return {
+      notWelcome: step < 3,
+      isWelcome: step === 3,
+      isStep1: step === 0, isStep2: step === 1, isStep3: step === 2,
+      progressPct: ["25%", "50%", "75%", "100%"][step],
+      stepOf: "Step " + (step + 1) + " of 4",
+      stepLabels,
+
+      firstName: st.firstName, lastName: st.lastName, email: st.email, pwd: st.pwd,
+      pwVisible: v, pwHidden: !v, pwType: v ? "text" : "password",
+      onFirst: (e) => this.setState({ firstName: e.target.value }),
+      onLast: (e) => this.setState({ lastName: e.target.value }),
+      onEmail: (e) => this.setState({ email: e.target.value }),
+      onPwd: (e) => this.setState({ pwd: e.target.value }),
+      togglePw: () => this.setState((s) => ({ pwVisible: !s.pwVisible })),
+
+      greeting: fn ? "Nice to meet you, " + fn + "." : "Nice to meet you.",
+      teamOptions,
+
+      agencyUrl: st.agencyUrl, logoUrl: st.logoUrl,
+      urlError: st.urlError,
+      urlBorder: st.urlError ? "#D6402C" : "#E4E4E7",
+      onUrl: (e) => this.setState({ agencyUrl: e.target.value, urlError: false }),
+      onLogoUrl: (e) => this.setState({ logoUrl: e.target.value, logoSrc: e.target.value }),
+      onPickFile: (e) => this.readFile(e.target.files && e.target.files[0]),
+      onDragOver: (e) => e.preventDefault(),
+      onDrop: (e) => { e.preventDefault(); this.readFile(e.dataTransfer.files && e.dataTransfer.files[0]); },
+      region: st.region, language: st.language,
+      onRegion: (e) => this.setState({ region: e.target.value }),
+      onLanguage: (e) => this.setState({ language: e.target.value }),
+
+      hasLogo: !!st.logoSrc, noLogo: !st.logoSrc, logoSrc: st.logoSrc,
+      logoImg: st.logoSrc ? React.createElement("img", { src: st.logoSrc, alt: "", style: { width: "100%", height: "100%", objectFit: "contain" } }) : null,
+      agencyName, agencyInitial: agencyName.charAt(0).toUpperCase(),
+      welcomeTitle: fn ? "Welcome to Layers, " + fn + "." : "Welcome to Layers.",
+
+      goNext,
+    };
+  }
+}
+</script>
+</body>
+</html>

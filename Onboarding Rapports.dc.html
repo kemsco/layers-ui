@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;background:#0A0A0A}
+  a{text-decoration:none}
+  input::placeholder{color:#A1A1A6}
+  .lyr-scroll::-webkit-scrollbar{width:10px}
+  .lyr-scroll::-webkit-scrollbar-thumb{background:#E4E4E7}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#0A0A0A;display:flex;align-items:center;justify-content:center;padding:24px">
+  <div style="position:relative;width:100%;max-width:960px;height:min(90vh,780px);background:#FFFFFF;display:flex;flex-direction:column;overflow:hidden">
+
+    <!-- top chrome -->
+    <div style="position:absolute;top:14px;left:16px;display:flex;align-items:center;gap:6px;height:22px;padding:0 9px;border:1px solid #EFE0DE;background:#FDF3F2;z-index:5">
+      <svg width="11" height="11" viewBox="0 0 16 16" fill="#D6402C"><path d="M8.5 1.5 L3.5 9 H8 L7 14.5 L12.5 6.5 H8 Z"/></svg>
+      <span style="font-size:11px;font-weight:500;color:#B23524;font-variant-numeric:tabular-nums">{{ credits }} credits</span>
+    </div>
+    <button type="button" style="position:absolute;top:12px;right:12px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:#6E6E73;z-index:5" style-hover="color:#1D1D1F">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="3.5" y1="3.5" x2="12.5" y2="12.5"/><line x1="12.5" y1="3.5" x2="3.5" y2="12.5"/></svg>
+    </button>
+
+    <!-- stepper -->
+    <div style="flex-shrink:0;padding:20px 32px 22px;border-bottom:1px solid #EFEFEF">
+      <div style="text-align:center;font-size:11px;letter-spacing:0.06em;color:#A1A1A6">STEP {{ stepNum }} OF 6&nbsp;&nbsp;<span style="color:#1D1D1F;font-weight:600">{{ stepUpper }}</span></div>
+      <div style="margin-top:16px;display:flex;align-items:flex-start;justify-content:center;gap:0">
+        <sc-for list="{{ chips }}" as="c" hint-placeholder-count="6">
+        <div style="display:flex;align-items:center">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:7px;width:66px">
+            <div style="width:26px;height:26px;display:flex;align-items:center;justify-content:center;background:{{ c.boxBg }};border:1px solid {{ c.boxBorder }};color:{{ c.boxColor }};font-size:12px;font-weight:600;font-variant-numeric:tabular-nums">
+              <sc-if value="{{ c.done }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,8.5 6.5,12 13,4.5"/></svg></sc-if>
+              <sc-if value="{{ c.showNum }}" hint-placeholder-val="{{ true }}">{{ c.num }}</sc-if>
+            </div>
+            <span style="font-size:10px;letter-spacing:0.04em;color:{{ c.labelColor }};font-weight:{{ c.labelWeight }}">{{ c.label }}</span>
+          </div>
+          <sc-if value="{{ c.showLine }}" hint-placeholder-val="{{ true }}"><span style="width:34px;height:1px;background:{{ c.lineColor }};margin-top:13px"></span></sc-if>
+        </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- body -->
+    <div class="lyr-scroll" style="flex:1;overflow-y:auto;padding:32px">
+      <div style="max-width:720px;margin:0 auto">
+
+        <!-- STEP 1 — CLIENT -->
+        <sc-if value="{{ isClient }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <h1 style="margin:0;font-size:20px;font-weight:600;color:#1D1D1F">Client</h1>
+          <p style="margin:6px 0 0;font-size:13px;color:#6E6E73">Select the client this report belongs to. You can create a new client if they are not listed yet.</p>
+          <div style="margin-top:22px;position:relative;display:flex;align-items:center">
+            <span style="position:absolute;left:14px;color:#A1A1A6;display:flex"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg></span>
+            <input placeholder="Search clients by name…" style="width:100%;height:44px;padding:0 14px 0 38px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none" style-focus="border-color:#0A0A0A">
+          </div>
+          <button type="button" style="margin-top:12px;width:100%;height:44px;display:flex;align-items:center;gap:10px;padding:0 16px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:12px;font-weight:500;letter-spacing:0.04em;color:#1D1D1F;cursor:pointer" style-hover="background:#FAFAFA;border-color:#D4D4D8"><span style="font-size:15px;line-height:1">+</span>NEW CLIENT</button>
+          <div style="margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+            <sc-for list="{{ clients }}" as="c" hint-placeholder-count="3">
+            <button onClick="{{ c.onClick }}" type="button" style="position:relative;min-height:96px;padding:16px;border:1px solid {{ c.border }};background:{{ c.bg }};font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;text-align:left" style-hover="border-color:#0A0A0A">
+              <span style="width:34px;height:34px;border:1px solid #E4E4E7;display:flex;align-items:center;justify-content:center;color:#6E6E73"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.5" y="2" width="9" height="12"/><line x1="6" y1="5" x2="10" y2="5"/><line x1="6" y1="7.5" x2="10" y2="7.5"/><line x1="6" y1="10" x2="8" y2="10"/></svg></span>
+              <span style="font-size:14px;font-weight:500;color:#1D1D1F">{{ c.name }}</span>
+              <span style="position:absolute;top:14px;right:14px;width:18px;height:18px;border:1.5px solid {{ c.checkBorder }};background:{{ c.checkBg }};display:flex;align-items:center;justify-content:center">
+                <sc-if value="{{ c.selected }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,8.5 6.5,12 13,4.5"/></svg></sc-if>
+              </span>
+            </button>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- STEP 2 — IDENTITY -->
+        <sc-if value="{{ isIdentity }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.05em;color:#6E6E73">WEBSITE URL <span style="color:#D6402C">*</span></div>
+          <input value="{{ website }}" onInput="{{ onWebsite }}" style="margin-top:8px;width:100%;height:46px;padding:0 14px;border:1px solid #1D1D1F;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none">
+          <div style="margin-top:8px;font-size:11px;letter-spacing:0.03em;color:#A1A1A6">PRIMARY URL FOR POSITIONING ANALYSIS AND SIGNAL EXTRACTION</div>
+
+          <div style="margin-top:26px;font-size:11px;font-weight:500;letter-spacing:0.05em;color:#6E6E73">COMPETITOR URLS <span style="color:#C7C7CC">OPTIONAL</span></div>
+          <div style="margin-top:8px;font-size:11px;letter-spacing:0.03em;color:#A1A1A6">WEBSITES TO BENCHMARK AGAINST IN AI MODEL COMPARISONS</div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <input placeholder="https://competitor.com" style="flex:1;height:44px;padding:0 14px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none" style-focus="border-color:#0A0A0A">
+            <button type="button" style="width:44px;height:44px;border:1px solid #E4E4E7;background:#FFFFFF;color:#1D1D1F;font-size:18px;cursor:pointer" style-hover="background:#FAFAFA;border-color:#D4D4D8">+</button>
+          </div>
+
+          <div style="margin-top:30px;font-size:11px;font-weight:500;letter-spacing:0.05em;color:#6E6E73">ANALYSIS DEPTH</div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <sc-for list="{{ depths }}" as="d" hint-placeholder-count="3">
+            <button onClick="{{ d.onClick }}" type="button" style="position:relative;padding:16px 14px;border:1px solid {{ d.border }};background:{{ d.bg }};font-family:inherit;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:10px" style-hover="border-color:#0A0A0A">
+              <sc-if value="{{ d.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);height:18px;padding:0 8px;display:inline-flex;align-items:center;background:#101828;color:#FFFFFF;font-size:9px;font-weight:600;letter-spacing:0.05em">{{ d.badge }}</span></sc-if>
+              <div style="display:flex;align-items:center;justify-content:space-between;color:#6E6E73">
+                <span style="display:flex">{{ d.icon }}</span>
+                <span style="font-size:11px;color:#A1A1A6;font-variant-numeric:tabular-nums">{{ d.time }}</span>
+              </div>
+              <div>
+                <div style="font-size:14px;font-weight:600;color:#1D1D1F">{{ d.name }}</div>
+                <div style="margin-top:3px;font-size:12px;color:#6E6E73;line-height:16px">{{ d.desc }}</div>
+              </div>
+            </button>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:30px;font-size:11px;font-weight:500;letter-spacing:0.05em;color:#6E6E73">TRACKING SCHEDULE</div>
+          <div style="margin-top:6px;font-size:11px;letter-spacing:0.03em;color:#A1A1A6">HOW OFTEN SHOULD THE ANALYSIS RUN</div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+            <sc-for list="{{ schedules }}" as="s" hint-placeholder-count="4">
+            <button onClick="{{ s.onClick }}" type="button" style="position:relative;padding:16px 14px;border:1px solid {{ s.border }};background:{{ s.bg }};font-family:inherit;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:10px" style-hover="border-color:#0A0A0A">
+              <sc-if value="{{ s.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:-9px;left:14px;height:18px;padding:0 8px;display:inline-flex;align-items:center;background:#101828;color:#FFFFFF;font-size:9px;font-weight:600;letter-spacing:0.05em">{{ s.badge }}</span></sc-if>
+              <span style="display:flex;color:#6E6E73">{{ s.icon }}</span>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:#1D1D1F">{{ s.name }}</div>
+                <div style="margin-top:3px;font-size:12px;color:#6E6E73">{{ s.desc }}</div>
+              </div>
+            </button>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- STEP 3 — SCOPE -->
+        <sc-if value="{{ isScope }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <h1 style="margin:0;font-size:20px;font-weight:600;color:#1D1D1F">Markets &amp; Languages <span style="color:#D6402C">*</span></h1>
+          <p style="margin:6px 0 0;font-size:13px;color:#6E6E73">Select one target market and one language for AI model queries.</p>
+
+          <div style="margin-top:24px;display:flex;align-items:center;gap:7px;color:#6E6E73"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 4h7M5.5 2.5v1.5M4 4c0 3 1.5 5 3.5 6M8 10c-1.5-1-2.5-2.5-2.5-2.5"/><path d="M9 14l2.5-6 2.5 6M10 12h3"/></svg><span style="font-size:11px;font-weight:500;letter-spacing:0.05em">LINGUISTIC COVERAGE <span style="color:#D6402C">*</span></span></div>
+          <p style="margin:6px 0 0;font-size:11px;letter-spacing:0.02em;color:#A1A1A6">Select the language AI queries should be run in for this market.</p>
+          <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ languages }}" as="l" hint-placeholder-count="10">
+            <button onClick="{{ l.onClick }}" type="button" style="height:30px;padding:0 14px;border:1px solid {{ l.border }};background:{{ l.bg }};color:{{ l.color }};font-family:inherit;font-size:13px;font-weight:500;cursor:pointer" style-hover="border-color:#0A0A0A">{{ l.name }}</button>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:26px;display:flex;align-items:center;gap:7px;color:#6E6E73"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6"/><line x1="2" y1="8" x2="14" y2="8"/><path d="M8 2c2 2 2 10 0 12M8 2c-2 2-2 10 0 12"/></svg><span style="font-size:11px;font-weight:500;letter-spacing:0.05em">REGION_SEARCH</span></div>
+          <div style="margin-top:10px;position:relative;display:flex;align-items:center">
+            <span style="position:absolute;left:14px;color:#A1A1A6;display:flex"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg></span>
+            <input placeholder="Search cities / countries / regions…" style="width:100%;height:44px;padding:0 14px 0 38px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:14px;color:#1D1D1F;outline:none" style-focus="border-color:#0A0A0A">
+          </div>
+
+          <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div style="border:1px solid #E4E4E7">
+              <div style="height:34px;display:flex;align-items:center;padding:0 14px;border-bottom:1px solid #EFEFEF;background:#F7F8FA;font-size:11px;font-weight:600;letter-spacing:0.05em;color:#6E6E73">EUROPE</div>
+              <sc-for list="{{ regionList }}" as="r" hint-placeholder-count="5">
+              <button onClick="{{ r.onClick }}" type="button" style="width:100%;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border:none;border-bottom:1px solid #EFEFEF;background:#FFFFFF;font-family:inherit;cursor:pointer" style-hover="background:#FAFAFA">
+                <span style="display:flex;align-items:center;gap:9px"><span style="color:#A1A1A6;display:flex"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 1.5c2.8 0 4.5 2.2 4.5 4.6C12.5 9.5 8 14.5 8 14.5S3.5 9.5 3.5 6.1C3.5 3.7 5.2 1.5 8 1.5Z"/><circle cx="8" cy="6" r="1.6"/></svg></span><span style="font-size:13px;font-weight:500;color:#1D1D1F">{{ r.name }}</span><span style="font-size:11px;color:#A1A1A6">{{ r.code }}</span></span>
+                <span style="color:#C7C7CC">›</span>
+              </button>
+              </sc-for>
+            </div>
+            <div style="border:1px solid #E4E4E7;display:flex;flex-direction:column">
+              <div style="height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid #EFEFEF;background:#F7F8FA">
+                <span style="display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;letter-spacing:0.05em;color:#6E6E73"><span style="width:3px;height:12px;background:#101828"></span>SELECTED</span>
+                <sc-if value="{{ hasRegions }}" hint-placeholder-val="{{ true }}"><button onClick="{{ clearRegions }}" type="button" style="border:none;background:transparent;font-family:inherit;font-size:11px;font-weight:500;letter-spacing:0.04em;color:#6E6E73;cursor:pointer" style-hover="color:#1D1D1F">CLEAR</button></sc-if>
+              </div>
+              <sc-if value="{{ hasRegions }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:14px;flex:1">
+                <div style="font-size:11px;letter-spacing:0.04em;color:#A1A1A6">{{ regionCount }}</div>
+                <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:8px">
+                  <sc-for list="{{ selectedRegions }}" as="r" hint-placeholder-count="1">
+                  <span style="height:24px;padding:0 6px 0 9px;display:inline-flex;align-items:center;gap:6px;background:#101828;color:#FFFFFF;font-size:12px;font-weight:500">{{ r.code }}<button onClick="{{ r.onRemove }}" type="button" style="border:none;background:transparent;color:#FFFFFF;cursor:pointer;display:flex;padding:2px"><svg width="9" height="9" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3.5" y1="3.5" x2="12.5" y2="12.5"/><line x1="12.5" y1="3.5" x2="3.5" y2="12.5"/></svg></button></span>
+                  </sc-for>
+                </div>
+              </div>
+              </sc-if>
+              <sc-if value="{{ noRegions }}" hint-placeholder-val="{{ false }}">
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px">
+                <span style="color:#D4D4D8;display:flex"><svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M8 1.5c2.8 0 4.5 2.2 4.5 4.6C12.5 9.5 8 14.5 8 14.5S3.5 9.5 3.5 6.1C3.5 3.7 5.2 1.5 8 1.5Z"/><circle cx="8" cy="6" r="1.6"/></svg></span>
+                <span style="font-size:11px;letter-spacing:0.04em;color:#A1A1A6">NO REGIONS SELECTED</span>
+              </div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- STEP 4 — PERSONAS -->
+        <sc-if value="{{ isPersonas }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <h1 style="margin:0;font-size:20px;font-weight:600;color:#1D1D1F">Personas</h1>
+          <p style="margin:6px 0 0;font-size:13px;color:#6E6E73">Select customer personas for this analysis, or let the system generate them automatically.</p>
+          <div style="margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <button type="button" style="height:38px;padding:0 14px;display:flex;align-items:center;gap:8px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:13px;font-weight:500;color:#1D1D1F;cursor:pointer" style-hover="background:#FAFAFA;border-color:#D4D4D8"><span style="font-size:15px;line-height:1">+</span>New Persona</button>
+            <button onClick="{{ togglePersonaAuto }}" type="button" style="height:38px;padding:0 16px;display:flex;align-items:center;gap:8px;border:1px solid {{ personaAutoBorder }};background:{{ personaAutoBg }};font-family:inherit;font-size:13px;font-weight:500;color:{{ personaAutoColor }};cursor:pointer"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M8 1.5l1.6 3.9 3.9 1.6-3.9 1.6L8 12.5 6.4 8.6 2.5 7l3.9-1.6z"/></svg>Automatic</button>
+          </div>
+          <sc-if value="{{ personaAuto }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:16px;display:flex;gap:12px;padding:16px;background:#F7F8FA;border:1px solid #EFEFEF">
+            <span style="color:#6E6E73;display:flex;margin-top:1px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M8 1.5l1.6 3.9 3.9 1.6-3.9 1.6L8 12.5 6.4 8.6 2.5 7l3.9-1.6z"/></svg></span>
+            <div><div style="font-size:13px;font-weight:600;color:#1D1D1F">Automatic personas enabled</div><div style="margin-top:3px;font-size:12px;line-height:17px;color:#6E6E73">Personas will be generated based on your brand context and industry. Select existing personas below to switch to manual mode.</div></div>
+          </div>
+          </sc-if>
+          <div style="margin-top:22px;font-size:11px;font-weight:500;letter-spacing:0.05em;color:#A1A1A6">CLIENT PERSONAS</div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <sc-for list="{{ personas }}" as="p" hint-placeholder-count="2">
+            <button onClick="{{ p.onClick }}" type="button" style="padding:18px;border:1px solid {{ p.border }};background:{{ p.bg }};font-family:inherit;cursor:pointer;text-align:left;display:flex;flex-direction:column" style-hover="border-color:#0A0A0A">
+              <span style="width:34px;height:34px;border:1px solid #E4E4E7;display:flex;align-items:center;justify-content:center;color:#6E6E73"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="5.5" cy="6" r="2"/><circle cx="11" cy="6.5" r="1.6"/><path d="M2 13c0-2 1.6-3 3.5-3s3.5 1 3.5 3M9.5 12.5c.2-1.5 1.3-2.3 2.6-2.3S14.5 11 14.5 12.5"/></svg></span>
+              <div style="margin-top:14px;font-size:14px;font-weight:600;color:#1D1D1F">{{ p.name }}</div>
+              <div style="margin-top:5px;font-size:12px;line-height:17px;color:#6E6E73">{{ p.desc }}</div>
+              <div style="margin-top:16px;display:flex;align-items:center;gap:6px;color:#6E6E73"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="4.8" r="0.6" fill="currentColor"/></svg><span style="font-size:12px;font-weight:500">Details</span></div>
+            </button>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- STEP 5 — KEYWORDS -->
+        <sc-if value="{{ isKeywords }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <h1 style="margin:0;font-size:20px;font-weight:600;color:#1D1D1F">Keywords</h1>
+          <p style="margin:6px 0 0;font-size:13px;color:#6E6E73">Select keywords to track across AI models, or let the system choose automatically.</p>
+          <div style="margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <button type="button" style="height:38px;padding:0 14px;display:flex;align-items:center;gap:8px;border:1px solid #E4E4E7;background:#FFFFFF;font-family:inherit;font-size:13px;font-weight:500;color:#1D1D1F;cursor:pointer" style-hover="background:#FAFAFA;border-color:#D4D4D8"><span style="font-size:15px;line-height:1">+</span>New keyword</button>
+            <button onClick="{{ toggleKeywordAuto }}" type="button" style="height:38px;padding:0 16px;display:flex;align-items:center;gap:8px;border:1px solid {{ keywordAutoBorder }};background:{{ keywordAutoBg }};font-family:inherit;font-size:13px;font-weight:500;color:{{ keywordAutoColor }};cursor:pointer"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M8 1.5l1.6 3.9 3.9 1.6-3.9 1.6L8 12.5 6.4 8.6 2.5 7l3.9-1.6z"/></svg>Automatic</button>
+          </div>
+          <sc-if value="{{ keywordAuto }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:16px;display:flex;gap:12px;padding:16px;background:#F7F8FA;border:1px solid #EFEFEF">
+            <span style="color:#6E6E73;display:flex;margin-top:1px"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M8 1.5l1.6 3.9 3.9 1.6-3.9 1.6L8 12.5 6.4 8.6 2.5 7l3.9-1.6z"/></svg></span>
+            <div><div style="font-size:13px;font-weight:600;color:#1D1D1F">Automatic keywords enabled</div><div style="margin-top:3px;font-size:12px;line-height:17px;color:#6E6E73">Keywords will be selected automatically based on your brand context. Select existing keywords below to switch to manual mode.</div></div>
+          </div>
+          </sc-if>
+          <div style="margin-top:22px;font-size:11px;font-weight:500;letter-spacing:0.05em;color:#A1A1A6">CLIENT KEYWORDS</div>
+          <div style="margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+            <sc-for list="{{ keywords }}" as="k" hint-placeholder-count="3">
+            <button onClick="{{ k.onClick }}" type="button" style="padding:18px;border:1px solid {{ k.border }};background:{{ k.bg }};font-family:inherit;cursor:pointer;text-align:left;display:flex;flex-direction:column" style-hover="border-color:#0A0A0A">
+              <span style="width:34px;height:34px;border:1px solid #E4E4E7;display:flex;align-items:center;justify-content:center;color:#6E6E73"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M8.5 2h4.5v4.5L7 12.5 2.5 8z"/><circle cx="10.5" cy="4.5" r="0.9" fill="currentColor" stroke="none"/></svg></span>
+              <div style="margin-top:14px;font-size:14px;font-weight:600;color:#1D1D1F">{{ k.name }}</div>
+              <div style="margin-top:5px;font-size:12px;line-height:17px;color:#6E6E73">{{ k.desc }}</div>
+              <div style="margin-top:16px;display:flex;align-items:center;gap:6px;color:#6E6E73"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="7" x2="8" y2="11"/><circle cx="8" cy="4.8" r="0.6" fill="currentColor"/></svg><span style="font-size:12px;font-weight:500">Details</span></div>
+            </button>
+            </sc-for>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- STEP 6 — REVIEW -->
+        <sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <h1 style="margin:0 0 18px;font-size:20px;font-weight:600;color:#1D1D1F">Review</h1>
+          <div style="border:1px solid #E4E4E7">
+            <sc-for list="{{ reviewRows }}" as="r" hint-placeholder-count="6">
+            <div style="padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #EFEFEF">
+              <div><div style="font-size:11px;font-weight:500;letter-spacing:0.05em;color:#A1A1A6">{{ r.label }}</div><div style="margin-top:4px;font-size:14px;color:#1D1D1F">{{ r.value }}</div></div>
+              <a href="#" style="display:flex;align-items:center;gap:5px;font-size:12px;color:#6E6E73" style-hover="color:#1D1D1F"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2.5l2.5 2.5L6 12.5 3 13l.5-3z"/></svg>Edit</a>
+            </div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:22px;padding:20px;background:#F7F8FA;border:1px solid #EFEFEF">
+            <div style="font-size:11px;font-weight:600;letter-spacing:0.05em;color:#1D1D1F">WHAT HAPPENS NEXT</div>
+            <ul style="margin:12px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:8px">
+              <li style="font-size:13px;line-height:19px;color:#6E6E73">System will generate test queries based on your subject context</li>
+              <li style="font-size:13px;line-height:19px;color:#6E6E73">AI models will be queried across selected regions and languages</li>
+              <li style="font-size:13px;line-height:19px;color:#6E6E73">Perception data will be collected and analyzed for visibility, sentiment, and competitive positioning</li>
+              <li style="font-size:13px;line-height:19px;color:#6E6E73">Results will appear in your dashboard within ~5 min</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:22px;padding:16px 20px;border:1px solid #E4E4E7;display:flex;align-items:center;gap:24px">
+            <div><div style="font-size:10px;font-weight:500;letter-spacing:0.05em;color:#A1A1A6">AVAILABLE</div><div style="margin-top:2px;font-size:16px;font-weight:600;color:#1D1D1F;font-variant-numeric:tabular-nums">33</div></div>
+            <div style="flex:1;height:5px;background:#EFEFEF"><div style="width:3%;height:100%;background:#101828"></div></div>
+            <div style="text-align:right"><div style="font-size:10px;font-weight:500;letter-spacing:0.05em;color:#A1A1A6">THIS RUN</div><div style="margin-top:2px;font-size:16px;font-weight:600;color:#1D1D1F;font-variant-numeric:tabular-nums">1</div></div>
+            <div style="text-align:right"><div style="font-size:10px;font-weight:500;letter-spacing:0.05em;color:#A1A1A6">AFTER RUN</div><div style="margin-top:2px;font-size:16px;font-weight:600;color:#1D1D1F;font-variant-numeric:tabular-nums">32</div></div>
+          </div>
+        </div>
+        </sc-if>
+
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div style="flex-shrink:0;padding:16px 32px;border-top:1px solid #EFEFEF;display:flex;align-items:center;justify-content:space-between">
+      <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}"><button onClick="{{ goBack }}" type="button" style="border:none;background:transparent;font-family:inherit;font-size:14px;font-weight:500;color:#1D1D1F;cursor:pointer" style-hover="opacity:0.6">Back</button></sc-if>
+      <sc-if value="{{ noBack }}" hint-placeholder-val="{{ true }}"><span></span></sc-if>
+      <button onClick="{{ goNext }}" type="button" style="height:42px;padding:0 22px;border:none;background:#101828;color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#1D2739">{{ nextLabel }}</button>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    step: 0,
+    client: "c2",
+    website: "https://size-up.com",
+    depth: "standard",
+    schedule: "once",
+    language: "French",
+    regions: ["FR"],
+    personaAuto: true,
+    keywordAuto: true,
+  };
+
+  renderVals() {
+    const h = React.createElement;
+    const svg = (paths, sw) => h("svg", { width: 16, height: 16, viewBox: "0 0 16 16", fill: "none", stroke: "currentColor", strokeWidth: sw || 1.4, strokeLinecap: "round", strokeLinejoin: "round" }, paths);
+    const st = this.state, step = st.step;
+
+    const names = ["Client", "Identity", "Scope", "Personas", "Keywords", "Review"];
+    const chips = names.map((label, i) => {
+      const done = i < step, current = i === step;
+      return {
+        num: i + 1, label: label.toUpperCase(),
+        done, showNum: !done,
+        boxBg: (done || current) ? "#101828" : "#FFFFFF",
+        boxColor: (done || current) ? "#FFFFFF" : "#A1A1A6",
+        boxBorder: (done || current) ? "#101828" : "#E4E4E7",
+        labelColor: i <= step ? "#1D1D1F" : "#A1A1A6",
+        labelWeight: current ? 600 : 500,
+        showLine: i < names.length - 1,
+        lineColor: i < step ? "#101828" : "#E4E4E7",
+      };
+    });
+
+    const pickStyle = (sel) => ({ bg: sel ? "#F4F5F7" : "#FFFFFF", border: sel ? "#101828" : "#E4E4E7" });
+
+    const clientData = [
+      { k: "c1", name: "Northwind Studio" },
+      { k: "c2", name: "Meridian Retail" },
+      { k: "c3", name: "Acme Labs" },
+    ];
+    const clients = clientData.map((c) => {
+      const sel = st.client === c.k;
+      return {
+        name: c.name, selected: sel,
+        bg: sel ? "#F4F5F7" : "#FFFFFF", border: sel ? "#101828" : "#E4E4E7",
+        checkBg: sel ? "#101828" : "#FFFFFF", checkBorder: sel ? "#101828" : "#C7C7CC",
+        onClick: () => this.setState({ client: c.k }),
+      };
+    });
+
+    const depthData = [
+      { k: "quick", name: "Quick Scan", time: "~5 min", desc: "Fast overview with fewer models", icon: svg([h("path", { key: 1, d: "M8 1.5l1.6 3.9 3.9 1.6-3.9 1.6L8 12.5 6.4 8.6 2.5 7l3.9-1.6z" })]) },
+      { k: "standard", name: "Standard", time: "~30 min", desc: "Balanced depth across all dimensions", badge: "RECOMMENDED", icon: svg([h("line", { key: 1, x1: 3, y1: 13, x2: 3, y2: 8 }), h("line", { key: 2, x1: 8, y1: 13, x2: 8, y2: 4 }), h("line", { key: 3, x1: 13, y1: 13, x2: 13, y2: 6 })]) },
+      { k: "deep", name: "Deep Analysis", time: "~2 hours", desc: "Comprehensive coverage, all models", icon: svg([h("circle", { key: 1, cx: 8, cy: 8, r: 5.5 }), h("path", { key: 2, d: "M8 2.5v5.5l3.5 2" })]) },
+    ];
+    const depths = depthData.map((d) => {
+      const s = pickStyle(st.depth === d.k);
+      return { name: d.name, time: d.time, desc: d.desc, icon: d.icon, badge: d.badge || "", hasBadge: !!d.badge, bg: s.bg, border: s.border, onClick: () => this.setState({ depth: d.k }) };
+    });
+
+    const schedData = [
+      { k: "once", name: "Run Once", desc: "Single execution", badge: "DEFAULT", icon: svg([h("polygon", { key: 1, points: "5,3 13,8 5,13", fill: "currentColor", stroke: "none" })]) },
+      { k: "daily", name: "Daily", desc: "Every day", icon: svg([h("rect", { key: 1, x: 2.5, y: 3, width: 11, height: 10.5 }), h("line", { key: 2, x1: 2.5, y1: 6, x2: 13.5, y2: 6 }), h("line", { key: 3, x1: 5.5, y1: 1.8, x2: 5.5, y2: 4 }), h("line", { key: 4, x1: 10.5, y1: 1.8, x2: 10.5, y2: 4 })]) },
+      { k: "weekly", name: "Weekly", desc: "Once per week", icon: svg([h("rect", { key: 1, x: 2.5, y: 3, width: 11, height: 10.5 }), h("line", { key: 2, x1: 2.5, y1: 6, x2: 13.5, y2: 6 }), h("line", { key: 3, x1: 5.5, y1: 1.8, x2: 5.5, y2: 4 }), h("line", { key: 4, x1: 10.5, y1: 1.8, x2: 10.5, y2: 4 })]) },
+      { k: "monthly", name: "Monthly", desc: "Once per month", icon: svg([h("rect", { key: 1, x: 2.5, y: 3, width: 11, height: 10.5 }), h("line", { key: 2, x1: 2.5, y1: 6, x2: 13.5, y2: 6 }), h("line", { key: 3, x1: 5.5, y1: 1.8, x2: 5.5, y2: 4 }), h("line", { key: 4, x1: 10.5, y1: 1.8, x2: 10.5, y2: 4 })]) },
+    ];
+    const schedules = schedData.map((s) => {
+      const st2 = pickStyle(this.state.schedule === s.k);
+      return { name: s.name, desc: s.desc, icon: s.icon, badge: s.badge || "", hasBadge: !!s.badge, bg: st2.bg, border: st2.border, onClick: () => this.setState({ schedule: s.k }) };
+    });
+
+    const langNames = ["English", "Spanish", "French", "German", "Chinese", "Japanese", "Portuguese", "Italian", "Korean", "Arabic"];
+    const languages = langNames.map((n) => {
+      const sel = st.language === n;
+      return { name: n, bg: sel ? "#101828" : "#FFFFFF", color: sel ? "#FFFFFF" : "#1D1D1F", border: sel ? "#101828" : "#E4E4E7", onClick: () => this.setState({ language: n }) };
+    });
+
+    const euro = [ { code: "AT", name: "Austria" }, { code: "BE", name: "Belgium" }, { code: "BG", name: "Bulgaria" }, { code: "HR", name: "Croatia" }, { code: "CY", name: "Cyprus" } ];
+    const regionList = euro.map((r) => ({ name: r.name, code: r.code, onClick: () => this.setState((s) => ({ regions: s.regions.includes(r.code) ? s.regions : [...s.regions, r.code] })) }));
+    const selectedRegions = st.regions.map((code) => ({ code, onRemove: () => this.setState((s) => ({ regions: s.regions.filter((x) => x !== code) })) }));
+
+    const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.";
+    const personas = [1, 2].map((n) => ({ name: "Persona " + n, desc: lorem, bg: "#FFFFFF", border: "#E4E4E7", onClick: () => this.setState({ personaAuto: false }) }));
+    const keywords = [1, 2, 3].map((n) => ({ name: "Keyword " + n, desc: lorem, bg: "#FFFFFF", border: "#E4E4E7", onClick: () => this.setState({ keywordAuto: false }) }));
+
+    const clientName = (clientData.find((c) => c.k === st.client) || {}).name || "—";
+    const depthName = (depthData.find((d) => d.k === st.depth) || {}).name || "—";
+    const schedName = (schedData.find((s) => s.k === st.schedule) || {}).name || "—";
+    const reviewRows = [
+      { label: "CLIENT", value: clientName },
+      { label: "WEBSITE", value: st.website },
+      { label: "ANALYSIS DEPTH", value: depthName },
+      { label: "TRACKING SCHEDULE", value: schedName },
+      { label: "MARKETS & LANGUAGES", value: st.language + " · " + (st.regions.join(", ") || "—") },
+      { label: "PERSONAS", value: st.personaAuto ? "Auto-generated" : "Manual selection" },
+      { label: "KEYWORDS", value: st.keywordAuto ? "Auto-selected" : "Manual selection" },
+    ];
+
+    const autoStyle = (on) => ({ bg: on ? "#101828" : "#FFFFFF", color: on ? "#FFFFFF" : "#1D1D1F", border: on ? "#101828" : "#E4E4E7" });
+    const pa = autoStyle(st.personaAuto), ka = autoStyle(st.keywordAuto);
+
+    return {
+      credits: 33,
+      stepNum: step + 1, stepUpper: names[step].toUpperCase(), chips,
+      isClient: step === 0, isIdentity: step === 1, isScope: step === 2,
+      isPersonas: step === 3, isKeywords: step === 4, isReview: step === 5,
+
+      clients,
+      website: st.website, onWebsite: (e) => this.setState({ website: e.target.value }),
+      depths, schedules, languages,
+      regionList, selectedRegions,
+      hasRegions: st.regions.length > 0, noRegions: st.regions.length === 0,
+      regionCount: st.regions.length + (st.regions.length === 1 ? " REGION" : " REGIONS"),
+      clearRegions: () => this.setState({ regions: [] }),
+
+      personaAuto: st.personaAuto, togglePersonaAuto: () => this.setState((s) => ({ personaAuto: !s.personaAuto })),
+      personaAutoBg: pa.bg, personaAutoColor: pa.color, personaAutoBorder: pa.border, personas,
+      keywordAuto: st.keywordAuto, toggleKeywordAuto: () => this.setState((s) => ({ keywordAuto: !s.keywordAuto })),
+      keywordAutoBg: ka.bg, keywordAutoColor: ka.color, keywordAutoBorder: ka.border, keywords,
+
+      reviewRows,
+      showBack: step > 0, noBack: step === 0,
+      nextLabel: step === 5 ? "Start Analysis" : "Continue",
+      goBack: () => this.setState((s) => ({ step: Math.max(0, s.step - 1) })),
+      goNext: () => this.setState((s) => ({ step: Math.min(5, s.step + 1) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

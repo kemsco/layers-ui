@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head> 
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
@@ -15,8 +15,8 @@
 @font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-SemiBold.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-SemiBold.woff') format('woff');font-weight:600;font-style:normal;font-display:swap}
 *{box-sizing:border-box}
 button,input,select,textarea{text-transform:inherit}
-:root{--bg-canvas:#FFFFFF;--bg-subtle:#FAFAFA;--bg-hover:#F4F4F5;--bg-active:#EDEDEE;--bg-inverse:#0A0A0A;--inverse-hover:#1F1F1F;--border-subtle:#EFEFEF;--border-default:#E4E4E4;--border-strong:#D4D4D4;--text-primary:#1A1A1A;--text-default:#333333;--text-secondary:#555555;--text-subtle:#777777;--text-disabled:#AFAFAF;--positive-text:#15B042;--negative-text:#D93025;--negative-bg:#FDDDDA;--negative-border:#F8BDB7;--info-text:#0077E6}
-:root[data-theme="dark"]{--bg-canvas:#171717;--bg-subtle:#101010;--bg-hover:#1F1F1F;--bg-active:#262626;--bg-inverse:#FAFAFA;--inverse-hover:#E4E4E4;--border-subtle:#262626;--border-default:#2E2E2E;--border-strong:#3A3A3A;--text-primary:#F5F5F5;--text-default:#D4D4D4;--text-secondary:#AFAFAF;--text-subtle:#8A8A8A;--text-disabled:#6B6B6B;--positive-text:#3FD068;--negative-text:#F26A5E;--negative-bg:#2A1614;--negative-border:#5A2621;--info-text:#4DA3FF}
+:root{--bg-canvas:#FFFFFF;--bg-card:#F7F8FA;--bg-subtle:#F7F8FA;--bg-hover:#F4F4F5;--bg-active:#EDEDEE;--bg-inverse:#0A0A0A;--inverse-hover:#1F1F1F;--border-subtle:#EFEFEF;--border-default:#E4E4E4;--border-strong:#D4D4D4;--text-primary:#1A1A1A;--text-default:#333333;--text-secondary:#555555;--text-subtle:#777777;--text-disabled:#AFAFAF;--positive-text:#15B042;--negative-text:#D93025;--negative-bg:#FDDDDA;--negative-border:#F8BDB7;--info-text:#0077E6}
+:root[data-theme="dark"]{--bg-canvas:#171717;--bg-card:#171717;--bg-subtle:#101010;--bg-hover:#1F1F1F;--bg-active:#262626;--bg-inverse:#FAFAFA;--inverse-hover:#E4E4E4;--border-subtle:#262626;--border-default:#2E2E2E;--border-strong:#3A3A3A;--text-primary:#F5F5F5;--text-default:#D4D4D4;--text-secondary:#AFAFAF;--text-subtle:#8A8A8A;--text-disabled:#6B6B6B;--positive-text:#3FD068;--negative-text:#F26A5E;--negative-bg:#2A1614;--negative-border:#5A2621;--info-text:#4DA3FF}
 body{transition:background 200ms ease,color 200ms ease}
 img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-theme="dark"] img[data-logo="black"]{display:none}:root[data-theme="dark"] img[data-logo="white"]{display:block}
   body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:var(--text-default);background:var(--bg-canvas);-webkit-font-smoothing:antialiased}
@@ -42,26 +42,35 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,7 8,2.5 13.5,7"/><polyline points="4,7 4,13 12,13 12,7"/></svg>
         <span data-nav-label>Home</span>
       </a>
-      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+      <a href="Inbox.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg>
         <span data-nav-label>Inbox</span>
+        <span data-nav-label style="margin-left:auto;height:18px;min-width:18px;padding:0 5px;background:var(--negative-text);color:#FFFFFF;font-size:11px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;font-family:'Proto Mono',ui-monospace,monospace">28</span>
       </a>
       <a href="Reports.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg>
         <span data-nav-label>Reports</span>
       </a>
-      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+      <a href="Clients.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,11 13.5,13"/></svg>
         <span data-nav-label>Clients</span>
       </a>
       <div data-nav-label style="display:flex;flex-direction:column;gap:2px;margin-top:2px">
         <a href="TastyCrousty.dc.html" style="height:32px;display:flex;align-items:center;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="background:var(--bg-hover);color:var(--text-primary)">Tasty Crousty</a>
         <a href="#" style="height:32px;display:flex;align-items:center;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="background:var(--bg-hover);color:var(--text-primary)">Clement</a>
-        <a href="Reports.dc.html" style="height:32px;display:flex;align-items:center;gap:6px;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="color:var(--text-primary)">View all
+        <a href="Clients.dc.html" style="height:32px;display:flex;align-items:center;gap:6px;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="color:var(--text-primary)">View all
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg>
         </a>
       </div>
-      <div style="height:1px;background:var(--border-subtle);margin:8px -8px"></div>
+      <a href="To-do.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><polyline points="5,8 7,10 11,5.5"/></svg>
+        <span data-nav-label>To-do</span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="5.5" width="11" height="7.5"/><path d="M6 5.5 V4 H10 V5.5"/><line x1="2.5" y1="8.5" x2="13.5" y2="8.5"/><rect x="7" y="7.5" width="2" height="2"/></svg>
+        <span data-nav-label>Tool Box</span>
+      </a>
+      <div style="height:1px;background:var(--border-subtle);margin:22px -8px 8px"></div>
       <div data-nav-label style="height:24px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">AI intelligence</div>
       <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,10.5 6,7 8.5,9.5 13.5,4.5"/><polyline points="10.5,4.5 13.5,4.5 13.5,7.5"/></svg>
@@ -90,16 +99,16 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
 
   <!-- ══ MAIN ══ -->
   <div style="flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;min-width:0">
-    <header style="height:56px;flex-shrink:0;border-bottom:1px solid var(--border-default);display:flex;align-items:center;padding:0 24px;gap:12px">
+    <header style="height:56px;flex-shrink:0;border-bottom:1px solid var(--border-default);display:flex;align-items:center;padding:0 24px;gap:12px;background:var(--bg-subtle)">
       <button onClick="{{ toggleSidebar }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-hover);color:var(--text-primary)">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="10"/><line x1="6.5" y1="3" x2="6.5" y2="13"/></svg>
       </button>
       <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
         <div style="height:20px;padding:0 8px;background:var(--negative-bg);border:1px solid var(--negative-border);color:var(--negative-text);font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:4px;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;cursor:pointer"><span style="width:8px;height:8px;background:var(--negative-text);display:block"></span>34</div>
         <button onClick="{{ toggleTheme }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary)" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="6" y="6" width="4" height="4"/><line x1="8" y1="1.5" x2="8" y2="3.5"/><line x1="8" y1="12.5" x2="8" y2="14.5"/><line x1="1.5" y1="8" x2="3.5" y2="8"/><line x1="12.5" y1="8" x2="14.5" y2="8"/><line x1="3.5" y1="3.5" x2="4.9" y2="4.9"/><line x1="11.1" y1="11.1" x2="12.5" y2="12.5"/><line x1="12.5" y1="3.5" x2="11.1" y2="4.9"/><line x1="4.9" y1="11.1" x2="3.5" y2="12.5"/></svg></button>
-        <button style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);position:relative" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg><span style="position:absolute;top:6px;right:6px;width:6px;height:6px;background:var(--info-text)"></span></button>
         <div style="width:1px;height:24px;background:var(--border-default);margin:0 4px"></div>
-        <button style="display:flex;align-items:center;gap:8px;height:32px;padding:0 4px 0 8px;border:none;background:transparent;cursor:pointer;font-family:inherit" style-hover="background:var(--bg-hover)"><span style="font-size:14px;font-weight:500;color:var(--text-primary)">Clément</span><span style="width:24px;height:24px;background:var(--bg-active);color:var(--text-secondary);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center">C</span></button>
+        <button style="height:32px;padding:0 14px;border:none;background:var(--bg-inverse);color:var(--bg-canvas);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:var(--inverse-hover)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg>Créer un rapport</button>
+        <button onClick="{{ openClientModal }}" style="height:32px;padding:0 14px;border:1px solid var(--bg-inverse);background:transparent;color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:var(--bg-hover)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><circle cx="6.5" cy="5.5" r="2.5"/><path d="M2.5 13 C2.5 10.2 4.3 9 6.5 9 C7.4 9 8.2 9.2 8.9 9.6"/><line x1="11.5" y1="7.5" x2="11.5" y2="12.5"/><line x1="9" y1="10" x2="14" y2="10"/></svg>Ajouter un client</button>
       </div>
     </header>
 
@@ -115,77 +124,184 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
             </div>
             <p style="margin:12px 0 0;font-size:14px;line-height:20px;color:var(--text-secondary)">Agency overview — manage clients and reports across your portfolio.</p>
           </div>
-          <button style="height:32px;padding:0 14px;background:var(--bg-inverse);color:var(--bg-canvas);border:none;font-size:14px;font-weight:500;font-family:inherit;display:flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0" style-hover="background:var(--inverse-hover)">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="6" x2="10.5" y2="6"/><line x1="5.5" y1="8.5" x2="10.5" y2="8.5"/><line x1="5.5" y1="11" x2="8.5" y2="11"/></svg>
-            Create Report
-          </button>
         </div>
 
         <div style="height:1px;background:var(--border-subtle);margin:32px 0"></div>
 
-        <!-- KPI cards -->
+        <!-- KPI row -->
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
-          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
-            <div style="display:flex;align-items:center;gap:8px;color:var(--text-subtle)">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,11 13.5,13"/></svg>
-              <span style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.03em;">Clients</span>
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:13px 18px;background:var(--bg-subtle);border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;color:var(--text-subtle)">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,13 13.5,13"/></svg>
+              <span style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Active clients</span>
             </div>
-            <div style="margin-top:16px;font-size:28px;line-height:34px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">2</div>
+            <div style="padding:18px">
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:28px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">12</span>
+                <span style="font-size:12px;color:var(--text-subtle)">accounts</span>
+              </div>
+              <div style="margin-top:8px;font-size:12px;font-weight:500;color:var(--positive-text)">+2 this month</div>
+            </div>
           </div>
-          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
-            <div style="display:flex;align-items:center;gap:8px;color:var(--text-subtle)">
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:13px 18px;background:var(--bg-subtle);border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;color:var(--text-subtle)">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg>
-              <span style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.03em;">Total reports</span>
+              <span style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Reports live</span>
             </div>
-            <div style="margin-top:16px;font-size:28px;line-height:34px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">1</div>
+            <div style="padding:18px">
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:28px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">38</span>
+                <span style="font-size:12px;color:var(--text-subtle)">total</span>
+              </div>
+              <div style="margin-top:8px;font-size:12px;font-weight:500;color:var(--positive-text)">+6 vs. last month</div>
+            </div>
           </div>
-          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
-            <div style="display:flex;align-items:center;gap:8px;color:var(--text-subtle)">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="13.5,2.5 2,7 7,8.5 8.5,13.5"/><line x1="13.5" y1="2.5" x2="7" y2="8.5"/></svg>
-              <span style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.03em;">Delivered</span>
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:13px 18px;background:var(--bg-subtle);border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;color:var(--text-subtle)">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2,11 6,6.5 9,9 14,3.5"/><polyline points="10.5,3.5 14,3.5 14,7"/></svg>
+              <span style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Avg. visibility</span>
             </div>
-            <div style="margin-top:16px;font-size:28px;line-height:34px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">0</div>
+            <div style="padding:18px">
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:28px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">74.2</span>
+                <span style="font-size:12px;color:var(--text-subtle)">/100</span>
+              </div>
+              <div style="margin-top:8px;font-size:12px;font-weight:500;color:var(--positive-text)">+6.4 pts over 6 mo.</div>
+            </div>
           </div>
-          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:20px;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
-            <div style="display:flex;align-items:center;gap:8px;color:var(--text-subtle)">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="1.5,8 8,4 14.5,8 8,12"/><rect x="6.5" y="6.5" width="3" height="3"/></svg>
-              <span style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:0.03em;">Avg. views</span>
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:13px 18px;background:var(--bg-subtle);border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;color:var(--text-subtle)">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><circle cx="8" cy="8" r="5.5"/><polyline points="8,4.5 8,8 10.5,9.5"/></svg>
+              <span style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Improving clients</span>
             </div>
-            <div style="margin-top:16px;display:flex;align-items:baseline;gap:6px"><span style="font-size:28px;line-height:34px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">0.0</span><span style="font-size:13px;color:var(--text-subtle)">per report</span></div>
+            <div style="padding:18px">
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:28px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">9</span>
+                <span style="font-size:12px;color:var(--text-subtle)">of 12</span>
+              </div>
+              <div style="margin-top:8px;font-size:12px;font-weight:500;color:var(--negative-text)">3 need attention</div>
+            </div>
           </div>
         </div>
 
-        <div style="height:1px;background:var(--border-subtle);margin:32px 0"></div>
+        <!-- Portfolio momentum + pipeline -->
+        <div style="margin-top:24px;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:16px;align-items:start">
 
-        <!-- pipeline -->
-        <div>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">Report Pipeline</h2>
-            <a href="Reports.dc.html" style="font-size:13px;color:var(--text-subtle);display:inline-flex;align-items:center;gap:6px" style-hover="color:var(--text-primary)">View all <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg></a>
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle);display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <div>
+                <div style="font-size:15px;font-weight:500;color:var(--text-primary);text-transform:none;letter-spacing:0">Portfolio momentum</div>
+                <div style="margin-top:2px;font-size:12px;color:var(--text-subtle)">Average AI visibility across all clients, month by month</div>
+              </div>
+              <div style="display:flex;gap:6px;flex-shrink:0">
+                <sc-for list="{{ ranges }}" as="r" hint-placeholder-count="3">
+                <button onClick="{{ r.onClick }}" style="height:26px;padding:0 10px;border:1px solid {{ r.border }};background:{{ r.bg }};color:{{ r.color }};font-family:inherit;font-size:12px;font-weight:500;cursor:pointer">{{ r.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="padding:20px">
+              <div style="display:flex;align-items:baseline;gap:10px">
+                <span style="font-size:30px;line-height:34px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ momentumValue }}</span>
+                <span style="font-size:13px;font-weight:500;color:var(--positive-text)">{{ momentumDelta }}</span>
+                <span style="font-size:12px;color:var(--text-subtle)">vs. same period last year</span>
+              </div>
+              <div style="margin-top:18px">{{ chart }}</div>
+              <div style="margin-top:14px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+                <span style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-secondary)"><span style="width:14px;height:2px;background:var(--info-text);display:block"></span>Visibility score</span>
+                <span style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-secondary)"><span style="width:14px;height:2px;background:var(--text-disabled);display:block"></span>Citation rate</span>
+              </div>
+            </div>
           </div>
-          <div style="margin-top:20px;height:8px;background:var(--bg-active);display:flex"><div style="width:100%;height:100%;background:var(--border-strong)"></div></div>
-          <div style="margin-top:16px;display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;background:var(--text-subtle);display:block"></span><span style="font-size:13px;color:var(--text-secondary)">Draft</span><span style="font-size:13px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">1</span></div>
+
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle);display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <span style="font-size:15px;font-weight:500;color:var(--text-primary)">Report pipeline</span>
+              <a href="Reports.dc.html" style="font-size:13px;color:var(--text-subtle);display:inline-flex;align-items:center;gap:6px" style-hover="color:var(--text-primary)">View all <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg></a>
+            </div>
+            <div style="padding:20px">
+              <div style="display:flex;height:8px;background:var(--bg-active)">
+                <sc-for list="{{ pipeline }}" as="p" hint-placeholder-count="3">
+                <div style="width:{{ p.pct }};height:100%;background:{{ p.color }}"></div>
+                </sc-for>
+              </div>
+              <div style="margin-top:18px;display:flex;flex-direction:column">
+                <sc-for list="{{ pipeline }}" as="p" hint-placeholder-count="3">
+                <div style="padding:12px 0;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:10px">
+                  <span style="width:8px;height:8px;background:{{ p.color }};display:block;flex-shrink:0"></span>
+                  <span style="flex:1;min-width:0"><span style="display:block;font-size:14px;font-weight:500;color:var(--text-primary)">{{ p.label }}</span><span style="display:block;margin-top:1px;font-size:12px;color:var(--text-subtle)">{{ p.hint }}</span></span>
+                  <span style="font-size:18px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ p.count }}</span>
+                </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:12px;color:var(--text-subtle)">2 reports due this week</span>
+                <a href="Reports.dc.html" style="font-size:13px;color:var(--text-subtle);display:inline-flex;align-items:center;gap:6px" style-hover="color:var(--text-primary)">Open pipeline <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg></a>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div style="height:1px;background:var(--border-subtle);margin:32px 0"></div>
+        <!-- Clients + to-do -->
+        <div style="margin-top:24px;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:16px;align-items:start">
 
-        <!-- client portfolio -->
-        <div>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <h2 style="margin:0;font-size:16px;line-height:20px;font-weight:500;color:var(--text-primary)">Client Portfolio</h2>
-            <a href="#" style="font-size:13px;color:var(--text-subtle);display:inline-flex;align-items:center;gap:6px" style-hover="color:var(--text-primary)">Manage <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg></a>
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle);display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <div>
+                <div style="font-size:15px;font-weight:500;color:var(--text-primary)">Clients</div>
+                <div style="margin-top:2px;font-size:12px;color:var(--text-subtle)">Quick access to your most active accounts</div>
+              </div>
+              <a href="#" style="font-size:13px;color:var(--text-subtle);display:inline-flex;align-items:center;gap:6px" style-hover="color:var(--text-primary)">View all 12 <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg></a>
+            </div>
+            <div style="padding:0 20px">
+              <div style="display:grid;grid-template-columns:22px minmax(0,1fr) 92px 92px 84px;gap:12px;align-items:center;height:38px;border-bottom:1px solid var(--border-subtle)">
+                <span></span>
+                <span style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em">Client</span>
+                <span style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;text-align:right">Visibility</span>
+                <span style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;text-align:right">30-day</span>
+                <span style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;text-align:right">Reports</span>
+              </div>
+              <sc-for list="{{ clients }}" as="c" hint-placeholder-count="4">
+              <a href="{{ c.href }}" style="display:grid;grid-template-columns:22px minmax(0,1fr) 92px 92px 84px;gap:12px;align-items:center;min-height:60px;border-bottom:1px solid var(--border-subtle);text-decoration:none" style-hover="background:var(--bg-hover)">
+                <span style="width:22px;height:22px;background:var(--bg-active);color:var(--text-secondary);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center">{{ c.initial }}</span>
+                <span style="min-width:0"><span style="display:block;font-size:14px;font-weight:500;color:var(--text-primary)">{{ c.name }}</span><span style="display:block;margin-top:1px;font-size:12px;color:var(--text-subtle)">{{ c.meta }}</span></span>
+                <span style="text-align:right;font-size:15px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ c.score }}</span>
+                <span style="text-align:right;font-size:13px;font-weight:500;color:{{ c.trendColor }};font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ c.trend }}</span>
+                <span style="text-align:right;font-size:13px;color:var(--text-secondary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ c.reports }}</span>
+              </a>
+              </sc-for>
+            </div>
           </div>
-          <div style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px">
-            <a href="TastyCrousty.dc.html" style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:16px;display:flex;align-items:center;gap:16px;transition:border-color 120ms ease-out;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)" style-hover="border-color:var(--border-strong);background:var(--bg-subtle)">
-              <span style="width:40px;height:40px;background:var(--bg-active);color:var(--text-secondary);font-size:14px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0">T</span>
-              <span style="flex:1;min-width:0"><span style="display:block;font-size:16px;font-weight:500;color:var(--text-primary)">Tasty Crousty</span><span style="display:block;margin-top:2px;font-size:12px;color:var(--text-subtle)">1 report</span></span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--text-subtle)" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg>
-            </a>
-            <a href="#" style="border:1px solid var(--border-default);background:var(--bg-canvas);padding:16px;display:flex;align-items:center;gap:16px;transition:border-color 120ms ease-out;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)" style-hover="border-color:var(--border-strong);background:var(--bg-subtle)">
-              <span style="width:40px;height:40px;background:var(--bg-active);color:var(--text-secondary);font-size:14px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0">C</span>
-              <span style="flex:1;min-width:0"><span style="display:block;font-size:16px;font-weight:500;color:var(--text-primary)">Clement</span><span style="display:block;margin-top:2px;font-size:12px;color:var(--text-subtle)">No reports</span></span>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="var(--text-subtle)" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg>
-            </a>
+
+          <div style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+            <div style="padding:14px 20px;border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle);display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <span style="font-size:15px;font-weight:500;color:var(--text-primary)">To-do</span>
+              <span style="font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ todoSummary }}</span>
+            </div>
+            <div style="padding:20px">
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:28px;line-height:32px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ todoRemaining }}</span>
+                <span style="font-size:13px;color:var(--text-subtle)">things left to do</span>
+              </div>
+              <div style="margin-top:14px;height:6px;background:var(--bg-active)"><div style="width:{{ todoPct }};height:100%;background:var(--bg-inverse)"></div></div>
+              <div style="margin-top:8px;font-size:12px;color:var(--text-subtle)">{{ todoPct }} complete this week</div>
+
+              <div style="margin-top:18px;display:flex;flex-direction:column">
+                <sc-for list="{{ todos }}" as="t" hint-placeholder-count="4">
+                <div style="padding:12px 0;border-bottom:1px solid var(--border-subtle);display:flex;align-items:flex-start;gap:10px">
+                  <button onClick="{{ t.toggle }}" style="width:15px;height:15px;margin-top:2px;flex-shrink:0;border:1.5px solid {{ t.boxBorder }};background:{{ t.boxBg }};display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0">
+                    <sc-if value="{{ t.done }}" hint-placeholder-val="{{ false }}"><svg width="9" height="9" viewBox="0 0 16 16" fill="none" stroke="var(--bg-canvas)" stroke-width="2.6" stroke-linecap="square"><polyline points="3,8.5 6.5,12 13,4.5"/></svg></sc-if>
+                  </button>
+                  <span style="flex:1;min-width:0">
+                    <span style="display:block;font-size:13px;line-height:18px;color:{{ t.textColor }};text-decoration:{{ t.strike }}">{{ t.label }}</span>
+                    <span style="display:block;margin-top:3px;font-size:11px;color:var(--text-subtle)">{{ t.client }}</span>
+                  </span>
+                  <span style="flex-shrink:0;height:19px;padding:0 7px;display:inline-flex;align-items:center;font-size:10px;font-weight:600;letter-spacing:0.03em;color:{{ t.tagColor }};background:{{ t.tagBg }}">{{ t.tag }}</span>
+                </div>
+                </sc-for>
+              </div>
+
+              <a href="#" style="margin-top:16px;height:36px;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--border-default);font-size:13px;font-weight:500;color:var(--text-primary)" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">Check my to-do list <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg></a>
+            </div>
           </div>
         </div>
 
@@ -201,14 +317,183 @@ img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-them
   </div>
 </div>
 
+
+<div id="lyr-client-modal" style="display:none;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;padding:24px;background:rgba(10,10,10,0.34);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">
+  <div style="width:100%;max-width:520px;border:1px solid var(--border-strong);background:var(--bg-canvas);box-shadow:0 24px 64px rgba(0,0,0,0.28)">
+    <div style="padding:18px 22px;border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle);display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+      <div>
+        <div style="font-size:16px;font-weight:500;color:var(--text-primary)">Ajouter un client</div>
+        <div style="margin-top:3px;font-size:13px;color:var(--text-subtle)">Créez un compte client pour lancer des analyses et livrer des rapports.</div>
+      </div>
+      <button onClick="{{ closeClientModal }}" aria-label="Close" style="width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-subtle)" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></button>
+    </div>
+    <div style="padding:22px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label style="font-size:13px;font-weight:500;color:var(--text-primary)">Nom du client</label>
+        <input placeholder="Tasty Crousty" style="height:42px;padding:0 14px;border:1px solid var(--border-default);background:var(--bg-canvas);font-family:inherit;font-size:14px;color:var(--text-primary);outline:none" style-focus="border-color:var(--bg-inverse)">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label style="font-size:13px;font-weight:500;color:var(--text-primary)">URL du site</label>
+        <input placeholder="https://tastycrousty.com" style="height:42px;padding:0 14px;border:1px solid var(--border-default);background:var(--bg-canvas);font-family:inherit;font-size:14px;color:var(--text-primary);outline:none" style-focus="border-color:var(--bg-inverse)">
+        <span style="font-size:12px;line-height:17px;color:var(--text-subtle)">Servira à lancer les analyses et à récupérer automatiquement leur logo.</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label style="font-size:13px;font-weight:500;color:var(--text-primary)">Notes</label>
+        <textarea rows="4" placeholder="Contexte, contacts, particularités du compte…" style="padding:11px 14px;border:1px solid var(--border-default);background:var(--bg-canvas);font-family:inherit;font-size:14px;line-height:20px;color:var(--text-primary);outline:none;resize:vertical"></textarea>
+      </div>
+    </div>
+    <div style="padding:16px 22px;border-top:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:flex-end;gap:10px">
+      <button onClick="{{ closeClientModal }}" style="height:38px;padding:0 16px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer" style-hover="background:var(--bg-hover)">Annuler</button>
+      <button onClick="{{ closeClientModal }}" style="height:38px;padding:0 18px;border:none;background:var(--bg-inverse);color:var(--bg-canvas);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer" style-hover="background:var(--inverse-hover)">Créer le client</button>
+    </div>
+  </div>
+</div>
 <div style="position:fixed;inset:0;pointer-events:none;z-index:2147483647;opacity:0.05;background-image:url('textures/grain.png');background-repeat:repeat"></div></x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:800},&quot;showGetHelp&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
 class Component extends DCLogic {
   componentDidMount() {
     try { if (localStorage.getItem("lyr-theme") === "dark") document.documentElement.setAttribute("data-theme","dark"); } catch(e){}
   }
+  state = { range: "12M", todoDone: {} };
+
+  chart(series) {
+    const h = React.createElement;
+    const W = 660, H = 190, PL = 4, PR = 4, PT = 10, PB = 26;
+    const all = series.flatMap((s) => s.values);
+    const lo = Math.min(...all) - 6, hi = Math.max(...all) + 6;
+    const n = series[0].values.length;
+    const x = (i) => PL + (i * (W - PL - PR)) / (n - 1);
+    const y = (v) => PT + (1 - (v - lo) / (hi - lo)) * (H - PT - PB);
+
+    const kids = [];
+    [0, 0.25, 0.5, 0.75, 1].forEach((f, gi) => {
+      const gy = PT + f * (H - PT - PB);
+      kids.push(h("line", { key: "g" + gi, x1: PL, y1: gy, x2: W - PR, y2: gy, stroke: "var(--border-subtle)", strokeWidth: 1 }));
+    });
+
+    series.forEach((s, si) => {
+      const pts = s.values.map((v, i) => x(i) + "," + y(v)).join(" ");
+      if (s.fill) {
+        kids.push(h("polygon", {
+          key: "a" + si,
+          points: pts + " " + x(n - 1) + "," + (H - PB) + " " + x(0) + "," + (H - PB),
+          fill: s.color, opacity: 0.08,
+        }));
+      }
+      kids.push(h("polyline", {
+        key: "l" + si, points: pts, fill: "none", stroke: s.color,
+        strokeWidth: s.width || 2, strokeDasharray: s.dash || "none",
+        strokeLinejoin: "round", strokeLinecap: "round",
+      }));
+      if (s.dots) {
+        s.values.forEach((v, i) => {
+          kids.push(h("circle", { key: "d" + si + "-" + i, cx: x(i), cy: y(v), r: 2.5, fill: "var(--bg-canvas)", stroke: s.color, strokeWidth: 1.8 }));
+        });
+      }
+    });
+
+    this.labels.forEach((m, i) => {
+      kids.push(h("text", {
+        key: "t" + i, x: x(i), y: H - 6, textAnchor: "middle",
+        fill: "var(--text-subtle)", fontSize: 10.5, fontFamily: "Inter, sans-serif",
+      }, m));
+    });
+
+    return h("svg", { viewBox: "0 0 " + W + " " + H, width: "100%", style: { display: "block", overflow: "visible" } }, kids);
+  }
+
   renderVals() {
+    const RANGES = {
+      "6M": {
+        labels: ["Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+        vis: [57, 61, 64, 68, 71, 74.2],
+        cit: [31, 33, 34, 37, 39, 41],
+        value: "74.2", delta: "+17.2 pts",
+      },
+      "12M": {
+        labels: ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+        vis: [41, 44, 43, 48, 52, 51, 57, 61, 64, 68, 71, 74.2],
+        cit: [22, 24, 25, 27, 29, 28, 31, 33, 34, 37, 39, 41],
+        value: "74.2", delta: "+33.2 pts",
+      },
+      YTD: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+        vis: [52, 51, 57, 61, 64, 68, 71, 74.2],
+        cit: [29, 28, 31, 33, 34, 37, 39, 41],
+        value: "74.2", delta: "+22.2 pts",
+      },
+    };
+    const rk = this.state.range, R = RANGES[rk] || RANGES["12M"];
+    this.labels = R.labels;
+
+    const ranges = ["6M", "12M", "YTD"].map((k) => {
+      const on = k === rk;
+      return {
+        label: k, onClick: () => this.setState({ range: k }),
+        bg: on ? "var(--bg-inverse)" : "var(--bg-canvas)",
+        color: on ? "var(--bg-canvas)" : "var(--text-secondary)",
+        border: on ? "var(--bg-inverse)" : "var(--border-default)",
+      };
+    });
+
+    const pipelineData = [
+      { label: "Draft", hint: "In progress, not shared", count: 7, color: "var(--text-disabled)" },
+      { label: "Created", hint: "Ready to send to client", count: 5, color: "var(--info-text)" },
+      { label: "Delivered", hint: "Sent and viewed", count: 26, color: "var(--positive-text)" },
+    ];
+    const totalP = pipelineData.reduce((a, b) => a + b.count, 0);
+    const pipeline = pipelineData.map((p) => ({ ...p, pct: ((p.count / totalP) * 100).toFixed(1) + "%" }));
+
+    const clientData = [
+      { name: "Tasty Crousty", meta: "Food & beverage · 4 markets", score: "78.4", trend: "+5.2", reports: 6, href: "TastyCrousty.dc.html" },
+      { name: "Northwind Studio", meta: "Design services · 2 markets", score: "71.9", trend: "+3.8", reports: 4, href: "#" },
+      { name: "Meridian Retail", meta: "Retail · 6 markets", score: "66.2", trend: "-1.4", reports: 5, href: "#" },
+      { name: "Acme Labs", meta: "SaaS · 3 markets", score: "81.0", trend: "+7.1", reports: 3, href: "#" },
+    ];
+    const clients = clientData.map((c) => ({
+      ...c,
+      initial: c.name.charAt(0),
+      trendColor: c.trend.startsWith("-") ? "var(--negative-text)" : "var(--positive-text)",
+    }));
+
+    const todoData = [
+      { k: "t1", label: "Publish tariff evidence page", client: "Tasty Crousty", tag: "GEO", tagColor: "var(--info-text)" },
+      { k: "t2", label: "Send Q3 visibility report", client: "Meridian Retail", tag: "REPORT", tagColor: "var(--text-secondary)" },
+      { k: "t3", label: "Fix schema markup on 8 product pages", client: "Acme Labs", tag: "TECH", tagColor: "var(--text-secondary)" },
+      { k: "t4", label: "Review competitor set before next run", client: "Northwind Studio", tag: "SCOPE", tagColor: "var(--text-secondary)" },
+    ];
+    const todos = todoData.map((t) => {
+      const done = !!this.state.todoDone[t.k];
+      return {
+        label: t.label, client: t.client, tag: t.tag, done,
+        tagColor: t.tagColor, tagBg: "var(--bg-active)",
+        textColor: done ? "var(--text-subtle)" : "var(--text-default)",
+        strike: done ? "line-through" : "none",
+        boxBg: done ? "var(--bg-inverse)" : "transparent",
+        boxBorder: done ? "var(--bg-inverse)" : "var(--border-strong)",
+        toggle: () => this.setState((s) => ({ todoDone: { ...s.todoDone, [t.k]: !s.todoDone[t.k] } })),
+      };
+    });
+    const TOTAL = 28, BASE_DONE = 11;
+    const doneNow = BASE_DONE + Object.values(this.state.todoDone).filter(Boolean).length;
+    const remaining = Math.max(0, TOTAL - doneNow);
+
     return {
+      ranges,
+      momentumValue: R.value,
+      momentumDelta: R.delta,
+      chart: this.chart([
+        { values: R.cit, color: "var(--text-disabled)", width: 1.6, dash: "4 4" },
+        { values: R.vis, color: "var(--info-text)", width: 2.2, fill: true, dots: true },
+      ]),
+      pipeline,
+      clients,
+      todos,
+      todoRemaining: remaining,
+      todoSummary: doneNow + " / " + TOTAL + " done",
+      todoPct: Math.round((doneNow / TOTAL) * 100) + "%",
+      openClientModal: () => { const m = document.getElementById("lyr-client-modal"); if (m) m.style.display = "flex"; },
+      closeClientModal: () => { const m = document.getElementById("lyr-client-modal"); if (m) m.style.display = "none"; },
       toggleTheme: () => {
         const r = document.documentElement;
         const dark = r.getAttribute("data-theme") === "dark";

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-Regular.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-Regular.woff') format('woff');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-Medium.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-Medium.woff') format('woff');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Proto Mono';src:url('fonts/proto-mono/ProtoMono-SemiBold.woff2') format('woff2'),url('fonts/proto-mono/ProtoMono-SemiBold.woff') format('woff');font-weight:600;font-style:normal;font-display:swap}
+*{box-sizing:border-box}
+button,input,select,textarea{text-transform:inherit}
+:root{--bg-canvas:#FFFFFF;--bg-card:#F7F8FA;--bg-subtle:#F7F8FA;--bg-hover:#F4F4F5;--bg-active:#EDEDEE;--bg-inverse:#0A0A0A;--inverse-hover:#1F1F1F;--border-subtle:#EFEFEF;--border-default:#E4E4E4;--border-strong:#D4D4D4;--text-primary:#1A1A1A;--text-default:#333333;--text-secondary:#555555;--text-subtle:#777777;--text-disabled:#AFAFAF;--positive-text:#15B042;--negative-text:#D93025;--negative-bg:#FDDDDA;--negative-border:#F8BDB7;--info-text:#0077E6}
+:root[data-theme="dark"]{--bg-canvas:#171717;--bg-card:#171717;--bg-subtle:#101010;--bg-hover:#1F1F1F;--bg-active:#262626;--bg-inverse:#FAFAFA;--inverse-hover:#E4E4E4;--border-subtle:#262626;--border-default:#2E2E2E;--border-strong:#3A3A3A;--text-primary:#F5F5F5;--text-default:#D4D4D4;--text-secondary:#AFAFAF;--text-subtle:#8A8A8A;--text-disabled:#6B6B6B;--positive-text:#3FD068;--negative-text:#F26A5E;--negative-bg:#2A1614;--negative-border:#5A2621;--info-text:#4DA3FF}
+body{transition:background 200ms ease,color 200ms ease}
+img[data-logo]{display:none}img[data-logo="black"]{display:block}:root[data-theme="dark"] img[data-logo="black"]{display:none}:root[data-theme="dark"] img[data-logo="white"]{display:block}
+  body{margin:0;font-family:Inter,-apple-system,"Segoe UI",sans-serif;color:var(--text-default);background:var(--bg-canvas);-webkit-font-smoothing:antialiased}
+  a{color:var(--text-primary);text-decoration:none}
+  ::selection{background:var(--bg-active)}
+  svg{display:block}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</helmet>
+
+<div style="height:100vh;display:flex;overflow:hidden;font-family:Inter,-apple-system,'Segoe UI',sans-serif;color:var(--text-default);background:var(--bg-canvas)">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside id="lyr-sidebar" data-collapsed="0" style="width:240px;flex-shrink:0;height:100vh;background:var(--bg-subtle);border-right:1px solid var(--border-default);padding:8px;display:flex;flex-direction:column;overflow:hidden;transition:width 200ms cubic-bezier(0.32,0.72,0,1)">
+    <a href="Home.dc.html" style="height:40px;display:flex;align-items:center;gap:8px;padding:0 12px;border-bottom:1px solid var(--border-subtle);margin:0 -8px;padding-left:20px;padding-right:20px" style-hover="background:var(--bg-hover)">
+      <img data-logo="black" src="logos/layers-black.png" alt="Layers" style="height:18px;width:auto;flex-shrink:0">
+      <img data-logo="white" src="logos/layers-white.png" alt="Layers" style="height:18px;width:auto;flex-shrink:0">
+      <span data-nav-label style="margin-left:auto;color:var(--text-subtle);display:flex"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><polyline points="6.5,4 10,8 6.5,12"/></svg></span>
+    </a>
+
+    <div style="flex:1;overflow-y:auto;overflow-x:hidden;padding-top:8px;display:flex;flex-direction:column;gap:2px">
+      <a href="Home.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,7 8,2.5 13.5,7"/><polyline points="4,7 4,13 12,13 12,7"/></svg>
+        <span data-nav-label>Home</span>
+      </a>
+      <a href="Inbox.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;background:var(--bg-canvas);box-shadow:inset 2px 0 0 var(--bg-inverse);color:var(--text-primary);font-size:13px;font-weight:500">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg>
+        <span data-nav-label>Inbox</span>
+        <span data-nav-label style="margin-left:auto;height:18px;min-width:18px;padding:0 5px;background:var(--negative-text);color:#FFFFFF;font-size:11px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;font-family:'Proto Mono',ui-monospace,monospace">28</span>
+      </a>
+      <a href="Reports.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3.5" y="2.5" width="9" height="11"/><line x1="5.5" y1="5.5" x2="10.5" y2="5.5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="10.5" x2="8.5" y2="10.5"/></svg>
+        <span data-nav-label>Reports</span>
+      </a>
+      <a href="Clients.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="4" height="4"/><rect x="9.5" y="3" width="4" height="4"/><polyline points="1.5,13 1.5,11 6.5,11 6.5,13"/><polyline points="8.5,13 8.5,11 13.5,11 13.5,13"/></svg>
+        <span data-nav-label>Clients</span>
+      </a>
+      <div data-nav-label style="display:flex;flex-direction:column;gap:2px;margin-top:2px">
+        <a href="TastyCrousty.dc.html" style="height:32px;display:flex;align-items:center;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="background:var(--bg-hover);color:var(--text-primary)">Tasty Crousty</a>
+        <a href="#" style="height:32px;display:flex;align-items:center;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="background:var(--bg-hover);color:var(--text-primary)">Clement</a>
+        <a href="Clients.dc.html" style="height:32px;display:flex;align-items:center;gap:6px;padding:0 12px 0 40px;color:var(--text-subtle);font-size:13px;font-weight:400" style-hover="color:var(--text-primary)">View all
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg>
+        </a>
+      </div>
+      <a href="To-do.dc.html" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="2.5" width="11" height="11"/><polyline points="5,8 7,10 11,5.5"/></svg>
+        <span data-nav-label>To-do</span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="5.5" width="11" height="7.5"/><path d="M6 5.5 V4 H10 V5.5"/><line x1="2.5" y1="8.5" x2="13.5" y2="8.5"/><rect x="7" y="7.5" width="2" height="2"/></svg>
+        <span data-nav-label>Tool Box</span>
+      </a>
+      <div style="height:1px;background:var(--border-subtle);margin:22px -8px 8px"></div>
+      <div data-nav-label style="height:24px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.03em;">AI intelligence</div>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="2.5,10.5 6,7 8.5,9.5 13.5,4.5"/><polyline points="10.5,4.5 13.5,4.5 13.5,7.5"/></svg>
+        <span data-nav-label>Optimization</span>
+        <span data-nav-label style="margin-left:auto;color:var(--text-disabled);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><polygon points="8,2.5 9.5,6.5 13.5,8 9.5,9.5 8,13.5 6.5,9.5 2.5,8 6.5,6.5"/></svg></span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="8"/><line x1="6" y1="13.5" x2="10" y2="13.5"/></svg>
+        <span data-nav-label>Website Intelligence</span>
+        <span data-nav-label style="margin-left:auto;color:var(--text-disabled);display:flex"><svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><polygon points="8,2.5 9.5,6.5 13.5,8 9.5,9.5 8,13.5 6.5,9.5 2.5,8 6.5,6.5"/></svg></span>
+      </a>
+    </div>
+
+    <div style="border-top:1px solid var(--border-subtle);margin:0 -8px;padding:8px 8px 0;display:flex;flex-direction:column;gap:2px">
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="5.5" y="3" width="5" height="5"/><polyline points="3,13 3,11.5 13,11.5 13,13"/></svg>
+        <span data-nav-label>Account</span>
+      </a>
+      <a href="#" style="height:32px;display:flex;align-items:center;gap:8px;padding:0 12px;color:var(--text-subtle);font-size:13px;font-weight:500" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="3" width="10" height="10"/><line x1="3" y1="8" x2="13" y2="8"/><line x1="8" y1="3" x2="8" y2="13"/></svg>
+        <span data-nav-label>English</span>
+        <span data-nav-label style="margin-left:auto;font-size:12px;color:var(--text-disabled)">EN</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ══ MAIN ══ -->
+  <div style="flex:1;display:flex;flex-direction:column;height:100vh;overflow:hidden;min-width:0">
+    <header style="height:56px;flex-shrink:0;border-bottom:1px solid var(--border-default);display:flex;align-items:center;padding:0 24px;gap:12px;background:var(--bg-subtle)">
+      <button onClick="{{ toggleSidebar }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary);flex-shrink:0" style-hover="background:var(--bg-hover);color:var(--text-primary)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2.5" y="3" width="11" height="10"/><line x1="6.5" y1="3" x2="6.5" y2="13"/></svg>
+      </button>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+        <div style="height:20px;padding:0 8px;background:var(--negative-bg);border:1px solid var(--negative-border);color:var(--negative-text);font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:4px;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;cursor:pointer"><span style="width:8px;height:8px;background:var(--negative-text);display:block"></span>34</div>
+        <button onClick="{{ toggleTheme }}" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-secondary)" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="6" y="6" width="4" height="4"/><line x1="8" y1="1.5" x2="8" y2="3.5"/><line x1="8" y1="12.5" x2="8" y2="14.5"/><line x1="1.5" y1="8" x2="3.5" y2="8"/><line x1="12.5" y1="8" x2="14.5" y2="8"/><line x1="3.5" y1="3.5" x2="4.9" y2="4.9"/><line x1="11.1" y1="11.1" x2="12.5" y2="12.5"/><line x1="12.5" y1="3.5" x2="11.1" y2="4.9"/><line x1="4.9" y1="11.1" x2="3.5" y2="12.5"/></svg></button>
+        <div style="width:1px;height:24px;background:var(--border-default);margin:0 4px"></div>
+        <button style="height:32px;padding:0 14px;border:none;background:var(--bg-inverse);color:var(--bg-canvas);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:var(--inverse-hover)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg>Créer un rapport</button>
+        <button onClick="{{ openClientModal }}" style="height:32px;padding:0 14px;border:1px solid var(--bg-inverse);background:transparent;color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:var(--bg-hover)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><circle cx="6.5" cy="5.5" r="2.5"/><path d="M2.5 13 C2.5 10.2 4.3 9 6.5 9 C7.4 9 8.2 9.2 8.9 9.6"/><line x1="11.5" y1="7.5" x2="11.5" y2="12.5"/><line x1="9" y1="10" x2="14" y2="10"/></svg>Ajouter un client</button>
+      </div>
+    </header>
+
+    <div style="flex:1;overflow-y:auto;position:relative;background:var(--bg-canvas)">
+      <div style="max-width:1440px;margin:0 auto;padding:20px 24px 64px">
+
+        <!-- page header -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap">
+          <div>
+            <h1 style="margin:0;font-size:20px;line-height:26px;font-weight:500;color:var(--text-primary);letter-spacing:-0.01em">Inbox</h1>
+            <p style="margin:4px 0 0;font-size:14px;line-height:20px;color:var(--text-secondary)">Alerts, run failures, new reports and optimization signals across your portfolio.</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
+            <button onClick="{{ resetFilters }}" style="height:32px;padding:0 14px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:var(--bg-hover);border-color:var(--border-strong)">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><polygon points="2,3 14,3 9.5,8 9.5,13 6.5,11.5 6.5,8"/></svg>
+              Reset filters
+            </button>
+            <button onClick="{{ markAllRead }}" style="height:32px;padding:0 14px;border:none;background:var(--bg-inverse);color:var(--bg-canvas);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px" style-hover="background:var(--inverse-hover)">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"><polyline points="1.5,8.5 4.5,11.5 9.5,5"/><polyline points="7.5,10 9,11.5 14.5,5"/></svg>
+              Mark all read
+            </button>
+          </div>
+        </div>
+
+        <!-- category strip -->
+        <div style="margin-top:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+          <sc-for list="{{ categories }}" as="c" hint-placeholder-count="4">
+          <button onClick="{{ c.onClick }}" style="border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04);border-color:{{ c.border }};padding:0;font-family:inherit;text-align:left;cursor:pointer;display:block;width:100%" style-hover="border-color:var(--border-strong)">
+            <div style="height:42px;box-sizing:border-box;padding:0 18px;background:{{ c.headBg }};border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;color:{{ c.color }};white-space:nowrap">
+              {{ c.icon }}
+              <span style="font-size:12px;font-weight:500;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.04em;color:{{ c.color }}">{{ c.label }}</span>
+              <sc-if value="{{ c.active }}" hint-placeholder-val="{{ false }}"><span style="margin-left:auto;width:7px;height:7px;background:{{ c.color }};display:block"></span></sc-if>
+            </div>
+            <div style="padding:16px 18px;background:var(--bg-canvas)">
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:26px;line-height:30px;font-weight:500;color:var(--text-primary);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ c.count }}</span>
+                <span style="font-size:12px;color:var(--text-subtle)">{{ c.unread }} unread</span>
+              </div>
+              <div style="margin-top:6px;font-size:12px;color:var(--text-subtle)">{{ c.hint }}</div>
+            </div>
+          </button>
+          </sc-for>
+        </div>
+
+        <!-- toolbar -->
+        <div style="margin-top:16px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <div style="padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+            <div style="display:flex;border:1px solid var(--border-default);flex-shrink:0">
+              <sc-for list="{{ statuses }}" as="st" hint-placeholder-count="3">
+              <button onClick="{{ st.onClick }}" style="height:32px;padding:0 14px;border:none;background:{{ st.bg }};color:{{ st.color }};font-family:inherit;font-size:13px;font-weight:{{ st.weight }};cursor:pointer;display:flex;align-items:center;gap:8px">{{ st.label }}<span style="font-size:12px;opacity:0.65;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ st.count }}</span></button>
+              </sc-for>
+            </div>
+
+            <div style="width:1px;height:24px;background:var(--border-default);flex-shrink:0"></div>
+
+            <div style="position:relative;flex-shrink:0">
+              <button onClick="{{ toggleClientMenu }}" style="height:32px;min-width:210px;padding:0 12px;border:1px solid var(--border-default);background:var(--bg-canvas);display:flex;align-items:center;gap:10px;cursor:pointer;font-family:inherit" style-hover="border-color:var(--border-strong)">
+                <span style="width:19px;height:19px;flex-shrink:0;background:var(--bg-active);color:var(--text-secondary);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center">{{ activeInitial }}</span>
+                <span style="flex:1;text-align:left;font-size:13px;font-weight:500;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ activeName }}</span>
+                <span style="font-size:12px;color:var(--text-subtle);flex-shrink:0;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ activeBadge }}</span>
+                <span style="color:var(--text-subtle);display:flex;flex-shrink:0"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><polyline points="4,6.5 8,10.5 12,6.5"/></svg></span>
+              </button>
+              <sc-if value="{{ clientMenuOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:calc(100% + 4px);left:0;width:320px;z-index:30;border:1px solid var(--border-strong);background:var(--bg-canvas);box-shadow:0 8px 28px rgba(0,0,0,0.14)">
+                <div style="padding:10px 14px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:9px">
+                  <span style="color:var(--text-subtle);display:flex;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg></span>
+                  <input value="{{ clientQuery }}" onInput="{{ onClientQuery }}" placeholder="Search clients…" style="flex:1;min-width:0;height:26px;border:none;background:transparent;font-family:inherit;font-size:14px;color:var(--text-primary);outline:none">
+                </div>
+                <div style="max-height:300px;overflow-y:auto">
+                  <sc-for list="{{ clientOptions }}" as="c" hint-placeholder-count="5">
+                  <button onClick="{{ c.onClick }}" style="width:100%;padding:10px 14px;border:none;border-bottom:1px solid var(--border-subtle);background:{{ c.bg }};box-shadow:{{ c.mark }};font-family:inherit;cursor:pointer;text-align:left;display:flex;align-items:center;gap:10px" style-hover="background:var(--bg-hover)">
+                    <span style="width:19px;height:19px;flex-shrink:0;background:var(--bg-active);color:var(--text-secondary);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center">{{ c.initial }}</span>
+                    <span style="flex:1;min-width:0;font-size:13px;font-weight:{{ c.weight }};color:{{ c.color }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.name }}</span>
+                    <span style="font-size:12px;color:var(--text-subtle);flex-shrink:0;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ c.badge }}</span>
+                  </button>
+                  </sc-for>
+                  <sc-if value="{{ noClientMatch }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding:20px 14px;text-align:center;font-size:13px;color:var(--text-subtle)">No client matches.</div>
+                  </sc-if>
+                </div>
+              </div>
+              </sc-if>
+            </div>
+
+            <div style="flex:1;min-width:180px;display:flex;align-items:center;gap:10px">
+              <span style="color:var(--text-subtle);display:flex;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg></span>
+              <input value="{{ query }}" onInput="{{ onQuery }}" placeholder="Search notifications…" style="flex:1;min-width:0;height:30px;border:none;background:transparent;font-family:inherit;font-size:14px;color:var(--text-primary);outline:none">
+            </div>
+
+            <span style="font-size:12px;color:var(--text-subtle);flex-shrink:0;font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ resultCount }}</span>
+          </div>
+        </div>
+
+        <!-- notification list -->
+        <div style="margin-top:16px;border:1px solid var(--border-default);background:var(--bg-canvas);box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 12px rgba(0,0,0,0.04)">
+          <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+          <div>
+            <div style="padding:9px 20px;background:var(--bg-active);border-top:1px solid var(--border-default);border-bottom:1px solid var(--border-default);font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.06em">{{ g.label }}</div>
+            <sc-for list="{{ g.items }}" as="n" hint-placeholder-count="3">
+            <div style="padding:16px 20px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:flex-start;gap:14px;background:{{ n.rowBg }};opacity:{{ n.rowOpacity }}">
+              <span style="width:7px;height:7px;margin-top:7px;flex-shrink:0;background:{{ n.dotColor }};display:block"></span>
+              <span style="width:30px;height:30px;flex-shrink:0;border:1px solid {{ n.iconBorder }};background:{{ n.iconBg }};color:{{ n.color }};display:flex;align-items:center;justify-content:center">{{ n.icon }}</span>
+              <div style="flex:1;min-width:0">
+                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+                  <span style="font-size:14px;font-weight:{{ n.titleWeight }};color:{{ n.titleColor }}">{{ n.title }}</span>
+                  <span style="height:19px;padding:0 7px;display:inline-flex;align-items:center;font-size:10px;font-weight:600;letter-spacing:0.03em;color:{{ n.color }};background:{{ n.tagBg }};border:1px solid {{ n.tagBorder }};text-transform:uppercase">{{ n.tag }}</span>
+                </div>
+                <div style="margin-top:4px;font-size:13px;line-height:19px;color:{{ n.descColor }}">{{ n.desc }}</div>
+                <div style="margin-top:8px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+                  <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-subtle)"><span style="width:16px;height:16px;background:var(--bg-active);color:var(--text-secondary);font-size:9px;font-weight:500;display:flex;align-items:center;justify-content:center">{{ n.initial }}</span>{{ n.client }}</span>
+                  <sc-if value="{{ n.hasAction }}" hint-placeholder-val="{{ true }}"><a href="{{ n.actionHref }}" style="font-size:12px;font-weight:500;color:{{ n.actionColor }};display:inline-flex;align-items:center;gap:5px" style-hover="text-decoration:underline">{{ n.action }} <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><line x1="3" y1="8" x2="12" y2="8"/><polyline points="9,5 12.5,8 9,11"/></svg></a></sc-if>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
+                <span style="font-size:12px;color:var(--text-subtle);font-family:'Proto Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums">{{ n.time }}</span>
+                <button onClick="{{ n.toggleRead }}" title="{{ n.readTitle }}" style="width:26px;height:26px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-default);background:var(--bg-canvas);cursor:pointer;color:var(--text-subtle)" style-hover="border-color:var(--border-strong);color:var(--text-primary)"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"><polyline points="2.5,8.5 6,12 13.5,4.5"/></svg></button>
+                <button onClick="{{ n.archive }}" title="Archive" style="width:26px;height:26px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-default);background:var(--bg-canvas);cursor:pointer;color:var(--text-subtle)" style-hover="border-color:var(--border-strong);color:var(--text-primary)"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" stroke-linejoin="miter"><rect x="2" y="3" width="12" height="3"/><polyline points="3,6 3,13 13,13 13,6"/><line x1="6.5" y1="9" x2="9.5" y2="9"/></svg></button>
+              </div>
+            </div>
+            </sc-for>
+          </div>
+          </sc-for>
+
+          <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:56px 20px;display:flex;flex-direction:column;align-items:center;gap:12px">
+            <span style="color:var(--text-disabled);display:flex"><svg width="26" height="26" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 11 L5 6 L11 6 L12 11 Z"/><line x1="6.5" y1="13" x2="9.5" y2="13"/></svg></span>
+            <span style="font-size:14px;color:var(--text-secondary)">Nothing here — you're all caught up.</span>
+            <button onClick="{{ resetFilters }}" style="height:32px;padding:0 14px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer" style-hover="background:var(--bg-hover)">Reset filters</button>
+          </div>
+          </sc-if>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="lyr-client-modal" style="display:none;position:fixed;inset:0;z-index:400;align-items:center;justify-content:center;padding:24px;background:rgba(10,10,10,0.34);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)">
+  <div style="width:100%;max-width:520px;border:1px solid var(--border-strong);background:var(--bg-canvas);box-shadow:0 24px 64px rgba(0,0,0,0.28)">
+    <div style="padding:18px 22px;border-bottom:1px solid var(--border-subtle);background:var(--bg-subtle);display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+      <div>
+        <div style="font-size:16px;font-weight:500;color:var(--text-primary)">Ajouter un client</div>
+        <div style="margin-top:3px;font-size:13px;color:var(--text-subtle)">Créez un compte client pour lancer des analyses et livrer des rapports.</div>
+      </div>
+      <button onClick="{{ closeClientModal }}" aria-label="Close" style="width:30px;height:30px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:pointer;color:var(--text-subtle)" style-hover="background:var(--bg-hover);color:var(--text-primary)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg></button>
+    </div>
+    <div style="padding:22px;display:flex;flex-direction:column;gap:18px">
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label style="font-size:13px;font-weight:500;color:var(--text-primary)">Nom du client</label>
+        <input placeholder="Tasty Crousty" style="height:42px;padding:0 14px;border:1px solid var(--border-default);background:var(--bg-canvas);font-family:inherit;font-size:14px;color:var(--text-primary);outline:none" style-focus="border-color:var(--bg-inverse)">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label style="font-size:13px;font-weight:500;color:var(--text-primary)">URL du site</label>
+        <input placeholder="https://tastycrousty.com" style="height:42px;padding:0 14px;border:1px solid var(--border-default);background:var(--bg-canvas);font-family:inherit;font-size:14px;color:var(--text-primary);outline:none" style-focus="border-color:var(--bg-inverse)">
+        <span style="font-size:12px;line-height:17px;color:var(--text-subtle)">Servira à lancer les analyses et à récupérer automatiquement leur logo.</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <label style="font-size:13px;font-weight:500;color:var(--text-primary)">Notes</label>
+        <textarea rows="4" placeholder="Contexte, contacts, particularités du compte…" style="padding:11px 14px;border:1px solid var(--border-default);background:var(--bg-canvas);font-family:inherit;font-size:14px;line-height:20px;color:var(--text-primary);outline:none;resize:vertical"></textarea>
+      </div>
+    </div>
+    <div style="padding:16px 22px;border-top:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:flex-end;gap:10px">
+      <button onClick="{{ closeClientModal }}" style="height:38px;padding:0 16px;border:1px solid var(--border-default);background:var(--bg-canvas);color:var(--text-primary);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer" style-hover="background:var(--bg-hover)">Annuler</button>
+      <button onClick="{{ closeClientModal }}" style="height:38px;padding:0 18px;border:none;background:var(--bg-inverse);color:var(--bg-canvas);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer" style-hover="background:var(--inverse-hover)">Créer le client</button>
+    </div>
+  </div>
+</div>
+<div style="position:fixed;inset:0;pointer-events:none;z-index:2147483647;opacity:0.05;background-image:url('textures/grain.png');background-repeat:repeat"></div></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:800},&quot;compact&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { cat: "all", client: "all", status: "all", query: "", read: {}, archived: {}, clientOpen: false, clientQuery: "" };
+
+  componentDidMount() {
+    try { if (localStorage.getItem("lyr-theme") === "dark") document.documentElement.setAttribute("data-theme","dark"); } catch(e){}
+  }
+
+  icon(cat, size) {
+    const h = React.createElement;
+    const p = { width: size || 15, height: size || 15, viewBox: "0 0 16 16", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "square", strokeLinejoin: "miter" };
+    if (cat === "error") return h("svg", p, [h("path", { key: 1, d: "M8 2 L14.5 13.5 L1.5 13.5 Z" }), h("line", { key: 2, x1: 8, y1: 6, x2: 8, y2: 9.5 }), h("line", { key: 3, x1: 8, y1: 11, x2: 8, y2: 11.6 })]);
+    if (cat === "report") return h("svg", p, [h("rect", { key: 1, x: 3.5, y: 2.5, width: 9, height: 11 }), h("line", { key: 2, x1: 5.5, y1: 5.5, x2: 10.5, y2: 5.5 }), h("line", { key: 3, x1: 5.5, y1: 8, x2: 10.5, y2: 8 }), h("line", { key: 4, x1: 5.5, y1: 10.5, x2: 8.5, y2: 10.5 })]);
+    if (cat === "optim") return h("svg", p, [h("polyline", { key: 1, points: "2.5,10.5 6,7 8.5,9.5 13.5,4.5" }), h("polyline", { key: 2, points: "10.5,4.5 13.5,4.5 13.5,7.5" })]);
+    return h("svg", p, [h("rect", { key: 1, x: 2, y: 3.5, width: 12, height: 9 }), h("polyline", { key: 2, points: "2,4 8,9 14,4" })]);
+  }
+
+  renderVals() {
+    const st = this.state;
+    const META = {
+      error:   { label: "Errors",        color: "var(--negative-text)", tagBg: "var(--negative-bg)", hint: "Runs that need a fix" },
+      report:  { label: "New reports",   color: "var(--info-text)",     tagBg: "var(--bg-active)",   hint: "Ready to review or send" },
+      optim:   { label: "Optimizations", color: "var(--positive-text)", tagBg: "var(--bg-active)",   hint: "Signals worth acting on" },
+      message: { label: "Messages",      color: "var(--text-secondary)",tagBg: "var(--bg-active)",   hint: "From clients and teammates" },
+    };
+
+    const DATA = [
+      { id: "n1", cat: "error", title: "Analysis run failed", desc: "The scheduled run stopped at model query 42/120. Rate limit reached on one provider.", client: "Meridian Retail", time: "12m", group: "Today", unread: true, action: "Retry run", actionHref: "Reports.dc.html" },
+      { id: "n2", cat: "report", title: "New report available", desc: "August visibility report is ready. Completed 6/6 tasks.", client: "Tasty Crousty", time: "1h", group: "Today", unread: true, action: "Open report", actionHref: "TastyCrousty.dc.html" },
+      { id: "n3", cat: "optim", title: "Citation rate up 8.4 pts", desc: "Your pricing page is now cited in 43% of pricing-intent answers, up from 35%.", client: "Acme Labs", time: "3h", group: "Today", unread: true, action: "See detail", actionHref: "TastyCrousty.dc.html" },
+      { id: "n4", cat: "error", title: "Sitemap unreachable", desc: "Crawler returned 403 on /sitemap.xml for the last two runs. Coverage may be incomplete.", client: "Northwind Studio", time: "5h", group: "Today", unread: true, action: "Fix source", actionHref: "#" },
+      { id: "n5", cat: "message", title: "Client left a comment", desc: "\u201cCan we add a competitor to the next run?\u201d \u2014 on the Q3 report.", client: "Tasty Crousty", time: "8h", group: "Today", unread: false, action: "Reply", actionHref: "#" },
+      { id: "n6", cat: "optim", title: "New content gap detected", desc: "3 student-budget prompts have no owned source. Competitors answer 2 of them.", client: "Tasty Crousty", time: "1d", group: "Yesterday", unread: true, action: "Add to to-do", actionHref: "#" },
+      { id: "n7", cat: "report", title: "Report delivered", desc: "Sent to 4 recipients. Opened by 2 within the hour.", client: "Acme Labs", time: "1d", group: "Yesterday", unread: false, action: "View delivery", actionHref: "Reports.dc.html" },
+      { id: "n8", cat: "optim", title: "Competitor overtook you", desc: "Five Pizza Original now ranks above you on 4 of 12 tracked prompts.", client: "Meridian Retail", time: "1d", group: "Yesterday", unread: true, action: "Compare", actionHref: "TastyCrousty.dc.html" },
+      { id: "n9", cat: "error", title: "Credit balance low", desc: "33 credits left. The next scheduled run needs 12.", client: "Northwind Studio", time: "2d", group: "Earlier", unread: false, action: "Top up", actionHref: "#" },
+      { id: "n10", cat: "report", title: "New report available", desc: "July visibility report is ready. Completed 4/4 tasks.", client: "Northwind Studio", time: "4d", group: "Earlier", unread: false, action: "Open report", actionHref: "Reports.dc.html" },
+      { id: "n11", cat: "message", title: "Teammate mentioned you", desc: "Sarah asked you to review the persona set before the next run.", client: "Acme Labs", time: "5d", group: "Earlier", unread: false, action: "Open thread", actionHref: "#" },
+      { id: "n12", cat: "optim", title: "Sentiment improved", desc: "Average sentiment moved from 72 to 81 across all tracked markets.", client: "Tasty Crousty", time: "6d", group: "Earlier", unread: false, action: "See detail", actionHref: "TastyCrousty.dc.html" },
+    ];
+
+    const isUnread = (n) => (st.read[n.id] ? false : n.unread);
+    const isArchived = (n) => !!st.archived[n.id];
+    const live = DATA.filter((n) => !isArchived(n));
+
+    const q = st.query.trim().toLowerCase();
+    const matchesQuery = (n) => !q || (n.title + " " + n.desc + " " + n.client).toLowerCase().includes(q);
+    const matchesCat = (n) => st.cat === "all" || n.cat === st.cat;
+    const matchesClient = (n) => st.client === "all" || n.client === st.client;
+    const matchesStatus = (n) => st.status === "all" ? !isArchived(n) : st.status === "unread" ? isUnread(n) : isArchived(n);
+
+    const pool = st.status === "archived" ? DATA.filter(isArchived) : live;
+    const visible = pool.filter((n) => matchesQuery(n) && matchesCat(n) && matchesClient(n) && matchesStatus(n));
+
+    const categories = ["error", "report", "optim", "message"].map((k) => {
+      const m = META[k];
+      const all = live.filter((n) => n.cat === k);
+      const on = st.cat === k;
+      return {
+        label: m.label, hint: m.hint, color: m.color, icon: this.icon(k, 15),
+        count: all.length, unread: all.filter(isUnread).length, active: on,
+        border: on ? "var(--border-strong)" : "var(--border-default)",
+        headBg: on ? "var(--bg-active)" : "var(--bg-subtle)",
+        onClick: () => this.setState((s) => ({ cat: s.cat === k ? "all" : k })),
+      };
+    });
+
+    const pick = (on) => ({
+      bg: on ? "var(--bg-hover)" : "transparent",
+      color: on ? "var(--text-primary)" : "var(--text-secondary)",
+      weight: on ? 500 : 400,
+      mark: on ? "inset 2px 0 0 var(--bg-inverse)" : "none",
+    });
+
+    const statuses = [
+      { k: "all", label: "All", count: live.length },
+      { k: "unread", label: "Unread", count: live.filter(isUnread).length },
+      { k: "archived", label: "Archived", count: DATA.filter(isArchived).length },
+    ].map((s) => ({ ...s, ...pick(st.status === s.k), onClick: () => this.setState({ status: s.k }) }));
+
+    const names = [];
+    live.forEach((n) => { if (!names.includes(n.client)) names.push(n.client); });
+    const cq = st.clientQuery.trim().toLowerCase();
+    const clientOptions = [{ name: "All clients", key: "all", initial: "\u2731", badge: live.length }]
+      .concat(names.map((nm) => ({ name: nm, key: nm, initial: nm.charAt(0), badge: live.filter((n) => n.client === nm).length })))
+      .filter((c) => !cq || c.name.toLowerCase().includes(cq))
+      .map((c) => ({ ...c, ...pick(st.client === c.key), onClick: () => this.setState({ client: c.key, clientOpen: false, clientQuery: "" }) }));
+    const activeName = st.client === "all" ? "All clients" : st.client;
+
+    const order = ["Today", "Yesterday", "Earlier"];
+    const groups = order.map((label) => ({
+      label,
+      items: visible.filter((n) => n.group === label).map((n) => {
+        const m = META[n.cat], unread = isUnread(n);
+        return {
+          title: n.title, desc: n.desc, client: n.client, time: n.time + " ago",
+          initial: n.client.charAt(0), tag: m.label,
+          color: unread ? m.color : "var(--text-disabled)",
+          tagBg: unread ? m.tagBg : "transparent",
+          tagBorder: unread ? "transparent" : "var(--border-default)",
+          icon: this.icon(n.cat, 15),
+          iconBg: "var(--bg-canvas)",
+          iconBorder: unread ? "var(--border-default)" : "var(--border-subtle)",
+          rowBg: "var(--bg-canvas)",
+          rowOpacity: unread ? "1" : "0.62",
+          dotColor: unread ? m.color : "transparent",
+          titleWeight: unread ? 500 : 400,
+          titleColor: unread ? "var(--text-primary)" : "var(--text-subtle)",
+          descColor: unread ? "var(--text-secondary)" : "var(--text-disabled)",
+          actionColor: unread ? "var(--text-primary)" : "var(--text-subtle)",
+          action: n.action, actionHref: n.actionHref, hasAction: !!n.action,
+          readTitle: unread ? "Mark as read" : "Mark as unread",
+          toggleRead: () => this.setState((s) => ({ read: { ...s.read, [n.id]: !s.read[n.id] } })),
+          archive: () => this.setState((s) => ({ archived: { ...s.archived, [n.id]: !s.archived[n.id] } })),
+        };
+      }),
+    })).filter((g) => g.items.length > 0);
+
+    return {
+      categories, statuses, groups,
+      clientOptions,
+      noClientMatch: clientOptions.length === 0,
+      clientMenuOpen: st.clientOpen,
+      clientQuery: st.clientQuery,
+      onClientQuery: (e) => this.setState({ clientQuery: e.target.value }),
+      toggleClientMenu: () => this.setState((x) => ({ clientOpen: !x.clientOpen, clientQuery: "" })),
+      activeName,
+      activeInitial: st.client === "all" ? "\u2731" : st.client.charAt(0),
+      activeBadge: st.client === "all" ? live.length : live.filter((n) => n.client === st.client).length,
+      isEmpty: visible.length === 0,
+      resultCount: visible.length + (visible.length === 1 ? " result" : " results"),
+      query: st.query,
+      onQuery: (e) => this.setState({ query: e.target.value }),
+      resetFilters: () => this.setState({ cat: "all", client: "all", status: "all", query: "", clientQuery: "", clientOpen: false }),
+      markAllRead: () => {
+        const read = {};
+        DATA.forEach((n) => { read[n.id] = true; });
+        this.setState({ read });
+      },
+      openClientModal: () => { const m = document.getElementById("lyr-client-modal"); if (m) m.style.display = "flex"; },
+      closeClientModal: () => { const m = document.getElementById("lyr-client-modal"); if (m) m.style.display = "none"; },
+      toggleTheme: () => {
+        const r = document.documentElement;
+        const dark = r.getAttribute("data-theme") === "dark";
+        if (dark) { r.removeAttribute("data-theme"); try{localStorage.setItem("lyr-theme","light")}catch(e){} }
+        else { r.setAttribute("data-theme","dark"); try{localStorage.setItem("lyr-theme","dark")}catch(e){} }
+      },
+      toggleSidebar: () => {
+        const sb = document.getElementById("lyr-sidebar");
+        if (!sb) return;
+        const collapsed = sb.getAttribute("data-collapsed") === "1";
+        sb.style.width = collapsed ? "240px" : "56px";
+        sb.setAttribute("data-collapsed", collapsed ? "0" : "1");
+        document.querySelectorAll("[data-nav-label]").forEach((el) => { el.style.display = collapsed ? "" : "none"; });
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
